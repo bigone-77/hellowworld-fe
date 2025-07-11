@@ -1,0 +1,3 @@
+echo '현재 pre-commit 훅은 lint-staged만을 검사합니다. 추후 pr룰이랑 깃모지 사용유무도 체크할 예정입니다.'
+
+pnpm lint-staged

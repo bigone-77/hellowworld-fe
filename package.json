@@ -1,17 +1,24 @@
 {
-  "name": "shadcn-ui-monorepo",
+  "name": "helloworld-fe",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,md}": "prettier --write"
   },
   "devDependencies": {
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
+    "husky": "9.1.7",
+    "lint-staged": "16.1.2",
     "prettier": "^3.5.1",
+    "prettier-plugin-tailwindcss": "0.6.13",
     "turbo": "^2.4.2",
     "typescript": "5.7.3"
   },
