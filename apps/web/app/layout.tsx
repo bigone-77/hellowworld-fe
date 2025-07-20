@@ -1,8 +1,13 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Geist } from 'next/font/google';
+import localFont from 'next/font/local';
 
-const geist = Geist({ subsets: ['latin'] });
+const pretendard = localFont({
+  src: '../../../packages/tailwind-config/fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '45 920',
+  variable: '--font-pretendard',
+});
 
 export const metadata: Metadata = {
   title: 'Create Turborepo',
@@ -16,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={geist.className}>{children}</body>
+      <body className={pretendard.className}>{children}</body>
     </html>
   );
 }
