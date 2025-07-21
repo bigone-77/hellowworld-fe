@@ -5,7 +5,7 @@ import InlineSvg from '@repo/ui/components/InlineSvg';
 
 export default function Page() {
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
+    <main className='flex min-h-screen flex-col items-center justify-between p-16'>
       <p className='text-primary-box'>hi</p>
       <Button variant='primary' size='xs'>
         <InlineSvg
