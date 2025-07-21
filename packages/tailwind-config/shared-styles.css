@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+@source "../../apps/**/*.{ts,tsx,js,jsx}";
+@source "../ui/**/*.{ts,tsx,js,jsx}";
+
 @font-face {
   font-family: 'Pretendard Variable';
   font-weight: 45 920;
@@ -10,6 +13,17 @@
 
 @theme {
   --font-pretendard: 'Pretendard Variable';
+
+  --radius-s: 4px;
+  --radius-m: 30px;
+  --radius-l: 1000px;
+  --radius-ms: 15px;
+  --radius-icon: 10px;
+
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-regular: 400;
 
   --color-black: #000000;
   --color-white: #ffffff;
@@ -97,6 +111,45 @@
   --color-blue-90: #222f80;
   --color-blue-95: #19204a;
   --color-blue-99: #080d28;
+
+  /* Surface */
+  --color-surface1: var(--color-white);
+  --color-surface2: var(--color-gray-5);
+  --color-surface-var1: var(--color-yellow-5);
+  --color-surface-var2: var(--color-purple-5);
+
+  /* Primary */
+  --color-primary-box: var(--color-yellow-40);
+  --color-primary-box-var1: var(--color-yellow-20);
+  --color-primary-box-var2: var(--color-yellow-30);
+  --color-primary-box-var3: var(--color-yellow-80);
+  --color-primary-line: var(--color-yellow-80);
+  --color-primary-on: var(--color-yellow-99);
+  --color-primary-on-var: var(--color-yellow-60);
+
+  /* Secondary */
+  --color-secondary-box: var(--color-purple-20);
+  --color-secondary-box-on: var(--color-purple-70);
+  --color-secondary-box-var1: var(--color-purple-30);
+  --color-secondary-box-var2: var(--color-purple-40);
+  --color-secondary-line: var(--color-purple-50);
+  --color-secondary-on: var(--color-purple-70);
+
+  /* Text */
+  --color-text1: var(--color-gray-70);
+  --color-text2: var(--color-gray-99);
+  --color-text-line: var(--color-gray-40);
+  --color-text-box: var(--color-gray-20);
+  --color-text-box-var: var(--color-gray-30);
+
+  /* System */
+  --color-system-icon: var(--color-black);
+  --color-system-error-box: var(--color-red-10);
+  --color-system-error-on: var(--color-red-40);
+  --color-system-warning-box: var(--color-orange-10);
+  --color-system-warning-on: var(--color-orange-40);
+  --color-system-sucsess-box: var(--color-blue-10);
+  --color-system-sucsess-on: var(--color-blue-40);
 }
 
 @layer base {
@@ -106,4 +159,108 @@
   body {
     @apply font-pretendard;
   }
+}
+
+@layer components {
+  .btn-press-effect {
+    @apply transition-[transform] duration-[500ms] ease-[cubic-bezier(0.15,_1.15,_0.35,_1.05)] active:translate-y-1;
+  }
+}
+
+@utility text-display-l {
+  font-size: 48px;
+  line-height: 120%;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+@utility text-display-s {
+  font-size: 36px;
+  line-height: 120%;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+@utility text-headline-l {
+  font-size: 28px;
+  line-height: 140%;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+@utility text-headline-s {
+  font-size: 24px;
+  line-height: 140%;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+@utility text-title-l {
+  font-size: 20px;
+  line-height: 140%;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+@utility text-title-s {
+  font-size: 18px;
+  line-height: 140%;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+@utility text-body-l2 {
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+@utility text-body-l1 {
+  font-size: 16px;
+  line-height: 140%;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+}
+
+@utility text-body-s2 {
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+@utility text-body-s1 {
+  font-size: 14px;
+  line-height: 140%;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+}
+
+@utility text-body-s0 {
+  font-size: 14px;
+  line-height: 160%;
+  letter-spacing: -0.025em;
+  font-weight: 400;
+}
+
+@utility text-label-l2 {
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+@utility text-label-l1 {
+  font-size: 12px;
+  line-height: 140%;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+}
+
+@utility text-label-s {
+  font-size: 10px;
+  line-height: 140%;
+  letter-spacing: -0.025em;
+  font-weight: 500;
 }
