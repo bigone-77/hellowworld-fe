@@ -14,16 +14,20 @@
 @theme {
   --font-pretendard: 'Pretendard Variable';
 
-  --radius-s: 4px;
-  --radius-m: 30px;
-  --radius-l: 1000px;
-  --radius-ms: 15px;
-  --radius-icon: 10px;
+  --radius-XS: 4px;
+  --radius-S: 10px;
+  --radius-M: 24px;
+  --radius-L: 30px;
+  --radius-FULL: 1000px;
 
   --font-weight-bold: 700;
   --font-weight-semibold: 600;
   --font-weight-medium: 500;
   --font-weight-regular: 400;
+
+  --shadow-modal-l:
+    2px 4px 10px 0 rgba(0, 0, 0, 0.06), 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  --shadow-modal-s: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 
   --color-black: #000000;
   --color-white: #ffffff;
@@ -162,7 +166,7 @@
 }
 
 @layer components {
-  .btn-press-effect {
+  .btn-press-effect:not(:disabled) {
     @apply transition-[transform] duration-[500ms] ease-[cubic-bezier(0.15,_1.15,_0.35,_1.05)] active:translate-y-1;
   }
 }
