@@ -1,28 +1,26 @@
 'use client';
 
-import Button from '@repo/ui/components/Button';
-import InlineSvg from '@repo/ui/components/InlineSvg';
+import Calendar from '@repo/ui/components/Calendar';
 
 export default function Page() {
+  const datesToHighlight = [
+    new Date('2025-07-03'),
+    new Date('2025-07-05'),
+    new Date('2025-07-06'),
+    new Date('2025-07-07'),
+    new Date('2025-07-08'),
+    new Date('2025-07-09'),
+    new Date('2025-07-13'),
+    new Date('2025-07-14'),
+    new Date('2025-07-15'),
+    new Date('2025-07-16'),
+    new Date('2025-07-17'),
+    new Date('2025-07-18'), // 선택된 날짜도 하이라이트 대상에 포함
+  ];
+
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-16'>
-      <p className='text-primary-box'>hi</p>
-      <Button variant='primary' size='xs' disabled>
-        <InlineSvg srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753271887/svg/star.svg' />
-        버튼
-      </Button>
-      <Button variant='secondary' size='xl'>
-        버튼
-      </Button>
-      <Button variant='text'>버튼</Button>
-      <Button variant='outline_m'>버튼</Button>
-      <Button variant='outline_s'>버튼</Button>
-      <Button variant='secondary_icon' size='s'>
-        <InlineSvg
-          srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753116454/svg/star.svg'
-          className='text-yellow-30'
-        />
-      </Button>
+      <Calendar highlightedDates={datesToHighlight} />
     </main>
   );
 }

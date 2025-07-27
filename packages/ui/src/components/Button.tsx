@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
+
 import { cn } from '../lib/utils';
 
 // Props 타입 정의
@@ -10,6 +11,8 @@ type ButtonVariant =
   | 'outline_s'
   | 'outline_m'
   | 'text';
+// | 'date';
+
 type ButtonSize = 'xl' | 'l' | 'm' | 's' | 'xs';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

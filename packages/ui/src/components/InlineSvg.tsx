@@ -6,7 +6,6 @@ interface InlineSvgProps extends HTMLAttributes<HTMLSpanElement> {
   height?: number;
 }
 
-// props 객체에 직접 타입을 지정합니다.
 const InlineSvg = ({
   srcUrl,
   width = 24,
@@ -25,7 +24,13 @@ const InlineSvg = ({
           }
           return res.text();
         })
-        .then(setSvg)
+        .then((text) => {
+          // SVG 문자열에서 width와 height 속성을 제거합니다.
+          const cleanedSvg = text
+            .replace(/width="[^"]*"/, '')
+            .replace(/height="[^"]*"/, '');
+          setSvg(cleanedSvg);
+        })
         .catch(console.error);
     }
   }, [srcUrl]);
@@ -43,6 +48,7 @@ const InlineSvg = ({
     <span
       {...props}
       className={`inline-flex items-center justify-center ${className || ''}`}
+      style={{ width, height }}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );

@@ -29,6 +29,27 @@
     2px 4px 10px 0 rgba(0, 0, 0, 0.06), 0 0 4px 0 rgba(0, 0, 0, 0.1);
   --shadow-modal-s: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  --animate-in: fade-in 200ms ease-out;
+  --animate-out: fade-out 150ms ease-in;
+
   --color-black: #000000;
   --color-white: #ffffff;
 
