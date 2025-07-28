@@ -10,8 +10,8 @@ type ButtonVariant =
   | 'secondary_icon'
   | 'outline_s'
   | 'outline_m'
-  | 'text';
-// | 'date';
+  | 'text'
+  | 'date_picker';
 
 type ButtonSize = 'xl' | 'l' | 'm' | 's' | 'xs';
 
@@ -109,6 +109,13 @@ const Button = ({
         focus:border-solid focus:border-text1 focus:border-2 focus:bg-text-box
         active:bg-text-box-var
         disabled:bg-text-box disabled:text-text1 disabled:cursor-default
+      `,
+    },
+    date_picker: {
+      base: `
+        rounded-FULL relative flex cursor-pointer text-body-l1 text-text1 items-center justify-center px-[12.5] py-[14] transition-colors
+        hover:border hover:bg-secondary-box 
+        active:bg-secondary-box-var1 active:text-secondary-box-on  active:border-secondary-box-line
       `,
     },
   };

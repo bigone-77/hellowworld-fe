@@ -108,48 +108,52 @@ const CalendarModal = ({
   const months = Array.from({ length: 12 }, (_, i) => i);
 
   return (
-    <div className='w-full rounded-lg border bg-white p-4 shadow-lg'>
+    <div className='rounded-L shadow-modal-s w-full border border-white/60 bg-white p-4'>
       <div className='mb-4 flex items-center justify-between'>
-        <Button
-          onClick={() => onYearChange(pickerYear - 1)}
-          variant='primary_icon'
-          size='s'
-          className='!rounded-FULL'
-        >
-          <InlineSvg
-            srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/prev-arrow.svg'
-            width={24}
-            height={24}
-          />
-        </Button>
         <span className='text-body-l2 font-bold'>{pickerYear}년</span>
-        <Button
-          onClick={() => onYearChange(pickerYear + 1)}
-          variant='primary_icon'
-          size='s'
-          className='!rounded-FULL'
-        >
-          <InlineSvg
-            srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg'
-            width={24}
-            height={24}
-          />
-        </Button>
+        <div className='flex items-center justify-center gap-x-2'>
+          <Button
+            onClick={() => onYearChange(pickerYear - 1)}
+            variant='primary_icon'
+            size='s'
+            className='!rounded-FULL size-5'
+          >
+            <InlineSvg
+              srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/prev-arrow.svg'
+              width={12}
+              height={12}
+            />
+          </Button>
+          <Button
+            onClick={() => onYearChange(pickerYear + 1)}
+            variant='primary_icon'
+            size='s'
+            className='!rounded-FULL size-5'
+          >
+            <InlineSvg
+              srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg'
+              width={12}
+              height={12}
+            />
+          </Button>
+        </div>
       </div>
       <div className='grid grid-cols-3 gap-2'>
         {months.map((monthIndex) => (
-          <Button
+          <span
             key={monthIndex}
             onClick={() => onMonthSelect(monthIndex)}
-            variant={
-              pickerYear === currentMonth.getFullYear() &&
-              monthIndex === currentMonth.getMonth()
-                ? 'secondary'
-                : 'outline_s'
-            }
+            className={cn(
+              `rounded-FULL text-body-l1 text-text1 hover:bg-secondary-box active:bg-secondary-box-var1 active:text-secondary-box-on active:border-secondary-line relative flex cursor-pointer items-center justify-center border border-transparent px-[10] py-[14] transition-colors`,
+              {
+                'bg-secondary-box-var1 text-secondary-box-on border-secondary-line':
+                  pickerYear === currentMonth.getFullYear() &&
+                  monthIndex === currentMonth.getMonth(),
+              },
+            )}
           >
             {monthIndex + 1}월
-          </Button>
+          </span>
         ))}
       </div>
     </div>
@@ -180,8 +184,6 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
   const calendarEnd = endOfWeek(monthEnd, { weekStartsOn: 0 });
   const days = eachDayOfInterval({ start: calendarStart, end: calendarEnd });
 
-  console.log(isPopoverOpen);
-
   return (
     <div className='w-[350px] rounded-lg bg-white p-4 shadow-lg'>
       <div className='mb-4 flex items-center justify-between'>
@@ -189,7 +191,7 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
           <PopoverTrigger asChild>
             <CalendarTitle headerTitle={headerTitle} />
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent align='start'>
             <CalendarModal
               pickerYear={pickerYear}
               currentMonth={currentMonth}
@@ -223,24 +225,34 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
               key={day.toString()}
               onClick={() => handleDateClick(day)}
               className={cn(
-                'rounded-FULL relative flex cursor-pointer items-center justify-center px-[10] py-[14] transition-colors',
+                'rounded-FULL relative flex cursor-pointer items-center justify-center border border-transparent px-[10] py-[14] transition-colors',
                 {
-                  'bg-secondary-box-var1': isSelected,
-                  'bg-yellow-200': isHighlighted,
-                  'bg-blue-200': isToday(day) && !isSelected && !isHighlighted,
-                  'hover:bg-gray-100': !isSelected,
+                  'bg-secondary-box-var1 text-secondary-box-on border-secondary-line':
+                    isSelected,
+                  'bg-primary-box': isHighlighted,
+                  'flex-col py-[6]': isToday(day),
+                  'active:bg-secondary-box-var1 active:text-secondary-box-on active:border-secondary-line hover:bg-gray-100':
+                    !isSelected,
                   'opacity-50': !isCurrentMonthDay,
                 },
               )}
             >
               <span
-                className={cn('font-medium', {
+                className={cn('text-body-l1', {
                   'text-text1': isSameMonth(day, currentMonth),
                   'text-text-line': !isSameMonth(day, currentMonth),
+                  'text-text2': isToday(day),
                 })}
               >
                 {format(day, 'd')}
               </span>
+              {isToday(day) && (
+                <InlineSvg
+                  srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371466/svg/check.svg'
+                  width={16}
+                  height={16}
+                />
+              )}
             </div>
           );
         })}
