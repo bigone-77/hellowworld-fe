@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import Snb from './_layouts/Snb';
 
 const pretendard = localFont({
   src: '../../../packages/tailwind-config/fonts/PretendardVariable.woff2',
@@ -21,7 +22,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={pretendard.className}>{children}</body>
+      <body className={pretendard.className}>
+        <div className='grid min-h-screen w-full grid-cols-[97px_1fr]'>
+          <Snb />
+
+          <main className='w-full'>{children}</main>
+        </div>
+      </body>
     </html>
   );
 }

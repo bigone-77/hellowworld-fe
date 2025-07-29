@@ -24,6 +24,7 @@ import { Popover, PopoverContent, PopoverTrigger } from './Popover';
 interface CalendarTitleProps {
   headerTitle: string;
   ref?: React.Ref<HTMLDivElement>;
+  isPopupOpen: boolean;
   [key: string]: any;
 }
 
@@ -39,11 +40,16 @@ interface ModalProps {
   onMonthSelect: (monthIndex: number) => void;
 }
 
-const CalendarTitle = ({ ref, headerTitle, ...props }: CalendarTitleProps) => (
+const CalendarTitle = ({
+  ref,
+  headerTitle,
+  isPopupOpen,
+  ...props
+}: CalendarTitleProps) => (
   <div
     ref={ref}
     {...props}
-    className={`border-text-line rounded-FULL text-text1 hover:bg-text-box focus:!rounded-S disabled:bg-text-box flex cursor-pointer items-center justify-between gap-2 border px-3 py-[9] transition-colors active:bg-transparent disabled:opacity-50`}
+    className={`${isPopupOpen ? 'rounded-S border-text2' : 'border-text-line rounded-FULL'} text-text1 hover:bg-text-box focus:!rounded-S disabled:bg-text-box flex cursor-pointer items-center justify-between gap-2 border px-3 py-[9] transition-colors active:bg-transparent disabled:opacity-50`}
   >
     <span className='text-body-l2'>{headerTitle}</span>
     <InlineSvg
@@ -160,7 +166,6 @@ const CalendarModal = ({
   );
 };
 
-// --- 최종 메인 캘린더 컴포넌트 ---
 const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -189,7 +194,10 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
       <div className='mb-4 flex items-center justify-between'>
         <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
           <PopoverTrigger asChild>
-            <CalendarTitle headerTitle={headerTitle} />
+            <CalendarTitle
+              headerTitle={headerTitle}
+              isPopupOpen={isPopoverOpen}
+            />
           </PopoverTrigger>
           <PopoverContent align='start'>
             <CalendarModal
