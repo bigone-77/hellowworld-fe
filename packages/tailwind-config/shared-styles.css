@@ -168,13 +168,13 @@
   --color-text-box-var: var(--color-gray-30);
 
   /* System */
-  --color-system-icon: var(--color-black);
-  --color-system-error-box: var(--color-red-10);
-  --color-system-error-on: var(--color-red-40);
-  --color-system-warning-box: var(--color-orange-10);
-  --color-system-warning-on: var(--color-orange-40);
-  --color-system-sucsess-box: var(--color-blue-10);
-  --color-system-sucsess-on: var(--color-blue-40);
+  --color-icon: var(--color-black);
+  --color-error-box: var(--color-red-10);
+  --color-error-on: var(--color-red-40);
+  --color-warning-box: var(--color-orange-10);
+  --color-warning-on: var(--color-orange-40);
+  --color-success-box: var(--color-blue-10);
+  --color-success-on: var(--color-blue-40);
 }
 
 @layer base {

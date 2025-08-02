@@ -1,3 +1,9 @@
+import Label from '@repo/ui/components/Label';
+
 export default function Page() {
-  return <main>안농</main>;
+  return (
+    <main>
+      <Label>라벨</Label>
+    </main>
+  );
 }
