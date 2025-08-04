@@ -40,7 +40,6 @@ const Button = ({
       base: `
           text-primary-on bg-primary-box border-primary-line shadow-[0_6px_0_0_var(--color-primary-line)] btn-press-effect
           hover:bg-primary-box-var2
-          focus:border-primary-on  
           active:bg-primary-box-var3 active:text-primary-on active:border-primary-line active:shadow-[0_2px_0_0_var(--color-primary-line)]
           disabled:bg-text-box disabled:text-text2/30 disabled:border-text-line disabled:shadow-[0_2px_0_0_var(--color-text-line)] disabled:cursor-default
         `,
@@ -53,7 +52,6 @@ const Button = ({
       base: `
           text-secondary-box-on bg-secondary-box border-secondary-line shadow-[0_6px_0_0_var(--color-secondary-line)] btn-press-effect
           hover:bg-secondary-box-var1 
-          focus:border-secondary-box-on 
           active:bg-secondary-box-var2 active:text-secondary-box-on active:border-secondary-line active:shadow-[0_2px_0_0_var(--color-secondary-line)]
           disabled:bg-text-box disabled:text-text2/30 disabled:border-text-line disabled:shadow-[0_2px_0_0_var(--color-text-line)] disabled:cursor-default
         `,
@@ -66,7 +64,6 @@ const Button = ({
       base: `
           bg-primary-box border-primary-line rounded-S btn-press-effect
           hover:bg-primary-box-var2 shadow-[0_2px_0_0_var(--color-primary-line)]
-          focus:border-primary-on 
           active:bg-primary-box-var3 active:text-primary-on active:border-primary-line active:shadow-[0_0px_0_0_var(--color-primary-line)]
           disabled:bg-primary-box-var3 disabled:text-primary-on disabled:border-primary-line disabled:shadow-[0_0px_0_0_var(--color-primary-line)] disabled:cursor-default
         `,
@@ -77,7 +74,6 @@ const Button = ({
       base: `
           bg-secondary-box border-secondary-line rounded-S shadow-[0_2px_0_0_var(--color-primary-line)] btn-press-effect
           hover:bg-secondary-box-var1
-          focus:border-secondary-box-on 
           active:bg-secondary-box-var2 active:text-secondary-box-on active:border-secondary-line active:shadow-[0_2px_0_0_var(--color-secondary-line)]
           disabled:bg-secondary-box-var2 active:text-secondary-box-on active:border-secondary-line active:shadow-[0_2px_0_0_var(--color-secondary-line)] disabled:cursor-default
         `,
@@ -88,7 +84,6 @@ const Button = ({
       base: `
         border-text-box-var text-body-s1 text-text1 px-3 py-[6] 
         hover:bg-text-box 
-        focus:border-text1 
         active:bg-text-box-var active:border-text-line
         disabled:bg-text-box-var disabled:border-text-line disabled:cursor-default
       `,
@@ -97,7 +92,6 @@ const Button = ({
       base: `
         border-text-box-var text-body-l2 text-text1 px-3 py-[6] 
         hover:bg-text-box 
-        focus:border-text1 
         active:bg-text-box-var active:border-text-line
         disabled:bg-text-box-var disabled:border-text-line disabled:cursor-default
       `,
@@ -106,7 +100,6 @@ const Button = ({
       base: `
         border-none text-body-s1 text-text1 px-4 py-[6] 
         hover:bg-text-box 
-        focus:border-solid focus:border-text1 focus:border-2 focus:bg-text-box
         active:bg-text-box-var
         disabled:bg-text-box disabled:text-text1 disabled:cursor-default
       `,

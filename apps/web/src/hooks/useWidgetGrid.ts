@@ -1,13 +1,19 @@
 import { useRef, useState } from 'react';
-import { ActiveWidget, Widget } from '../types/Widget';
-import { GAP, GRID_COLS, GRID_ROWS, initialWidgets } from '../config/grid';
+import { ActiveWidget, Widget } from '@/types/Widget';
+import {
+  GAP,
+  GRID_COLS,
+  GRID_ROWS,
+  initialWidgets,
+  WIDGET_HEIGHT_MAP,
+} from '@/config/grid';
 import {
   DragEndEvent,
   DragOverEvent,
   DragStartEvent,
   Modifier,
 } from '@dnd-kit/core';
-import { getNextLayout } from '../lib/gridUtils';
+import { getNextLayout } from '@/lib/gridUtils';
 import { useThrottle } from './useThrottle';
 
 export function useWidgetGrid() {
@@ -49,7 +55,7 @@ export function useWidgetGrid() {
     const widget = event.active.data.current as Widget;
     const pixelWidth = widget.width * newCellWidth + (widget.width - 1) * GAP;
     const pixelHeight =
-      widget.height * newCellHeight + (widget.height - 1) * GAP;
+      WIDGET_HEIGHT_MAP[widget.height as keyof typeof WIDGET_HEIGHT_MAP];
     setActiveWidget({ ...widget, pixelWidth, pixelHeight });
   }
 

@@ -1,4 +1,4 @@
-import { WidgetId } from '../app/_components/Widgets.config';
+import { WidgetId } from '../components/Widgets.config';
 
 export interface Widget {
   id: WidgetId;

@@ -3,20 +3,23 @@
 import React from 'react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
-import { Widget as WidgetType } from '../../types/Widget';
+import { Widget as WidgetType } from '@/types/Widget';
+import { WIDGET_HEIGHT_MAP } from '@/config/grid';
 
 // Props 타입에 픽셀 크기를 받을 수 있도록 추가
 interface Props {
   widget: WidgetType & { pixelWidth?: number; pixelHeight?: number };
   children: React.ReactNode;
   isOverlay?: boolean;
+  isEditMode?: boolean;
 }
 
-export function Widget({ widget, children, isOverlay }: Props) {
+export function Widget({ widget, children, isOverlay, isEditMode }: Props) {
   const { attributes, listeners, setNodeRef, transform, isDragging } =
     useDraggable({
       id: widget.id,
       data: widget,
+      disabled: !isEditMode,
     });
 
   const { setNodeRef: setDroppableRef } = useDroppable({
@@ -36,6 +39,7 @@ export function Widget({ widget, children, isOverlay }: Props) {
     gridRowStart: widget.row,
     gridColumnEnd: `span ${widget.width}`,
     gridRowEnd: `span ${widget.height}`,
+    minHeight: `${WIDGET_HEIGHT_MAP[widget.height as keyof typeof WIDGET_HEIGHT_MAP]}px`, // ✨ min-height 적용
     transform: dragTransform || slideTransform,
     opacity: isDragging && !isOverlay ? 0.5 : 1,
   };
@@ -53,7 +57,7 @@ export function Widget({ widget, children, isOverlay }: Props) {
         setDroppableRef(node);
       }}
       style={style}
-      className={`flex touch-none items-center justify-center rounded-lg border border-gray-200 text-lg font-bold shadow-md ${
+      className={`rounded-L grid touch-none place-items-stretch shadow-md ${isEditMode ? 'cursor-grab transition-all hover:scale-[1.02]' : 'cursor-default'} ${
         isOverlay
           ? 'shadow-2xl'
           : 'transition-transform duration-300 ease-in-out'
