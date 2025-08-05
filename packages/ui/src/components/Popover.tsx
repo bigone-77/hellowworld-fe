@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { createPortal } from 'react-dom';
 
 interface PopoverContextProps {
   isOpen: boolean;
@@ -157,6 +158,13 @@ const PopoverContent = ({
 }: PopoverContentProps) => {
   const { isOpen, triggerRef, contentRef } = usePopover();
   const [position, setPosition] = useState({ top: 0, left: 0 });
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    // document 객체는 브라우저에서만 사용 가능하므로,
+    // 클라이언트에 마운트된 후에만 true로 설정합니다.
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isOpen && triggerRef.current && contentRef.current) {
@@ -195,11 +203,11 @@ const PopoverContent = ({
     }
   }, [isOpen, triggerRef, contentRef, sideOffset, align]);
 
-  if (!isOpen) {
+  if (!isMounted || !isOpen) {
     return null;
   }
 
-  return (
+  return createPortal(
     <div
       ref={contentRef}
       className={`absolute z-50 ${className} data-[state=open]:animate-in data-[state=closed]:animate-out`}
@@ -208,7 +216,8 @@ const PopoverContent = ({
       role='dialog'
     >
       {children}
-    </div>
+    </div>,
+    document.body,
   );
 };
 

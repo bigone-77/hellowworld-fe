@@ -289,3 +289,33 @@
   letter-spacing: -0.025em;
   font-weight: 500;
 }
+
+:root {
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.5);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.7);
+}
+
+::-webkit-scrollbar {
+  width: 4px; /* 스크롤바 너비 4px로 설정 */
+  height: 60px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px; /* 너비에 맞게 둥글게 처리 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* 2. Firefox */
+* {
+  scrollbar-width: thin; /* Firefox에서는 픽셀 단위 지정이 안되므로 'thin'으로 설정 */
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}

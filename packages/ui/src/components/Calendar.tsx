@@ -190,7 +190,7 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
   const days = eachDayOfInterval({ start: calendarStart, end: calendarEnd });
 
   return (
-    <div className='w-[350px] rounded-lg bg-white p-4 shadow-lg'>
+    <div className='w-[350px]'>
       <div className='mb-4 flex items-center justify-between'>
         <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
           <PopoverTrigger asChild>
