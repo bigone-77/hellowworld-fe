@@ -73,7 +73,7 @@
   --color-purple-20: #daccff;
   --color-purple-30: #bca4ff;
   --color-purple-40: #a67aff;
-  --color-purple-50: #926ee9;
+  --color-purple-50: #9268e9;
   --color-purple-60: #7a4bdc;
   --color-purple-70: #663eb8;
   --color-purple-80: #492eb5;
@@ -157,6 +157,7 @@
   --color-secondary-box-on: var(--color-purple-70);
   --color-secondary-box-var1: var(--color-purple-30);
   --color-secondary-box-var2: var(--color-purple-40);
+  --color-secondary-box-line: var(--color-purple-50);
   --color-secondary-line: var(--color-purple-50);
   --color-secondary-on: var(--color-purple-70);
 

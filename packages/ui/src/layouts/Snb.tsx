@@ -1,8 +1,7 @@
 'use client';
 
-import Button from '@repo/ui/components/Button';
-import InlineSvg from '@repo/ui/components/InlineSvg';
-import Image from 'next/image';
+import Button from '../components/Button';
+import InlineSvg from '../components/InlineSvg';
 
 export default function Snb() {
   return (
@@ -41,9 +40,8 @@ export default function Snb() {
           </svg>
         </MenuBtnWrapper>
         <div className='flex flex-col gap-y-[6]'>
-          <Image
-            src='https://res.cloudinary.com/dl31hx4rn/image/upload/v1752665741/badge/friends.svg'
-            alt='개인 뱃지'
+          <InlineSvg
+            srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1752665741/badge/friends.svg'
             width={44}
             height={44}
           />
@@ -55,27 +53,24 @@ export default function Snb() {
       </div>
       <div className='flex flex-col items-center gap-y-6'>
         <MenuBtnWrapper>
-          <Image
-            src='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/award.svg'
-            alt='명예의 전당'
+          <InlineSvg
+            srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/award.svg'
             width={24}
             height={24}
           />
           <span className='text-label-l2 whitespace-nowrap'>명예의 전당</span>
         </MenuBtnWrapper>
         <MenuBtnWrapper>
-          <Image
-            src='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/solve.svg'
-            alt='문제 풀이'
+          <InlineSvg
+            srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/solve.svg'
             width={24}
             height={24}
           />
           <span className='text-label-l2 whitespace-nowrap'>문제 풀이</span>
         </MenuBtnWrapper>
         <MenuBtnWrapper disabled>
-          <Image
-            src='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/board.svg'
-            alt='게시판'
+          <InlineSvg
+            srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/board.svg'
             width={24}
             height={24}
           />
@@ -83,9 +78,8 @@ export default function Snb() {
         </MenuBtnWrapper>
       </div>
       <div className='flex flex-col items-center gap-y-1'>
-        <Image
-          src='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753790409/svg/logout.svg'
-          alt='로그아웃'
+        <InlineSvg
+          srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753790409/svg/logout.svg'
           width={24}
           height={24}
         />

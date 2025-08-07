@@ -3,7 +3,7 @@ import InlineSvg from './InlineSvg';
 
 interface ToggleButtonProps extends Omit<ButtonProps, 'children'> {
   imgUrl: string;
-  isOn: boolean;
+  isOn?: boolean;
 }
 
 const ToggleButton = ({

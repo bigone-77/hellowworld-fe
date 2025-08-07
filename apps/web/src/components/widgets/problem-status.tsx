@@ -12,11 +12,7 @@ export default function ProblemStatus() {
           <span className='text-headline-s text-black'>나의 문제 현황</span>
           <Button className='text-text2' variant='text'>
             더보기
-            <InlineSvg
-              srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg'
-              width={18}
-              height={18}
-            />
+            <InlineSvg alias='nextArrow' width={18} height={18} />
           </Button>
         </div>
         <p className='flex items-center gap-x-2'>
@@ -40,7 +36,7 @@ export default function ProblemStatus() {
               />
               <div className='flex items-center gap-x-2'>
                 <Button variant='primary_icon' className='aspect-square'>
-                  <InlineSvg srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753115575/svg/play.svg' />
+                  <InlineSvg alias='play' />
                 </Button>
                 <ToggleButton
                   variant='primary_icon'
