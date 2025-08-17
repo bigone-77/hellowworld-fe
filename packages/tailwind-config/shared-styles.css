@@ -14,6 +14,8 @@
 @theme {
   --font-pretendard: 'Pretendard Variable';
 
+  --spacing-logo: 140px;
+
   --radius-XS: 4px;
   --radius-S: 10px;
   --radius-M: 24px;
@@ -26,8 +28,8 @@
   --font-weight-regular: 400;
 
   --shadow-modal-l:
-    2px 4px 10px 0 rgba(0, 0, 0, 0.06), 0 0 4px 0 rgba(0, 0, 0, 0.1);
-  --shadow-modal-s: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    0px 4px 10px 2px rgba(0, 0, 0, 0.06), 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  --shadow-modal-s: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 
   @keyframes fade-in {
     from {
@@ -191,6 +193,25 @@
   .btn-press-effect:not(:disabled) {
     @apply transition-[transform] duration-[500ms] ease-[cubic-bezier(0.15,_1.15,_0.35,_1.05)] active:translate-y-1;
   }
+}
+
+@utility flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@utility flex-center-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@utility flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @utility text-display-l {
