@@ -6,6 +6,8 @@
   ],
   "exports": {
     "./style.css": "./src/globals.css",
+    "./layouts/*": "./src/layouts/*.tsx",
+    "./config/*": "./src/config/*.ts|tsx",
     "./components/*": "./src/components/*.tsx"
   },
   "license": "MIT",
@@ -13,7 +15,9 @@
     "lint": "eslint src --max-warnings 0"
   },
   "peerDependencies": {
-    "react": "^19"
+    "@types/react-dom": "^19.1.1",
+    "react": "^19",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
@@ -21,8 +25,15 @@
     "@repo/typescript-config": "workspace:*",
     "@tailwindcss/cli": "^4.1.5",
     "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.1",
     "eslint": "^9.31.0",
+    "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.5",
     "typescript": "5.8.2"
+  },
+  "dependencies": {
+    "clsx": "2.1.1",
+    "date-fns": "4.1.0",
+    "tailwind-merge": "3.3.1"
   }
 }

@@ -14,16 +14,43 @@
 @theme {
   --font-pretendard: 'Pretendard Variable';
 
-  --radius-s: 4px;
-  --radius-m: 30px;
-  --radius-l: 1000px;
-  --radius-ms: 15px;
-  --radius-icon: 10px;
+  --spacing-logo: 140px;
+
+  --radius-XS: 4px;
+  --radius-S: 10px;
+  --radius-M: 24px;
+  --radius-L: 30px;
+  --radius-FULL: 1000px;
 
   --font-weight-bold: 700;
   --font-weight-semibold: 600;
   --font-weight-medium: 500;
   --font-weight-regular: 400;
+
+  --shadow-modal-l:
+    0px 4px 10px 2px rgba(0, 0, 0, 0.06), 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  --shadow-modal-s: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  --animate-in: fade-in 200ms ease-out;
+  --animate-out: fade-out 150ms ease-in;
 
   --color-black: #000000;
   --color-white: #ffffff;
@@ -48,7 +75,7 @@
   --color-purple-20: #daccff;
   --color-purple-30: #bca4ff;
   --color-purple-40: #a67aff;
-  --color-purple-50: #926ee9;
+  --color-purple-50: #9268e9;
   --color-purple-60: #7a4bdc;
   --color-purple-70: #663eb8;
   --color-purple-80: #492eb5;
@@ -132,6 +159,7 @@
   --color-secondary-box-on: var(--color-purple-70);
   --color-secondary-box-var1: var(--color-purple-30);
   --color-secondary-box-var2: var(--color-purple-40);
+  --color-secondary-box-line: var(--color-purple-50);
   --color-secondary-line: var(--color-purple-50);
   --color-secondary-on: var(--color-purple-70);
 
@@ -143,13 +171,13 @@
   --color-text-box-var: var(--color-gray-30);
 
   /* System */
-  --color-system-icon: var(--color-black);
-  --color-system-error-box: var(--color-red-10);
-  --color-system-error-on: var(--color-red-40);
-  --color-system-warning-box: var(--color-orange-10);
-  --color-system-warning-on: var(--color-orange-40);
-  --color-system-sucsess-box: var(--color-blue-10);
-  --color-system-sucsess-on: var(--color-blue-40);
+  --color-icon: var(--color-black);
+  --color-error-box: var(--color-red-10);
+  --color-error-on: var(--color-red-40);
+  --color-warning-box: var(--color-orange-10);
+  --color-warning-on: var(--color-orange-40);
+  --color-success-box: var(--color-blue-10);
+  --color-success-on: var(--color-blue-40);
 }
 
 @layer base {
@@ -162,9 +190,28 @@
 }
 
 @layer components {
-  .btn-press-effect {
+  .btn-press-effect:not(:disabled) {
     @apply transition-[transform] duration-[500ms] ease-[cubic-bezier(0.15,_1.15,_0.35,_1.05)] active:translate-y-1;
   }
+}
+
+@utility flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@utility flex-center-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@utility flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 @utility text-display-l {
@@ -263,4 +310,34 @@
   line-height: 140%;
   letter-spacing: -0.025em;
   font-weight: 500;
+}
+
+:root {
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.5);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.7);
+}
+
+::-webkit-scrollbar {
+  width: 4px; /* 스크롤바 너비 4px로 설정 */
+  height: 60px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px; /* 너비에 맞게 둥글게 처리 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* 2. Firefox */
+* {
+  scrollbar-width: thin; /* Firefox에서는 픽셀 단위 지정이 안되므로 'thin'으로 설정 */
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
