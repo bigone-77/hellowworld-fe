@@ -41,20 +41,20 @@ export default function Snb() {
         </MenuBtnWrapper>
         <div className='flex flex-col gap-y-[6]'>
           <InlineSvg
-            srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1752665741/badge/friends.svg'
+            srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1752665741/badge/friends.svg'
             width={44}
             height={44}
           />
           <span className='text-body-l1 text-black'>신태일</span>
         </div>
         <Button variant='primary_icon' size='m'>
-          <InlineSvg srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753115575/svg/play.svg' />
+          <InlineSvg srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753115575/svg/play.svg' />
         </Button>
       </div>
       <div className='flex flex-col items-center gap-y-6'>
         <MenuBtnWrapper>
           <InlineSvg
-            srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/award.svg'
+            srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/award.svg'
             width={24}
             height={24}
           />
@@ -62,7 +62,7 @@ export default function Snb() {
         </MenuBtnWrapper>
         <MenuBtnWrapper>
           <InlineSvg
-            srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/solve.svg'
+            srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/solve.svg'
             width={24}
             height={24}
           />
@@ -70,7 +70,7 @@ export default function Snb() {
         </MenuBtnWrapper>
         <MenuBtnWrapper disabled>
           <InlineSvg
-            srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/board.svg'
+            srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/board.svg'
             width={24}
             height={24}
           />
@@ -79,7 +79,7 @@ export default function Snb() {
       </div>
       <div className='flex flex-col items-center gap-y-1'>
         <InlineSvg
-          srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753790409/svg/logout.svg'
+          srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753790409/svg/logout.svg'
           width={24}
           height={24}
         />

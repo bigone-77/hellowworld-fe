@@ -23,7 +23,7 @@ const Badge = ({
       {...props}
     >
       <InlineSvg
-        srcUrl={imgUrl}
+        srcurl={imgUrl}
         width={imgSize}
         height={imgSize}
         className='rounded-M border-primary-line group-data-[state=on]:border-secondary-box-on border-2'
@@ -39,7 +39,7 @@ export default Badge;
 
 {
   /* <InlineSvg
-        srcUrl={imgUrl}
+        srcurl={imgUrl}
         width={imgSize}
         height={imgSize}
         className='rounded-M border-primary-line border-2'

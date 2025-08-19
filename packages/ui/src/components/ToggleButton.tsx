@@ -13,7 +13,7 @@ const ToggleButton = ({
 }: ToggleButtonProps) => {
   return (
     <Button {...props}>
-      <InlineSvg className={`${!isOn && 'opacity-30'}`} srcUrl={imgUrl} />
+      <InlineSvg className={`${!isOn && 'opacity-30'}`} srcurl={imgUrl} />
     </Button>
   );
 };

@@ -1,6 +1,9 @@
-import LoginForm from '@/components/(beforeLogin)/login-form';
-import Button from '@repo/ui/components/Button';
 import Image from 'next/image';
+
+import LoginForm from '@/components/(beforeLogin)/login-form';
+
+import Button from '@repo/ui/components/Button';
+import Link from 'next/link';
 
 export default function Login() {
   return (
@@ -18,8 +21,8 @@ export default function Login() {
         <div className='h-6' />
 
         <div className='flex-center text-body-l2 text-text1 gap-x-9'>
-          <span>비밀번호 찾기</span>
-          <span>회원가입</span>
+          <Link href='/find-pw'>비밀번호 찾기</Link>
+          <Link href='/member-join'>회원가입</Link>
         </div>
 
         <p className="text-body-s1 text-text1 before:bg-text-box after:bg-text-box flex-center w-full py-6 before:mr-3 before:h-px before:flex-1 before:content-[''] after:ml-3 after:h-px after:flex-1 after:content-['']">

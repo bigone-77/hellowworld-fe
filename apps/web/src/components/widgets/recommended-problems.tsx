@@ -45,7 +45,7 @@ export default function RecommendedProblems() {
               <div className='flex h-full items-center justify-end'>
                 <div className='flex h-11 items-stretch gap-x-2'>
                   <Button variant='primary_icon'>
-                    <InlineSvg srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753115575/svg/play.svg' />
+                    <InlineSvg srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753115575/svg/play.svg' />
                   </Button>
                   <ToggleButton
                     variant='primary_icon'

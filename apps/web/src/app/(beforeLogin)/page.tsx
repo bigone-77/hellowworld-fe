@@ -1,9 +1,9 @@
-import Login from '@/components/(beforeLogin)/Login';
+import { COOKIE } from '@/config/mock';
+import { redirect } from 'next/navigation';
 
 export default function Page() {
-  return (
-    <>
-      <Login />
-    </>
-  );
+  if (COOKIE) {
+    redirect('/home');
+  }
+  redirect('/login');
 }
