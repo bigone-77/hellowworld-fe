@@ -1,22 +1,15 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
-import LoginForm from '@/components/(beforeLogin)/login-form';
+import FormWrapper from '@/components/(beforeLogin)/FormWrapper';
+import LoginForm from '@/components/(beforeLogin)/login/form';
 
 import Button from '@repo/ui/components/Button';
-import Link from 'next/link';
 
 export default function Login() {
   return (
-    <div className='rounded-L shadow-modal-l bg-white px-6 pb-10 pt-[82]'>
-      <h2 className='text-center'>
-        <span className='text-display-s'>
-          게임처럼 쉽게,
-          <br />
-          코딩을 배워보세요.
-        </span>
-      </h2>
-
-      <div className='w-[357] px-6 pt-[55]'>
+    <FormWrapper title={`게임처럼 쉽게, \n 코딩을 배워보세요.`}>
+      <div className='w-full px-6 pt-[55]'>
         <LoginForm />
         <div className='h-6' />
 
@@ -51,6 +44,6 @@ export default function Login() {
           <span>에 동의한 것으로 간주합니다</span>
         </p>
       </div>
-    </div>
+    </FormWrapper>
   );
 }

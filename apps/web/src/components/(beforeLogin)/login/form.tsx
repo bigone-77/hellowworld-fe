@@ -2,7 +2,6 @@
 
 import Button from '@repo/ui/components/Button';
 import Checkbox from '@repo/ui/components/Checkbox';
-import InlineSvg from '@repo/ui/components/InlineSvg';
 import TextField from '@repo/ui/components/TextField';
 
 export default function LoginForm() {
