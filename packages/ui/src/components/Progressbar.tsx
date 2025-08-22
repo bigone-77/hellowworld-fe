@@ -29,4 +29,4 @@ const Progressbar = ({ progress }: ProgressBarProps) => {
   );
 };
 
-export default Progressbar;
+export { Progressbar };

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import FormWrapper from '@/components/(beforeLogin)/FormWrapper';
 import LoginForm from '@/components/(beforeLogin)/login/form';
 
-import Button from '@repo/ui/components/Button';
+import { Button } from '@repo/ui/components';
 
 export default function Login() {
   return (

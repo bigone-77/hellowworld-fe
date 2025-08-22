@@ -17,8 +17,8 @@ import {
 
 import { cn } from '../lib/utils';
 
-import InlineSvg from '../components/InlineSvg';
-import Button from '../components/Button';
+import { InlineSvg } from './InlineSvg';
+import { Button } from './Button';
 import { Popover, PopoverContent, PopoverTrigger } from './Popover';
 
 interface CalendarTitleProps {
@@ -269,4 +269,4 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
   );
 };
 
-export default Calendar;
+export { Calendar };

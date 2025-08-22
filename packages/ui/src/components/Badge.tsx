@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import InlineSvg from './InlineSvg';
+import { InlineSvg } from './InlineSvg';
 
 interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -35,15 +35,4 @@ const Badge = ({
   );
 };
 
-export default Badge;
-
-{
-  /* <InlineSvg
-        srcurl={imgUrl}
-        width={imgSize}
-        height={imgSize}
-        className='rounded-M border-primary-line border-2'
-      /> */
-}
-
-// https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371466/svg/check.svg
+export { Badge };

@@ -8,7 +8,7 @@
     "./style.css": "./src/globals.css",
     "./layouts/*": "./src/layouts/*.tsx",
     "./config/*": "./src/config/*.ts|tsx",
-    "./components/*": "./src/components/*.tsx"
+    "./components": "./src/components/index.tsx"
   },
   "license": "MIT",
   "scripts": {

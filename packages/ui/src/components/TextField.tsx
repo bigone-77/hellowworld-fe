@@ -2,13 +2,15 @@
 
 import { InputHTMLAttributes, useId, useState, ChangeEvent, Ref } from 'react';
 import clsx from 'clsx';
-import InlineSvg from './InlineSvg';
+import { InlineSvg } from './InlineSvg';
+import { HelperMessage } from './HelperMessage';
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   onClear?: () => void;
   label?: string;
   className?: string;
   ref?: Ref<HTMLInputElement>;
+  error?: string | null;
 }
 
 const TextField = ({
@@ -20,6 +22,7 @@ const TextField = ({
   onChange,
   type,
   ref,
+  error,
   ...props
 }: TextFieldProps) => {
   const isControlled = value !== undefined;
@@ -79,12 +82,13 @@ const TextField = ({
               'pr-20': isPasswordInput && showClearIcon,
               'pr-12': !isPasswordInput && showClearIcon,
               'pr-5': !showClearIcon,
+              '!border-error-on focus:!border-error-on': !!error,
             },
             'placeholder:text-text-line',
             'hover:bg-surface2 hover:border-text-line hover:cursor-text',
             'focus:bg-surface1 focus:border-text2 focus:outline-none',
             {
-              'bg-surface2 border-text-box text-text-line cursor-not-allowed':
+              'bg-surface2 border-text-box !text-text-line cursor-not-allowed':
                 props.disabled,
             },
           )}
@@ -92,37 +96,48 @@ const TextField = ({
         />
 
         <div className='absolute right-4 top-1/2 flex -translate-y-1/2 items-center gap-x-2'>
-          {isPasswordInput && showClearIcon && (
-            <button
-              type='button'
-              onClick={togglePasswordVisibility}
-              aria-label={
-                isPasswordVisible ? '비밀번호 보기' : '비밀번호 숨기기'
-              }
-              className='size-6 cursor-pointer text-gray-400 transition-colors hover:text-gray-700'
-            >
-              {isPasswordVisible ? (
-                <InlineSvg alias='pwOn' />
-              ) : (
-                <InlineSvg alias='pwOff' />
-              )}
-            </button>
-          )}
+          <button
+            type='button'
+            onClick={togglePasswordVisibility}
+            aria-label={isPasswordVisible ? '비밀번호 보기' : '비밀번호 숨기기'}
+            className={clsx(
+              'size-6 cursor-pointer text-gray-400 transition-colors hover:text-gray-700',
+              {
+                invisible: !(isPasswordInput && showClearIcon),
+              },
+            )}
+            disabled={!(isPasswordInput && showClearIcon)}
+          >
+            {isPasswordVisible ? (
+              <InlineSvg alias='pwOn' />
+            ) : (
+              <InlineSvg alias='pwOff' />
+            )}
+          </button>
 
-          {showClearIcon && (
-            <button
-              type='button'
-              onClick={handleClear}
-              aria-label='입력 내용 지우기'
-              className='size-6 cursor-pointer text-gray-400 transition-colors hover:text-gray-700'
-            >
-              <InlineSvg alias='cancel' />
-            </button>
-          )}
+          <button
+            type='button'
+            onClick={!error ? handleClear : undefined}
+            aria-label={error ? '입력값 오류' : '입력 내용 지우기'}
+            className={clsx('size-6 transition-colors', {
+              'cursor-pointer text-gray-400 hover:text-gray-700': !error,
+              invisible: !showClearIcon,
+            })}
+            disabled={!showClearIcon || !!error}
+          >
+            {error ? <InlineSvg alias='error' /> : <InlineSvg alias='cancel' />}
+          </button>
         </div>
+      </div>
+      <div className='h-5 pl-5 pt-2'>
+        {error ? (
+          <HelperMessage variant='error'>{error}</HelperMessage>
+        ) : (
+          <div aria-hidden='true' />
+        )}
       </div>
     </div>
   );
 };
 
-export default TextField;
+export { TextField };

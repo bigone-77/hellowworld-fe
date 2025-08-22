@@ -1,8 +1,6 @@
 'use client';
 
-import Button from '@repo/ui/components/Button';
-import Checkbox from '@repo/ui/components/Checkbox';
-import TextField from '@repo/ui/components/TextField';
+import { Button, Checkbox, TextField } from '@repo/ui/components';
 
 export default function LoginForm() {
   return (

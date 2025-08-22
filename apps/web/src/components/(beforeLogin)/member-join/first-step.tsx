@@ -2,9 +2,12 @@
 
 import { useMemo, useState } from 'react';
 
-import Checkbox from '@repo/ui/components/Checkbox';
-import TextField from '@repo/ui/components/TextField';
-import Button from '@repo/ui/components/Button';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { emailFormSchema, EmailFormValues } from '@/schemas';
+
+import { Button, Checkbox, TextField } from '@repo/ui/components';
 
 const AGENT_LIST = [
   {
@@ -47,7 +50,25 @@ const initialCheckedState = AGENT_LIST.reduce(
   {} as Record<string, boolean>,
 );
 
-export default function FirstStep() {
+interface Props {
+  setJoinId: (id: string) => void;
+  goNextStep: () => void;
+}
+
+export default function FirstStep({ setJoinId, goNextStep }: Props) {
+  const {
+    register,
+    trigger,
+    getValues,
+    formState: { errors, isValid },
+  } = useForm<EmailFormValues>({
+    resolver: zodResolver(emailFormSchema),
+    mode: 'onChange',
+    defaultValues: {
+      email: '',
+    },
+  });
+
   const [checkedItems, setCheckedItems] = useState(initialCheckedState);
 
   const isAllChecked = useMemo(
@@ -67,9 +88,31 @@ export default function FirstStep() {
     setCheckedItems((prev) => ({ ...prev, [id]: isChecked }));
   };
 
+  const btnDisabled =
+    !isValid ||
+    AGENT_LIST.filter((list) => list.isRequired).some(
+      (item) => !checkedItems[item.id],
+    );
+
+  const handleNextStep = async () => {
+    const isFormValid = await trigger();
+
+    if (isFormValid) {
+      console.log(getValues('email'));
+
+      setJoinId(getValues('email'));
+      goNextStep();
+    }
+  };
+
   return (
     <section>
-      <TextField label='아이디' placeholder='이메일 주소를 입력해주세요.' />
+      <TextField
+        label='아이디'
+        placeholder='이메일 주소를 입력해주세요.'
+        error={errors.email?.message}
+        {...register('email')}
+      />
       <div className='flex flex-col pb-10 pt-6'>
         <Checkbox
           checked={isAllChecked}
@@ -105,7 +148,13 @@ export default function FirstStep() {
           ))}
         </div>
       </div>
-      <Button className='w-full'>이메일 인증</Button>
+      <Button
+        className='w-full'
+        disabled={btnDisabled}
+        onClick={handleNextStep}
+      >
+        이메일 인증
+      </Button>
     </section>
   );
 }

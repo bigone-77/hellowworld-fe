@@ -2,7 +2,7 @@
 
 import { InputHTMLAttributes, ReactNode } from 'react';
 import clsx from 'clsx';
-import InlineSvg from './InlineSvg';
+import { InlineSvg } from './InlineSvg';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   children: ReactNode;
@@ -48,4 +48,4 @@ const Checkbox = ({
   );
 };
 
-export default Checkbox;
+export { Checkbox };

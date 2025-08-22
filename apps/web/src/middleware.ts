@@ -25,5 +25,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // api, _next/static, _next/image, favicon.ico를 제외한 모든 경로에서 미들웨어를 실행
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|mockServiceWorker.js).*)',
+  ],
 };
