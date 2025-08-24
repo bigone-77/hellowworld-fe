@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 
 import { MSWProvider } from '@/components/providers/msw-provider';
+import RQProvider from '@/components/providers/rq-provider';
 
 const pretendard = localFont({
   src: '../../../../packages/tailwind-config/fonts/PretendardVariable.woff2',
@@ -33,7 +34,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={pretendard.className}>
-        <MSWProvider>{children}</MSWProvider>
+        <MSWProvider>
+          <RQProvider>{children}</RQProvider>
+        </MSWProvider>
       </body>
     </html>
   );

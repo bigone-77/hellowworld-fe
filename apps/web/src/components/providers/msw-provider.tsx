@@ -14,6 +14,9 @@ const mockingEnabledPromise =
             if (request.url.includes('_next')) {
               return;
             }
+            if (request.url.includes('res.cloudinary.com')) {
+              return;
+            }
             print.warning();
           },
         });

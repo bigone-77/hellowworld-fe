@@ -5,6 +5,8 @@ import { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { useMemberJoinQueries } from '@/hooks';
+
 import { emailFormSchema, EmailFormValues } from '@/schemas';
 
 import { Button, Checkbox, TextField } from '@repo/ui/components';
@@ -56,6 +58,8 @@ interface Props {
 }
 
 export default function FirstStep({ setJoinId, goNextStep }: Props) {
+  const { mutate } = useMemberJoinQueries();
+
   const {
     register,
     trigger,
@@ -98,9 +102,8 @@ export default function FirstStep({ setJoinId, goNextStep }: Props) {
     const isFormValid = await trigger();
 
     if (isFormValid) {
-      console.log(getValues('email'));
-
       setJoinId(getValues('email'));
+      mutate({ email: getValues('email') });
       goNextStep();
     }
   };
