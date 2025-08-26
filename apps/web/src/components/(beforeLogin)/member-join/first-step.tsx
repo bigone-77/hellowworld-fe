@@ -58,7 +58,7 @@ interface Props {
 }
 
 export default function FirstStep({ setJoinId, goNextStep }: Props) {
-  const { mutate } = useMemberJoinQueries();
+  const { mutate: sendCodeMutate } = useMemberJoinQueries();
 
   const {
     register,
@@ -103,7 +103,7 @@ export default function FirstStep({ setJoinId, goNextStep }: Props) {
 
     if (isFormValid) {
       setJoinId(getValues('email'));
-      mutate({ email: getValues('email') });
+      sendCodeMutate({ email: getValues('email') });
       goNextStep();
     }
   };
