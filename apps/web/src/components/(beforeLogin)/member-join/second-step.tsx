@@ -1,24 +1,31 @@
+'use client';
+
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { verifyCodeFormSchema, VerifyCodeFormValues } from '@/schemas';
+import { verifyCodeFormSchema, VerifyCodePayload } from '@/schemas';
 
-import { Button, TextField } from '@repo/ui/components';
+import { Button, Snackbar, TextField } from '@repo/ui/components';
+import { useVerifySendCode } from '@/hooks';
 
 interface Props {
   joinId: string;
   tempCode: string;
+  goNextStep: () => void;
 }
 
-export default function SecondStep({ joinId, tempCode }: Props) {
-  console.log(joinId);
+export default function SecondStep({ joinId, tempCode, goNextStep }: Props) {
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+
+  const { mutate: verifyMutate } = useVerifySendCode();
+
   const {
     register,
     trigger,
     getValues,
-    setError,
     formState: { errors, isValid },
-  } = useForm<VerifyCodeFormValues>({
+  } = useForm<VerifyCodePayload>({
     resolver: zodResolver(verifyCodeFormSchema),
     mode: 'onChange',
     defaultValues: {
@@ -26,8 +33,23 @@ export default function SecondStep({ joinId, tempCode }: Props) {
     },
   });
 
+  const btnDisabled = !isValid;
+
+  const handleNextStep = async () => {
+    const isFormValid = await trigger();
+
+    if (isFormValid) {
+      verifyMutate(
+        { tempCode: getValues('tempCode') },
+        {
+          onSuccess: goNextStep,
+        },
+      );
+    }
+  };
+
   return (
-    <section>
+    <section className='relative'>
       <div className='mb-10 flex flex-col gap-y-1'>
         <TextField
           label='아이디'
@@ -44,11 +66,25 @@ export default function SecondStep({ joinId, tempCode }: Props) {
           {...register('tempCode')}
         />
         <div className='h-4' />
-        <Button variant='outline_s' className='w-fit place-items-start'>
+        <Button
+          variant='outline_s'
+          className='w-fit place-items-start'
+          onClick={() => setIsSnackbarOpen(true)}
+        >
           인증번호 다시 받기
         </Button>
       </div>
-      <Button className='w-full'>다음으로</Button>
+      <Button
+        className='w-full'
+        disabled={btnDisabled}
+        onClick={handleNextStep}
+      >
+        다음으로
+      </Button>
+
+      <Snackbar open={isSnackbarOpen} onOpenChange={setIsSnackbarOpen}>
+        인증번호를 다시 보냈어요.
+      </Snackbar>
     </section>
   );
 }

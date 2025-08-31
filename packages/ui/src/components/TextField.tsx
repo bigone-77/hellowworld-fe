@@ -138,9 +138,9 @@ const TextField = ({
             type='button'
             onClick={!error ? handleClear : undefined}
             aria-label={error ? '입력값 오류' : '입력 내용 지우기'}
-            className={clsx('size-6 transition-colors', {
+            className={clsx('size-6 transition-all', {
               'cursor-pointer text-gray-400 hover:text-gray-700': !error,
-              invisible: !showClearIcon,
+              hidden: !showClearIcon,
             })}
             disabled={!showClearIcon || !!error}
           >

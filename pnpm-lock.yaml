@@ -225,6 +225,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@types/node':
+        specifier: ^22.15.30
+        version: 22.15.30
       clsx:
         specifier: 2.1.1
         version: 2.1.1
@@ -1291,7 +1294,6 @@ packages:
     resolution: {integrity: sha512-6Q7lr06bEHdlfplU6YRbgG1SFBdlsfNC4/lX+SkhiTs0cpJkOElmWls8PxDFv4yY/xKb8Y6SO0OmSX4wgqTZbA==}
     dependencies:
       undici-types: 6.21.0
-    dev: true
 
   /@types/react-dom@19.1.1(@types/react@19.1.0):
     resolution: {integrity: sha512-jFf/woGTVTjUJsl2O7hcopJ1r0upqoq/vIOoCj0yLh3RIXxWcljlpuZ+vEBRXsymD1jhfeJrlyTy/S1UW+4y1w==}
@@ -4402,7 +4404,6 @@ packages:
 
   /undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
-    dev: true
 
   /universalify@0.2.0:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}

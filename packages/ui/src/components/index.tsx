@@ -11,3 +11,4 @@ export { default as Popover } from './Popover';
 export { default as Progressbar } from './Progressbar';
 export { default as TextField } from './TextField';
 export { default as ToggleButton } from './ToggleButton';
+export { default as Snackbar } from './Snackbar';

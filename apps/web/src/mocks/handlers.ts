@@ -1,5 +1,6 @@
-import { EmailFormValues as SendCodeRequestBody } from '@/schemas';
 import { http, HttpResponse } from 'msw';
+
+import { SendCodePayload, VerifyCodePayload } from '@/schemas';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -17,7 +18,7 @@ export const handlers = [
   // }),
 
   http.post(`${baseUrl}/api/auth/send-code`, async ({ request }) => {
-    const { email } = (await request.json()) as SendCodeRequestBody;
+    const { email } = (await request.json()) as SendCodePayload;
 
     console.log(`[성공] 인증번호 발송 API 요청 이메일: ${email}`);
     const authCode = Math.floor(100000 + Math.random() * 900000).toString();
@@ -30,4 +31,18 @@ export const handlers = [
       message: `${email}으로 인증번호가 발송되었습니다.`,
     });
   }),
+
+  http.post(
+    `${baseUrl}/api/auth/verify-code/:CONTACT_CODE`,
+    async ({ request }) => {
+      const { tempCode } = (await request.json()) as VerifyCodePayload;
+
+      if (tempCode) {
+        return HttpResponse.json({
+          code: 200,
+          message: '유효한 인증번호입니다.',
+        });
+      }
+    },
+  ),
 ];

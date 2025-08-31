@@ -1,15 +1,28 @@
 import { customFetch } from '@/lib/customFetch';
 
-import { emailFormResponse, EmailFormValues as requestType } from '@/schemas';
+import {
+  SendCodeResponse,
+  SendCodePayload,
+  VerifyCodePayload,
+} from '@/schemas';
 
-export const sendVerificationCode = async (email: requestType) => {
-  const responseData = await customFetch<emailFormResponse>(
+export const sendVerificationCode = async (email: SendCodePayload) => {
+  const responseData = await customFetch<SendCodeResponse>(
     '/api/auth/send-code',
     {
       method: 'POST',
       body: JSON.stringify(email),
     },
   );
+
+  return responseData;
+};
+
+export const verifySendCode = async (tempCode: VerifyCodePayload) => {
+  const responseData = await customFetch<string>('/api/auth/verify-code', {
+    method: 'POST',
+    body: JSON.stringify(tempCode),
+  });
 
   return responseData;
 };
