@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -22,18 +24,22 @@ export default function Login() {
           또는
         </p>
 
-        <Button
-          variant='outline_s'
-          className='border-text-box-var w-full border-[0.5] py-[11] text-black'
+        <Link
+          href={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/login/oauth2/code/google`}
         >
-          <Image
-            src='https://res.cloudinary.com/dl31hx4rn/image/upload/v1755539308/svg/google.svg'
-            alt='구글 로그인'
-            width={20}
-            height={20}
-          />
-          구글로 로그인
-        </Button>
+          <Button
+            variant='outline_s'
+            className='border-text-box-var w-full border-[0.5] py-[11] text-black'
+          >
+            <Image
+              src='https://res.cloudinary.com/dl31hx4rn/image/upload/v1755539308/svg/google.svg'
+              alt='구글 로그인'
+              width={20}
+              height={20}
+            />
+            구글로 로그인
+          </Button>
+        </Link>
 
         <p className='text-body-s0 text-text1 pt-[59] text-center'>
           <span>회원가입시 </span>

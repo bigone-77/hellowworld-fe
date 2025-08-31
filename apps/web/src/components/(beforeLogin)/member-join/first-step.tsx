@@ -1,13 +1,11 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { useMemberJoinQueries } from '@/hooks';
+import { useCheckbox, useMemberJoinQueries } from '@/hooks';
 
-import { emailFormSchema, EmailFormValues } from '@/schemas';
+import { SendCodePayload, sendCodePayloadSchema } from '@/schemas';
 
 import { Button, Checkbox, TextField } from '@repo/ui/components';
 
@@ -44,20 +42,17 @@ const AGENT_LIST = [
   },
 ];
 
-const initialCheckedState = AGENT_LIST.reduce(
-  (acc, item) => {
-    acc[item.id] = false;
-    return acc;
-  },
-  {} as Record<string, boolean>,
-);
-
 interface Props {
   setJoinId: (id: string) => void;
+  setTempCode: React.Dispatch<React.SetStateAction<string>>;
   goNextStep: () => void;
 }
 
-export default function FirstStep({ setJoinId, goNextStep }: Props) {
+export default function FirstStep({
+  setJoinId,
+  setTempCode,
+  goNextStep,
+}: Props) {
   const { mutate: sendCodeMutate } = useMemberJoinQueries();
 
   const {
@@ -65,45 +60,60 @@ export default function FirstStep({ setJoinId, goNextStep }: Props) {
     trigger,
     getValues,
     formState: { errors, isValid },
-  } = useForm<EmailFormValues>({
-    resolver: zodResolver(emailFormSchema),
+  } = useForm<SendCodePayload>({
+    resolver: zodResolver(sendCodePayloadSchema),
     mode: 'onChange',
     defaultValues: {
       email: '',
     },
   });
 
-  const [checkedItems, setCheckedItems] = useState(initialCheckedState);
+  //   AGENT_LIST.reduce(
+  //     (acc, item) => {
+  //       acc[item.id] = false;
+  //       return acc;
+  //     },
+  //     {} as Record<string, boolean>,
+  //   ),
+  // );
 
-  const isAllChecked = useMemo(
-    () => AGENT_LIST.every((item) => checkedItems[item.id]),
-    [checkedItems],
-  );
+  // const isAllChecked = useMemo(
+  //   () => AGENT_LIST.every((item) => checkedItems[item.id]),
+  //   [checkedItems],
+  // );
 
-  const handleCheckAll = (isChecked: boolean) => {
-    const newCheckedItems = { ...checkedItems };
-    AGENT_LIST.forEach((item) => {
-      newCheckedItems[item.id] = isChecked;
-    });
-    setCheckedItems(newCheckedItems);
-  };
+  // const handleCheckAll = (isChecked: boolean) => {
+  //   const newCheckedItems = { ...checkedItems };
+  //   AGENT_LIST.forEach((item) => {
+  //     newCheckedItems[item.id] = isChecked;
+  //   });
+  //   setCheckedItems(newCheckedItems);
+  // };
 
-  const handleCheck = (id: string, isChecked: boolean) => {
-    setCheckedItems((prev) => ({ ...prev, [id]: isChecked }));
-  };
+  // const handleCheck = (id: string, isChecked: boolean) => {
+  //   setCheckedItems((prev) => ({ ...prev, [id]: isChecked }));
+  // };
+  const {
+    checkedItems,
+    isAllChecked,
+    areAllRequiredChecked,
+    handleCheckAll,
+    handleCheck,
+  } = useCheckbox(AGENT_LIST);
 
-  const btnDisabled =
-    !isValid ||
-    AGENT_LIST.filter((list) => list.isRequired).some(
-      (item) => !checkedItems[item.id],
-    );
+  const btnDisabled = !isValid || !areAllRequiredChecked;
 
   const handleNextStep = async () => {
     const isFormValid = await trigger();
 
     if (isFormValid) {
       setJoinId(getValues('email'));
-      sendCodeMutate({ email: getValues('email') });
+      sendCodeMutate(
+        { email: getValues('email') },
+        {
+          onSuccess: (data) => setTempCode(data.authCode),
+        },
+      );
       goNextStep();
     }
   };

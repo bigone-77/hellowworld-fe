@@ -20,7 +20,8 @@
     "next.config.ts",
     ".next/types/**/*.ts",
     "../../packages/ui/src/layouts/Snb.tsx",
-    "public/test.js"
+    "public/test.js",
+    "../../packages/utils/src/useTimer.ts"
   ],
   "exclude": ["node_modules"]
 }

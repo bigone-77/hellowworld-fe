@@ -5,12 +5,18 @@ import clsx from 'clsx';
 import { InlineSvg } from './InlineSvg';
 import { HelperMessage } from './HelperMessage';
 
+import { useTimer } from '@repo/utils';
+
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   onClear?: () => void;
   label?: string;
   className?: string;
   ref?: Ref<HTMLInputElement>;
   error?: string | null;
+
+  isTimer?: boolean;
+  timerDuration?: number;
+  onTimeUp?: () => void;
 }
 
 const TextField = ({
@@ -23,6 +29,10 @@ const TextField = ({
   type,
   ref,
   error,
+
+  isTimer,
+  timerDuration,
+  onTimeUp,
   ...props
 }: TextFieldProps) => {
   const isControlled = value !== undefined;
@@ -55,6 +65,11 @@ const TextField = ({
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
   };
+
+  const { formattedTime } = useTimer({
+    initialTime: timerDuration || 0,
+    onTimeUp,
+  });
 
   return (
     <div className={clsx('w-full', className)}>
@@ -115,6 +130,10 @@ const TextField = ({
             )}
           </button>
 
+          {isTimer && (
+            <HelperMessage variant='error'>{formattedTime}</HelperMessage>
+          )}
+
           <button
             type='button'
             onClick={!error ? handleClear : undefined}
@@ -134,6 +153,9 @@ const TextField = ({
           <HelperMessage variant='error'>{error}</HelperMessage>
         ) : (
           <div aria-hidden='true' />
+        )}
+        {isTimer && !error && (
+          <HelperMessage>도착한 인증번호 6자리를 입력해주세요</HelperMessage>
         )}
       </div>
     </div>
