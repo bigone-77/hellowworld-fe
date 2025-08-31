@@ -221,4 +221,7 @@ const PopoverContent = ({
   );
 };
 
-export { Popover, PopoverTrigger, PopoverContent };
+Popover.Trigger = PopoverTrigger;
+Popover.Content = PopoverContent;
+
+export default Popover;

@@ -2,8 +2,8 @@
 
 import { InputHTMLAttributes, useId, useState, ChangeEvent, Ref } from 'react';
 import clsx from 'clsx';
-import { InlineSvg } from './InlineSvg';
-import { HelperMessage } from './HelperMessage';
+import InlineSvg from './InlineSvg';
+import HelperMessage from './HelperMessage';
 
 import { useTimer } from '@repo/utils';
 
@@ -162,4 +162,4 @@ const TextField = ({
   );
 };
 
-export { TextField };
+export default TextField;

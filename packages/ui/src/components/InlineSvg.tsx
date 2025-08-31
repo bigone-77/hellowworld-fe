@@ -67,4 +67,4 @@ const InlineSvg = ({
   );
 };
 
-export { InlineSvg };
+export default InlineSvg;

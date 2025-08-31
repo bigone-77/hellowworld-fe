@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import { InlineSvg } from './InlineSvg';
+import InlineSvg from './InlineSvg';
 
 interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -35,4 +35,4 @@ const Badge = ({
   );
 };
 
-export { Badge };
+export default Badge;

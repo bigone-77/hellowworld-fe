@@ -17,9 +17,9 @@ import {
 
 import { cn } from '../lib/utils';
 
-import { InlineSvg } from './InlineSvg';
-import { Button } from './Button';
-import { Popover, PopoverContent, PopoverTrigger } from './Popover';
+import InlineSvg from './InlineSvg';
+import Button from './Button';
+import Popover from './Popover';
 
 interface CalendarTitleProps {
   headerTitle: string;
@@ -193,13 +193,13 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
     <div className='w-[350px]'>
       <div className='mb-4 flex items-center justify-between'>
         <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-          <PopoverTrigger asChild>
+          <Popover.Trigger asChild>
             <CalendarTitle
               headerTitle={headerTitle}
               isPopupOpen={isPopoverOpen}
             />
-          </PopoverTrigger>
-          <PopoverContent align='start'>
+          </Popover.Trigger>
+          <Popover.Content align='start'>
             <CalendarModal
               pickerYear={pickerYear}
               currentMonth={currentMonth}
@@ -211,7 +211,7 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
                 setIsPopoverOpen(false);
               }}
             />
-          </PopoverContent>
+          </Popover.Content>
         </Popover>
         <CalendarNavigator
           goToPrevMonth={goToPrevMonth}
@@ -269,4 +269,4 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
   );
 };
 
-export { Calendar };
+export default Calendar;
