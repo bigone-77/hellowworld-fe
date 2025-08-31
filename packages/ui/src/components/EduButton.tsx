@@ -35,4 +35,4 @@ const EduButton = ({
   );
 };
 
-export default EduButton;
+export { EduButton };

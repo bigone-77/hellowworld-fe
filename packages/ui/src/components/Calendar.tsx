@@ -17,8 +17,8 @@ import {
 
 import { cn } from '../lib/utils';
 
-import InlineSvg from '../components/InlineSvg';
-import Button from '../components/Button';
+import { InlineSvg } from './InlineSvg';
+import { Button } from './Button';
 import { Popover, PopoverContent, PopoverTrigger } from './Popover';
 
 interface CalendarTitleProps {
@@ -53,7 +53,7 @@ const CalendarTitle = ({
   >
     <span className='text-body-l2'>{headerTitle}</span>
     <InlineSvg
-      srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371406/svg/down-arrow.svg'
+      srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371406/svg/down-arrow.svg'
       width={13.5}
       height={6.75}
     />
@@ -72,7 +72,7 @@ const CalendarNavigator = ({
       className='!rounded-FULL'
     >
       <InlineSvg
-        srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/prev-arrow.svg'
+        srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/prev-arrow.svg'
         width={24}
         height={24}
       />
@@ -84,7 +84,7 @@ const CalendarNavigator = ({
       className='!rounded-FULL'
     >
       <InlineSvg
-        srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg'
+        srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg'
         width={24}
         height={24}
       />
@@ -125,7 +125,7 @@ const CalendarModal = ({
             className='!rounded-FULL size-5'
           >
             <InlineSvg
-              srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/prev-arrow.svg'
+              srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/prev-arrow.svg'
               width={12}
               height={12}
             />
@@ -137,7 +137,7 @@ const CalendarModal = ({
             className='!rounded-FULL size-5'
           >
             <InlineSvg
-              srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg'
+              srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg'
               width={12}
               height={12}
             />
@@ -256,7 +256,7 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
               </span>
               {isToday(day) && (
                 <InlineSvg
-                  srcUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371466/svg/check.svg'
+                  srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371466/svg/check.svg'
                   width={16}
                   height={16}
                 />
@@ -269,4 +269,4 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
   );
 };
 
-export default Calendar;
+export { Calendar };

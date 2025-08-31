@@ -8,7 +8,9 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@repo/ui/components": ["../../packages/ui/src/components/index.tsx"],
+      "@repo/ui/*": ["../../packages/ui/src/*"]
     }
   },
   "include": [
@@ -17,7 +19,9 @@
     "next-env.d.ts",
     "next.config.ts",
     ".next/types/**/*.ts",
-    "../../packages/ui/src/layouts/Snb.tsx"
+    "../../packages/ui/src/layouts/Snb.tsx",
+    "public/test.js",
+    "../../packages/utils/src/useTimer.ts"
   ],
   "exclude": ["node_modules"]
 }

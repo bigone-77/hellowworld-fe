@@ -33,4 +33,4 @@ const HelperMessage = ({
   );
 };
 
-export default HelperMessage;
+export { HelperMessage };

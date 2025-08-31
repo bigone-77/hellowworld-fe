@@ -1,5 +1,5 @@
-import Button, { ButtonProps } from './Button';
-import InlineSvg from './InlineSvg';
+import { Button, ButtonProps } from './Button';
+import { InlineSvg } from './InlineSvg';
 
 interface ToggleButtonProps extends Omit<ButtonProps, 'children'> {
   imgUrl: string;
@@ -13,9 +13,9 @@ const ToggleButton = ({
 }: ToggleButtonProps) => {
   return (
     <Button {...props}>
-      <InlineSvg className={`${!isOn && 'opacity-30'}`} srcUrl={imgUrl} />
+      <InlineSvg className={`${!isOn && 'opacity-30'}`} srcurl={imgUrl} />
     </Button>
   );
 };
 
-export default ToggleButton;
+export { ToggleButton };

@@ -8,12 +8,12 @@ interface BaseProps extends HTMLAttributes<HTMLSpanElement> {
 
 interface AliasProps {
   alias: IconAlias;
-  srcUrl?: never;
+  srcurl?: never;
 }
 
 interface ImgUrlProps {
   alias?: never;
-  srcUrl: string;
+  srcurl: string;
 }
 
 type InlineSvgProps = BaseProps & (AliasProps | ImgUrlProps);
@@ -26,12 +26,12 @@ const InlineSvg = ({
 }: InlineSvgProps) => {
   const [svg, setSvg] = useState<string | null>(null);
 
-  const srcUrl =
-    'alias' in props && props.alias ? ICON_MAP[props.alias] : props.srcUrl;
+  const srcurl =
+    'alias' in props && props.alias ? ICON_MAP[props.alias] : props.srcurl;
 
   useEffect(() => {
-    if (srcUrl) {
-      fetch(srcUrl)
+    if (srcurl) {
+      fetch(srcurl)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`SVG fetch failed: ${res.statusText}`);
@@ -46,7 +46,7 @@ const InlineSvg = ({
         })
         .catch(console.error);
     }
-  }, [srcUrl]);
+  }, [srcurl]);
 
   if (!svg) {
     return (
@@ -67,4 +67,4 @@ const InlineSvg = ({
   );
 };
 
-export default InlineSvg;
+export { InlineSvg };

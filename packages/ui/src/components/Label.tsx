@@ -44,4 +44,4 @@ const Label = ({
   );
 };
 
-export default Label;
+export { Label };
