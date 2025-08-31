@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-type Props = {
+interface Props {
   children: React.ReactNode;
-};
+}
 
 function RQProvider({ children }: Props) {
   const [client] = useState(

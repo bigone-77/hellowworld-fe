@@ -30,7 +30,7 @@ export const verifyCodeFormSchema = z.object({
   tempCode: tempCodeSchema,
 });
 
-export type VerifyCodeFormValues = z.infer<typeof verifyCodeFormSchema>;
+export type VerifyCodePayload = z.infer<typeof verifyCodeFormSchema>;
 
 export const memberJoinSchema = z.object({
   email: emailSchema,
