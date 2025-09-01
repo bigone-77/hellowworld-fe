@@ -6,13 +6,13 @@ import {
 } from '@/apis/(beforeLogin)/auth.api';
 
 export const useMemberJoinQueries = () => {
-  return useMutation({
+  const memberJoinStepOneMutate = useMutation({
     mutationFn: sendVerificationCode,
   });
-};
 
-export const useVerifySendCode = () => {
-  return useMutation({
+  const memberJoinStepTwoMutate = useMutation({
     mutationFn: verifySendCode,
   });
+
+  return { memberJoinStepOneMutate, memberJoinStepTwoMutate };
 };

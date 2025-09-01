@@ -53,7 +53,8 @@ export default function FirstStep({
   setTempCode,
   goNextStep,
 }: Props) {
-  const { mutate: sendCodeMutate } = useMemberJoinQueries();
+  const { mutate: sendCodeMutate } =
+    useMemberJoinQueries().memberJoinStepOneMutate;
 
   const {
     register,

@@ -13,6 +13,7 @@ export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   ref?: Ref<HTMLInputElement>;
   error?: string | null;
+  success?: boolean | string;
 
   isTimer?: boolean;
   timerDuration?: number;
@@ -29,6 +30,7 @@ const TextField = ({
   type,
   ref,
   error,
+  success,
 
   isTimer,
   timerDuration,
@@ -136,25 +138,40 @@ const TextField = ({
 
           <button
             type='button'
-            onClick={!error ? handleClear : undefined}
-            aria-label={error ? '입력값 오류' : '입력 내용 지우기'}
+            onClick={!error && !success ? handleClear : undefined}
+            aria-label={
+              error
+                ? '입력값 오류'
+                : success
+                  ? '입력값 확인'
+                  : '입력 내용 지우기'
+            }
             className={clsx('size-6 transition-all', {
-              'cursor-pointer text-gray-400 hover:text-gray-700': !error,
+              'cursor-pointer text-gray-400 hover:text-gray-700':
+                !error && !success,
               hidden: !showClearIcon,
             })}
-            disabled={!showClearIcon || !!error}
+            disabled={!showClearIcon || !!error || !!success}
           >
-            {error ? <InlineSvg alias='error' /> : <InlineSvg alias='cancel' />}
+            {error ? (
+              <InlineSvg alias='error' />
+            ) : success ? (
+              <InlineSvg alias='success' />
+            ) : (
+              <InlineSvg alias='cancel' />
+            )}
           </button>
         </div>
       </div>
       <div className='h-5 pl-5 pt-2'>
         {error ? (
           <HelperMessage variant='error'>{error}</HelperMessage>
+        ) : typeof success == 'string' ? (
+          <HelperMessage variant='success'>{success}</HelperMessage>
         ) : (
           <div aria-hidden='true' />
         )}
-        {isTimer && !error && (
+        {isTimer && !error && !success && (
           <HelperMessage>도착한 인증번호 6자리를 입력해주세요</HelperMessage>
         )}
       </div>

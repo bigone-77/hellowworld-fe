@@ -6,9 +6,7 @@ export const emailSchema = z
   .min(1, '이메일을 입력해주세요.')
   .email('올바른 이메일 형식이 아닙니다.');
 
-export const passwordSchema = z
-  .string()
-  .min(8, '최소 8자리 이상 입력해주세요.');
+export const passwordSchema = z.string();
 
 export const tempCodeSchema = z
   .string()
@@ -32,15 +30,25 @@ export const verifyCodeFormSchema = z.object({
 
 export type VerifyCodePayload = z.infer<typeof verifyCodeFormSchema>;
 
-export const memberJoinSchema = z.object({
-  email: emailSchema,
+// (beforeLogin)/member-join thirdStep [비밀번호, 비밀번호 확인 -> 최종 회원가입]
+export const joinMemberPayloadSchema = z.object({
   password: passwordSchema,
+  passwordConfirm: z.string(),
 });
 
-export const loginSchema = z.object({
-  email: emailSchema,
-  password: z.string().min(1, '비밀번호를 입력해주세요.'),
-});
+export type JoinMemberPayload = z.infer<typeof joinMemberPayloadSchema>;
 
-export type SignUpFormValues = z.infer<typeof memberJoinSchema>;
-export type LoginFormValues = z.infer<typeof loginSchema>;
+export const joinMemberFormSchema = z
+  .object({
+    password: z.string(),
+    passwordConfirm: z.string().min(1, '비밀번호를 다시 입력해주세요.'),
+  })
+  .superRefine(({ password, passwordConfirm }, ctx) => {
+    if (password !== passwordConfirm) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '비밀번호가 일치하지 않습니다.',
+        path: ['passwordConfirm'],
+      });
+    }
+  });

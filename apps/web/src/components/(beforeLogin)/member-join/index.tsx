@@ -36,7 +36,7 @@ export default function MemberJoin() {
             goNextStep={() => setStep(3)}
           />
         )}
-        {step === 3 && <ThirdStep />}
+        {step === 3 && <ThirdStep joinId={joinDto.id} />}
       </div>
     </FormWrapper>
   );

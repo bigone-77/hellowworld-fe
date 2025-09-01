@@ -32,17 +32,14 @@ export const handlers = [
     });
   }),
 
-  http.post(
-    `${baseUrl}/api/auth/verify-code/:CONTACT_CODE`,
-    async ({ request }) => {
-      const { tempCode } = (await request.json()) as VerifyCodePayload;
+  http.post(`${baseUrl}/api/auth/verify-code`, async ({ request }) => {
+    const { tempCode } = (await request.json()) as VerifyCodePayload;
 
-      if (tempCode) {
-        return HttpResponse.json({
-          code: 200,
-          message: '유효한 인증번호입니다.',
-        });
-      }
-    },
-  ),
+    if (tempCode) {
+      return HttpResponse.json({
+        code: 200,
+        message: '유효한 인증번호입니다.',
+      });
+    }
+  }),
 ];
