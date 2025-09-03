@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
 import {
+  handleMemberJoin,
   sendVerificationCode,
   verifySendCode,
 } from '@/apis/(beforeLogin)/auth.api';
@@ -14,5 +15,13 @@ export const useMemberJoinQueries = () => {
     mutationFn: verifySendCode,
   });
 
-  return { memberJoinStepOneMutate, memberJoinStepTwoMutate };
+  const memberJoinLastMutate = useMutation({
+    mutationFn: handleMemberJoin,
+  });
+
+  return {
+    memberJoinStepOneMutate,
+    memberJoinStepTwoMutate,
+    memberJoinLastMutate,
+  };
 };

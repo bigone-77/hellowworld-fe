@@ -4,6 +4,8 @@ import {
   SendCodeResponse,
   SendCodePayload,
   VerifyCodePayload,
+  HandleMemberJoinPayload,
+  HandleMemberJoinResponse,
 } from '@/schemas';
 
 export const sendVerificationCode = async (email: SendCodePayload) => {
@@ -23,6 +25,18 @@ export const verifySendCode = async (tempCode: VerifyCodePayload) => {
     method: 'POST',
     body: JSON.stringify(tempCode),
   });
+
+  return responseData;
+};
+
+export const handleMemberJoin = async (reqBody: HandleMemberJoinPayload) => {
+  const responseData = await customFetch<HandleMemberJoinResponse>(
+    '/api/auth/member-join',
+    {
+      method: 'POST',
+      body: JSON.stringify(reqBody),
+    },
+  );
 
   return responseData;
 };

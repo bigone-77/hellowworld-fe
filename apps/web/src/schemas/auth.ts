@@ -52,3 +52,19 @@ export const joinMemberFormSchema = z
       });
     }
   });
+
+export const handleJoinMemberSchema = z.object({
+  email: emailSchema,
+  password: passwordSchema,
+});
+
+export const handleMemberJoinResponseSchema = z.object({
+  accessToken: z.string().min(1, 'Access token cannot be empty.'),
+  refreshToken: z.string().min(1, 'Refresh token cannot be empty.'),
+});
+
+export type HandleMemberJoinPayload = z.infer<typeof handleJoinMemberSchema>;
+
+export type HandleMemberJoinResponse = z.infer<
+  typeof handleMemberJoinResponseSchema
+>;

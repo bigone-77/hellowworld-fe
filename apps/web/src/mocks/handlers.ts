@@ -1,6 +1,10 @@
 import { http, HttpResponse } from 'msw';
 
-import { SendCodePayload, VerifyCodePayload } from '@/schemas';
+import {
+  HandleMemberJoinPayload,
+  SendCodePayload,
+  VerifyCodePayload,
+} from '@/schemas';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -42,4 +46,33 @@ export const handlers = [
       });
     }
   }),
+
+  http.post(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/member-join`,
+    async ({ request }) => {
+      const { email, password } =
+        (await request.json()) as HandleMemberJoinPayload;
+
+      if (email && password) {
+        const accessToken = 'mock-jwt-access-token-from-msw-12345';
+        const refreshToken = 'mock-jwt-refresh-token-from-msw-67890';
+
+        const responseBody = {
+          code: 201,
+          message: '회원가입에 성공했습니다.',
+          data: {
+            accessToken,
+            refreshToken,
+          },
+        };
+
+        return HttpResponse.json(responseBody, {
+          status: 201,
+          headers: {
+            'Set-Cookie': `refreshToken=${refreshToken}; HttpOnly; Path=/; Max-Age=604800; SameSite=Strict`,
+          },
+        });
+      }
+    },
+  ),
 ];

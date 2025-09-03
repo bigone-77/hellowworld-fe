@@ -1,4 +1,9 @@
 import { useEffect, useState } from 'react';
+
+import { useRouter } from 'next/navigation';
+
+import { setCookie } from 'cookies-next';
+
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,20 +13,29 @@ import {
   Button,
   HelperMessage,
   InlineSvg,
+  Modal,
   TextField,
 } from '@repo/ui/components';
 
 import { passwordRules } from '@/config/password';
+import { useMemberJoinQueries } from '@/hooks';
 
 interface Props {
   joinId: string;
 }
 
 export default function ThirdStep({ joinId }: Props) {
+  const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { mutate: memberJoinMutate } =
+    useMemberJoinQueries().memberJoinLastMutate;
+
   const {
     register,
     watch,
     trigger,
+    getValues,
     formState: { errors, dirtyFields, isValid },
   } = useForm<JoinMemberPayload>({
     resolver: zodResolver(joinMemberFormSchema),
@@ -41,6 +55,27 @@ export default function ThirdStep({ joinId }: Props) {
       trigger('passwordConfirm');
     }
   }, [watch('password'), trigger, dirtyFields.passwordConfirm]);
+
+  const handleMemberJoin = async () => {
+    const isFormValid = await trigger();
+
+    if (isFormValid) {
+      memberJoinMutate(
+        { email: joinId, password: getValues('password') },
+        {
+          onSuccess: (data) => {
+            setCookie('accessToken', data.accessToken, {
+              maxAge: 3600, // 1시간
+            });
+
+            console.log('AccessToken이 쿠키에 저장되었습니다.');
+
+            setIsModalOpen(true);
+          },
+        },
+      );
+    }
+  };
 
   return (
     <section>
@@ -78,13 +113,30 @@ export default function ThirdStep({ joinId }: Props) {
           }
         />
       </div>
-      <Button
-        className='w-full'
-        disabled={!isValid}
-        // onClick={handleNextStep}
-      >
+      <Button className='w-full' disabled={!isValid} onClick={handleMemberJoin}>
         회원가입 완료
       </Button>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <Modal.Content>
+          <Modal.Header>
+            <Modal.Title>Controlled Modal</Modal.Title>
+            <Modal.Description>
+              This modal's visibility is controlled by its parent.
+            </Modal.Description>
+          </Modal.Header>
+          <Modal.Footer>
+            <Button
+              onClick={() => {
+                setIsModalOpen(false);
+                router.push('/home');
+              }}
+            >
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
     </section>
   );
 }
