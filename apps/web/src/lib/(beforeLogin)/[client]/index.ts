@@ -1,11 +1,9 @@
-import { customFetch } from '@/lib/customFetch';
-
+import { customFetch } from '@/config/customFetch';
 import {
-  SendCodeResponse,
-  SendCodePayload,
-  VerifyCodePayload,
   HandleMemberJoinPayload,
-  HandleMemberJoinResponse,
+  SendCodePayload,
+  SendCodeResponse,
+  VerifyCodePayload,
 } from '@/schemas';
 
 export const sendVerificationCode = async (email: SendCodePayload) => {
@@ -30,13 +28,10 @@ export const verifySendCode = async (tempCode: VerifyCodePayload) => {
 };
 
 export const handleMemberJoin = async (reqBody: HandleMemberJoinPayload) => {
-  const responseData = await customFetch<HandleMemberJoinResponse>(
-    '/api/auth/member-join',
-    {
-      method: 'POST',
-      body: JSON.stringify(reqBody),
-    },
-  );
+  const responseData = await customFetch<string>('/api/auth/member-join', {
+    method: 'POST',
+    body: JSON.stringify(reqBody),
+  });
 
   return responseData;
 };

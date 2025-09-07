@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { verifyCodeFormSchema, VerifyCodePayload } from '@/schemas';
 
 import { Button, Snackbar, TextField } from '@repo/ui/components';
-import { useMemberJoinQueries } from '@/hooks';
+import { useAuthQueries } from '@/hooks';
 
 interface Props {
   joinId: string;
@@ -18,8 +18,7 @@ interface Props {
 export default function SecondStep({ joinId, tempCode, goNextStep }: Props) {
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
-  const { mutate: verifyMutate } =
-    useMemberJoinQueries().memberJoinStepTwoMutate;
+  const { mutate: verifyMutate } = useAuthQueries().memberJoinStepTwoMutate;
 
   const {
     register,

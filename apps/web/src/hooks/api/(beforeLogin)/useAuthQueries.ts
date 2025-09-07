@@ -4,9 +4,9 @@ import {
   handleMemberJoin,
   sendVerificationCode,
   verifySendCode,
-} from '@/apis/(beforeLogin)/auth.api';
+} from '@/lib/(beforeLogin)';
 
-export const useMemberJoinQueries = () => {
+export const useAuthQueries = () => {
   const memberJoinStepOneMutate = useMutation({
     mutationFn: sendVerificationCode,
   });

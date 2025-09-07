@@ -18,7 +18,7 @@ import {
 } from '@repo/ui/components';
 
 import { passwordRules } from '@/config/password';
-import { useMemberJoinQueries } from '@/hooks';
+import { useAuthQueries } from '@/hooks';
 
 interface Props {
   joinId: string;
@@ -28,8 +28,7 @@ export default function ThirdStep({ joinId }: Props) {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { mutate: memberJoinMutate } =
-    useMemberJoinQueries().memberJoinLastMutate;
+  const { mutate: memberJoinMutate } = useAuthQueries().memberJoinLastMutate;
 
   const {
     register,
@@ -63,13 +62,7 @@ export default function ThirdStep({ joinId }: Props) {
       memberJoinMutate(
         { email: joinId, password: getValues('password') },
         {
-          onSuccess: (data) => {
-            setCookie('accessToken', data.accessToken, {
-              maxAge: 3600, // 1시간
-            });
-
-            console.log('AccessToken이 쿠키에 저장되었습니다.');
-
+          onSuccess: () => {
             setIsModalOpen(true);
           },
         },
@@ -120,19 +113,19 @@ export default function ThirdStep({ joinId }: Props) {
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Modal.Content>
           <Modal.Header>
-            <Modal.Title>Controlled Modal</Modal.Title>
             <Modal.Description>
-              This modal's visibility is controlled by its parent.
+              {'헬로월드의 회원가입이 \n완료되었어요!'}
             </Modal.Description>
           </Modal.Header>
           <Modal.Footer>
             <Button
+              className='w-full'
               onClick={() => {
                 setIsModalOpen(false);
                 router.push('/home');
               }}
             >
-              Close
+              확인
             </Button>
           </Modal.Footer>
         </Modal.Content>

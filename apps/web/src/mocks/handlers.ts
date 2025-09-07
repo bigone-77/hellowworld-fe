@@ -9,17 +9,33 @@ import {
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const handlers = [
-  // http.post(`${baseUrl}/api/users`, async ({ request }) => {
-  //   console.log('회원가입');
-  //   // return HttpResponse.text(JSON.stringify('user_exists'), {
-  //   //   status: 403,
-  //   // });
-  //   return HttpResponse.text(JSON.stringify('ok'), {
-  //     headers: {
-  //       'Set-Cookie': 'connect.sid=msw-cookie;HttpOnly;Path=/',
-  //     },
-  //   });
-  // }),
+  http.post(`${baseUrl}/api/auth/login`, async ({ request }) => {
+    const { email, password } = (await request.json()) as {
+      email: string;
+      password: string;
+    };
+
+    if (email && password) {
+      const accessToken = 'mock-jwt-access-token-from-msw-12345';
+      const refreshToken = 'mock-jwt-refresh-token-from-msw-67890';
+
+      const responseBody = {
+        code: 200,
+        message: '로그인이 성공적으로 완료되었습니다.',
+        data: {
+          accessToken,
+          refreshToken,
+        },
+      };
+
+      return HttpResponse.json(responseBody, {
+        status: 200,
+        headers: {
+          'Set-Cookie': `refreshToken=${refreshToken}; HttpOnly; Path=/; Max-Age=604800; SameSite=Strict`,
+        },
+      });
+    }
+  }),
 
   http.post(`${baseUrl}/api/auth/send-code`, async ({ request }) => {
     const { email } = (await request.json()) as SendCodePayload;
@@ -54,23 +70,9 @@ export const handlers = [
         (await request.json()) as HandleMemberJoinPayload;
 
       if (email && password) {
-        const accessToken = 'mock-jwt-access-token-from-msw-12345';
-        const refreshToken = 'mock-jwt-refresh-token-from-msw-67890';
-
-        const responseBody = {
-          code: 201,
+        return HttpResponse.json({
+          code: 200,
           message: '회원가입에 성공했습니다.',
-          data: {
-            accessToken,
-            refreshToken,
-          },
-        };
-
-        return HttpResponse.json(responseBody, {
-          status: 201,
-          headers: {
-            'Set-Cookie': `refreshToken=${refreshToken}; HttpOnly; Path=/; Max-Age=604800; SameSite=Strict`,
-          },
         });
       }
     },

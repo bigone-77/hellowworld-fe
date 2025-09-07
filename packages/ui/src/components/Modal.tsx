@@ -63,7 +63,8 @@ const ModalContent = ({
   return (
     <div
       className={cn(
-        'rounded-M shadow-modal-l fixed left-1/2 top-1/2 z-50 w-[405] -translate-x-1/2 -translate-y-1/2 bg-white px-6 py-12',
+        'rounded-M fixed left-1/2 top-1/2 z-50 w-[405] -translate-x-1/2 -translate-y-1/2 bg-white px-6 py-12',
+        'shadow-modal-l',
         'data-[state=open]:animate-in data-[state=closed]:animate-out',
         className,
       )}
@@ -93,7 +94,11 @@ const ModalDescription = (
   props: React.HTMLAttributes<HTMLParagraphElement>,
 ) => (
   <p
-    className={cn('text-muted-foreground text-sm', props.className)}
+    className={cn(
+      'whitespace-pre-wrap text-center text-black',
+      'text-title-l',
+      props.className,
+    )}
     {...props}
   />
 );
