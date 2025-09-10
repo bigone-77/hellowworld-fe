@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useIsFetching, useIsMutating } from '@tanstack/react-query';
+import { Spinner } from '@repo/ui/components';
 
 const MutatingIndicator = () => {
   const isMutating = useIsMutating();
@@ -12,7 +13,7 @@ const MutatingIndicator = () => {
 
   return (
     <div className='fixed inset-0 z-50 flex items-center justify-center bg-black/20'>
-      <div className='size-12 animate-spin rounded-full border-4 border-solid border-white border-t-transparent'></div>
+      <Spinner />
     </div>
   );
 };
@@ -24,7 +25,7 @@ const FetchingIndicator = () => {
 
   return (
     <div className='fixed left-0 top-0 z-50 h-1 w-full'>
-      <div className='h-full w-full animate-pulse bg-blue-500'></div>
+      <Spinner />
     </div>
   );
 };

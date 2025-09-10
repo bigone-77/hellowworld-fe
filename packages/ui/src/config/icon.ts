@@ -14,8 +14,12 @@ export const ICON_MAP = {
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371406/svg/down-arrow.svg',
   prevArrow:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/prev-arrow.svg',
+  doublePrevArrow:
+    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1757349585/svg/double-prev-arrow.svg',
   nextArrow:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg',
+  doubleNextArrow:
+    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1757349585/svg/double-next-arrow.svg',
   check:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371466/svg/check.svg',
   award:
@@ -27,7 +31,7 @@ export const ICON_MAP = {
   logout:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753790409/svg/logout.svg',
   search:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1754589668/svg/search.svg',
+    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1757347608/svg/search.svg',
   cancel:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1754590078/svg/cancel.svg',
   error:

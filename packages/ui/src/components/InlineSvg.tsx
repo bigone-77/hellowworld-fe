@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, HTMLAttributes } from 'react';
 import { ICON_MAP, IconAlias } from '../config/icon';
 

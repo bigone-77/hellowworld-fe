@@ -48,7 +48,13 @@ export default function Snb() {
           <span className='text-body-l1 text-black'>신태일</span>
         </div>
         <Button variant='primary_icon' size='m'>
-          <InlineSvg srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753115575/svg/play.svg' />
+          <InlineSvg alias='play' />
+        </Button>
+        <Button variant='secondary_icon' size='m'>
+          <InlineSvg
+            alias='search'
+            className='text-secondary-box-on stroke-2'
+          />
         </Button>
       </div>
       <div className='flex flex-col items-center gap-y-6'>
@@ -100,7 +106,7 @@ const MenuBtnWrapper = ({
     <button
       type='button'
       disabled={disabled}
-      className='text-text2 rounded-S hover:bg-surface2 active:bg-primary-box-var1 disabled:text-text1 group flex w-[73] shrink-0 cursor-pointer flex-col items-center gap-y-1 bg-transparent px-5 py-[6] transition-all duration-200 ease-in-out active:scale-95 disabled:cursor-default disabled:opacity-50 disabled:hover:bg-transparent disabled:active:scale-100 disabled:active:bg-transparent'
+      className='text-text2 rounded-S hover:bg-surface2 active:bg-primary-box-var1 disabled:text-text1 group flex w-[73] shrink-0 cursor-pointer flex-col items-center gap-y-1 bg-transparent px-[11] py-3 transition-all duration-200 ease-in-out active:scale-95 disabled:cursor-default disabled:opacity-50 disabled:hover:bg-transparent disabled:active:scale-100 disabled:active:bg-transparent'
     >
       {children}
     </button>
