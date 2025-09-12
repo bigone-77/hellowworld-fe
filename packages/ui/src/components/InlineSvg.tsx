@@ -1,14 +1,26 @@
-import { useState, useEffect, HTMLAttributes } from 'react';
+'use client';
 
-interface InlineSvgProps extends HTMLAttributes<HTMLSpanElement> {
-  srcUrl: string;
+import { useState, useEffect, HTMLAttributes } from 'react';
+import { ICON_MAP, IconAlias } from '../config/icon';
+
+interface BaseProps extends HTMLAttributes<HTMLSpanElement> {
   width?: number;
   height?: number;
 }
 
-// props 객체에 직접 타입을 지정합니다.
+export interface AliasProps {
+  alias: IconAlias;
+  srcurl?: never;
+}
+
+export interface ImgUrlProps {
+  alias?: never;
+  srcurl: string;
+}
+
+type InlineSvgProps = BaseProps & (AliasProps | ImgUrlProps);
+
 const InlineSvg = ({
-  srcUrl,
   width = 24,
   height = 24,
   className,
@@ -16,19 +28,27 @@ const InlineSvg = ({
 }: InlineSvgProps) => {
   const [svg, setSvg] = useState<string | null>(null);
 
+  const srcurl =
+    'alias' in props && props.alias ? ICON_MAP[props.alias] : props.srcurl;
+
   useEffect(() => {
-    if (srcUrl) {
-      fetch(srcUrl)
+    if (srcurl) {
+      fetch(srcurl)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`SVG fetch failed: ${res.statusText}`);
           }
           return res.text();
         })
-        .then(setSvg)
+        .then((text) => {
+          const cleanedSvg = text
+            .replace(/width="[^"]*"/, '')
+            .replace(/height="[^"]*"/, '');
+          setSvg(cleanedSvg);
+        })
         .catch(console.error);
     }
-  }, [srcUrl]);
+  }, [srcurl]);
 
   if (!svg) {
     return (
@@ -43,6 +63,7 @@ const InlineSvg = ({
     <span
       {...props}
       className={`inline-flex items-center justify-center ${className || ''}`}
+      style={{ width, height }}
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );

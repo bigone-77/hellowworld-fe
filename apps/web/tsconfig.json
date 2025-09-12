@@ -5,14 +5,23 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@repo/ui/components": ["../../packages/ui/src/components/index.tsx"],
+      "@repo/ui/*": ["../../packages/ui/src/*"]
+    }
   },
   "include": [
     "**/*.ts",
     "**/*.tsx",
     "next-env.d.ts",
     "next.config.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "../../packages/ui/src/layouts/Snb.tsx",
+    "public/test.js",
+    "../../packages/utils/src/useTimer.ts"
   ],
   "exclude": ["node_modules"]
 }
