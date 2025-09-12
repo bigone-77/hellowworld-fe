@@ -1,4 +1,4 @@
-import Badge from '@repo/ui/components/Badge';
+import Badge from '../../../../../../../packages/ui/src/components/Badge';
 
 export default function MyBadges() {
   return (

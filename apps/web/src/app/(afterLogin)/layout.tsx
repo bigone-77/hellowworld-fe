@@ -6,9 +6,9 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   return (
-    <div className='grid min-h-screen w-full grid-cols-[97px_1fr]'>
+    <div className='grid h-screen w-full grid-cols-[97px_1fr] overflow-hidden'>
       <Snb />
-      <main className='w-full'>{children}</main>
+      <main className='w-full overflow-y-auto p-10'>{children}</main>
     </div>
   );
 }

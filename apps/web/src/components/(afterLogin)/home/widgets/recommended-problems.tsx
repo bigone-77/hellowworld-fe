@@ -1,17 +1,9 @@
-import { WIDGET_HEIGHT_MAP } from '@/config/grid';
-import Button from '@repo/ui/components/Button';
-import InlineSvg from '@repo/ui/components/InlineSvg';
-import Label from '@repo/ui/components/Label';
-import ToggleButton from '@repo/ui/components/ToggleButton';
-import { cn } from 'node_modules/@repo/ui/src/lib/utils';
+import { Button, InlineSvg, Label, ToggleButton } from '@repo/ui/components';
+import { cn } from '@repo/ui/lib/utils';
 
 export default function RecommendedProblems() {
-  const widgetHeight = WIDGET_HEIGHT_MAP[3];
   return (
-    <section
-      className='rounded-L flex flex-col bg-white px-6 pt-6'
-      style={{ maxHeight: widgetHeight }}
-    >
+    <section className='rounded-L bg-white px-6 pt-6'>
       <span className='text-headline-s text-black'>오늘의 추천문제</span>
       <div className='py-5'>
         <Button variant='primary' className='w-full'>
@@ -50,7 +42,7 @@ export default function RecommendedProblems() {
                   <ToggleButton
                     variant='primary_icon'
                     isOn={true}
-                    imgUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753271887/svg/star.svg'
+                    alias='star'
                   />
                 </div>
               </div>

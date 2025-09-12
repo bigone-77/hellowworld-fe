@@ -4,7 +4,7 @@ import React from 'react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { Widget as WidgetType } from '@/types/Widget';
-import { WIDGET_HEIGHT_MAP } from '@/config/grid';
+import { WIDGET_HEIGHT_MAP } from '@/config/widget';
 
 // Props 타입에 픽셀 크기를 받을 수 있도록 추가
 interface Props {

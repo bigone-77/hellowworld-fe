@@ -1,4 +1,4 @@
-import CalendarUI from '@repo/ui/components/Calendar';
+import { Calendar as CalendarUI } from '@repo/ui/components';
 
 export default function Calendar() {
   return (

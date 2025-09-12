@@ -1,20 +1,16 @@
-import Button from '@repo/ui/components/Button';
-import ToggleButton from '@repo/ui/components/ToggleButton';
-import EduButton from '@repo/ui/components/EduButton';
-import InlineSvg from '@repo/ui/components/InlineSvg';
-import Progressbar from '@repo/ui/components/Progressbar';
+import WidgetWrapper from '@/components/(afterLogin)/home/widgets/layout/Wrapper';
+import {
+  Button,
+  EduButton,
+  InlineSvg,
+  Progressbar,
+  ToggleButton,
+} from '@repo/ui/components';
 
 export default function ProblemStatus() {
   return (
-    <section className='rounded-L bg-primary-box-var1 px-6 pt-6'>
-      <div className='flex flex-col gap-y-3'>
-        <div className='flex items-center justify-between'>
-          <span className='text-headline-s text-black'>나의 문제 현황</span>
-          <Button className='text-text2' variant='text'>
-            더보기
-            <InlineSvg alias='nextArrow' width={18} height={18} />
-          </Button>
-        </div>
+    <WidgetWrapper title='나의 문제 현황' isMoreBtnVisible href='/step-up'>
+      <div className='mt-3 flex flex-col gap-y-3'>
         <p className='flex items-center gap-x-2'>
           <span className='text-label-l2 text-primary-box-var3'>STEP2</span>
           <span className='text-title-l text-text2'>
@@ -22,7 +18,7 @@ export default function ProblemStatus() {
           </span>
         </p>
         <Progressbar progress={32} />
-        <div className='bg-yellow-5 rounded-L flex max-h-[240px] flex-col gap-y-3 overflow-y-auto p-5'>
+        <div className='bg-text-box rounded-L flex max-h-[224] flex-col gap-y-3 overflow-y-auto p-5'>
           {lessonData.map((d) => (
             <div
               key={d.id}
@@ -41,7 +37,7 @@ export default function ProblemStatus() {
                 <ToggleButton
                   variant='primary_icon'
                   className='aspect-square'
-                  imgUrl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753271887/svg/star.svg'
+                  alias='star'
                   isOn={false}
                 />
               </div>
@@ -50,7 +46,7 @@ export default function ProblemStatus() {
         </div>
         <Button variant='primary'>바로시작하기</Button>
       </div>
-    </section>
+    </WidgetWrapper>
   );
 }
 

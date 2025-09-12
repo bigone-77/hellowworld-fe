@@ -6,7 +6,7 @@ import {
   GRID_ROWS,
   initialWidgets,
   WIDGET_HEIGHT_MAP,
-} from '@/config/grid';
+} from '@/config/widget';
 import {
   DragEndEvent,
   DragOverEvent,
