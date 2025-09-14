@@ -14,3 +14,4 @@ export { default as ToggleButton } from './ToggleButton';
 export { default as Snackbar } from './Snackbar';
 export { default as Modal } from './Modal';
 export { default as Spinner } from './Spinner';
+export { default as Mascot } from './Mascot';

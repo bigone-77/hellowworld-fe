@@ -11,8 +11,9 @@ export default function Page() {
           왕초보 Python 입문 (3/20)
         </span>
       </p>
-      <div className='h-5' />
-      <StepUpBanner />
+      <div className='grid grid-cols-[939fr_405fr] gap-6'>
+        <StepUpBanner />
+      </div>
     </main>
   );
 }
