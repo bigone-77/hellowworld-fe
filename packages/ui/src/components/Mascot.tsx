@@ -76,10 +76,10 @@ const ALERT_TITLE_MAP: Partial<Record<AlertVariant, string>> = {
 };
 
 const ALERT_STYLE_MAP: Record<AlertVariant, string> = {
-  default: 'bg-yellow-100',
-  success: 'bg-blue-100',
-  fail: 'bg-red-100',
-  hint: 'bg-yellow-100',
+  default: 'border-primary-box p-3 rounded-l-S rounded-tr-S',
+  success: 'bg-blue-100 p-6 rounded-l-M rounded-tr-M',
+  fail: 'bg-red-100 p-6 rounded-l-M rounded-tr-M',
+  hint: 'bg-yellow-100 p-6 rounded-l-M rounded-tr-M',
 };
 
 // =================================================================
@@ -113,17 +113,23 @@ const Mascot = (props: MascotProps) => {
   const lottieData = MASCOT_LOTTIE_MAP[mascotToShow];
 
   return (
-    <div className={`relative flex flex-col items-center ${className}`}>
-      <div className={`mb-4 rounded-lg px-4 py-3 text-center ${alertStyle}`}>
-        {title && <p className='mb-1 text-lg font-bold'>{title}</p>}
-        <p className='text-sm'>{message}</p>
-      </div>
+    <div className={`flex justify-center ${className}`}>
+      <div className='relative w-fit'>
+        <div
+          className={`absolute right-[calc(100%+1rem)] top-5 w-max border text-center ${alertStyle}`}
+        >
+          {title && <p className='mb-1 text-lg font-bold'>{title}</p>}
+          <p className='text-body-l2 whitespace-pre-wrap text-black'>
+            {message}
+          </p>
+        </div>
 
-      <Lottie
-        animationData={lottieData}
-        style={{ width: size, height: size }}
-        loop={true}
-      />
+        <Lottie
+          animationData={lottieData}
+          style={{ width: size, height: size }}
+          loop={true}
+        />
+      </div>
     </div>
   );
 };

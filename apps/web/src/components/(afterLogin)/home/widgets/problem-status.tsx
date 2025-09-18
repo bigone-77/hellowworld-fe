@@ -63,7 +63,7 @@ const lessonData = [
     id: 2,
     step: '02',
     title: '반복문(for, while) 마스터',
-    progress: 75,
+    progress: 0,
     isActive: true, // 현재 활성화된 항목
     isBookmarked: false,
   },
@@ -71,7 +71,7 @@ const lessonData = [
     id: 3,
     step: '03',
     title: '함수 선언과 호출',
-    progress: 20,
+    progress: 0,
     isActive: false,
     isBookmarked: true,
   },

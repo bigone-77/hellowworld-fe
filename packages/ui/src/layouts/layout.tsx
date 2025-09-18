@@ -3,7 +3,7 @@
 import Button from '../components/Button';
 import InlineSvg from '../components/InlineSvg';
 
-export default function Snb() {
+export default function HomeLayout() {
   return (
     <aside className='bg-surface-var1 flex min-h-svh flex-col items-center justify-between border-[#A48C40] border-r-[0.5] pb-10 pt-5'>
       <div className='flex flex-col items-center gap-y-5'>
