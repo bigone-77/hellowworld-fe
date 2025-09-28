@@ -26,7 +26,6 @@ interface PopoverProps {
 
 interface PopoverTriggerProps {
   children: React.ReactNode;
-  asChild?: boolean;
 }
 
 interface PopoverContentProps {
@@ -34,6 +33,7 @@ interface PopoverContentProps {
   className?: string;
   sideOffset?: number;
   align?: 'center' | 'start' | 'end';
+  side?: 'top' | 'right' | 'bottom' | 'left';
 }
 
 const PopoverContext = createContext<PopoverContextProps | null>(null);
@@ -114,41 +114,23 @@ const Popover = ({
   );
 };
 
-const PopoverTrigger = ({ children, asChild = false }: PopoverTriggerProps) => {
+const PopoverTrigger = ({ children }: PopoverTriggerProps) => {
   const { isOpen, setIsOpen, triggerRef } = usePopover();
 
   const handleClick = useCallback(() => {
     setIsOpen(!isOpen);
   }, [isOpen, setIsOpen]);
 
-  if (asChild) {
-    const child = React.Children.only(children);
-
-    if (React.isValidElement(child)) {
-      return React.cloneElement(child as any, {
-        ref: triggerRef,
-        onClick: (e: React.MouseEvent<HTMLElement>) => {
-          handleClick();
-
-          (
-            child.props as { onClick?: (e: React.MouseEvent) => void }
-          )?.onClick?.(e);
-        },
-        'aria-expanded': isOpen,
-        'aria-haspopup': 'dialog',
-      });
-    }
-  }
-
   return (
-    <button
-      ref={triggerRef as React.RefObject<HTMLButtonElement>}
+    <div
+      ref={triggerRef as React.RefObject<HTMLDivElement>}
       onClick={handleClick}
       aria-expanded={isOpen}
       aria-haspopup='dialog'
+      style={{ cursor: 'pointer' }}
     >
       {children}
-    </button>
+    </div>
   );
 };
 
@@ -157,14 +139,13 @@ const PopoverContent = ({
   className = '',
   sideOffset = 8,
   align = 'center',
+  side = 'bottom',
 }: PopoverContentProps) => {
   const { isOpen, triggerRef, contentRef } = usePopover();
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // document 객체는 브라우저에서만 사용 가능하므로,
-    // 클라이언트에 마운트된 후에만 true로 설정합니다.
     setIsMounted(true);
   }, []);
 
@@ -175,19 +156,64 @@ const PopoverContent = ({
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
 
-      let top = triggerRect.bottom + window.scrollY + sideOffset;
-      let left;
+      let top = 0,
+        left = 0;
 
-      if (align === 'center') {
+      // side prop에 따라 위치 계산
+      if (side === 'bottom') {
+        top = triggerRect.bottom + window.scrollY + sideOffset;
+        if (align === 'center') {
+          left =
+            triggerRect.left +
+            window.scrollX +
+            triggerRect.width / 2 -
+            contentRect.width / 2;
+        } else if (align === 'start') {
+          left = triggerRect.left + window.scrollX;
+        } else {
+          left = triggerRect.right + window.scrollX - contentRect.width;
+        }
+      } else if (side === 'top') {
+        top =
+          triggerRect.top + window.scrollY - contentRect.height - sideOffset;
+        if (align === 'center') {
+          left =
+            triggerRect.left +
+            window.scrollX +
+            triggerRect.width / 2 -
+            contentRect.width / 2;
+        } else if (align === 'start') {
+          left = triggerRect.left + window.scrollX;
+        } else {
+          left = triggerRect.right + window.scrollX - contentRect.width;
+        }
+      } else if (side === 'right') {
+        left = triggerRect.right + window.scrollX + sideOffset;
+        if (align === 'center') {
+          top =
+            triggerRect.top +
+            window.scrollY +
+            triggerRect.height / 2 -
+            contentRect.height / 2;
+        } else if (align === 'start') {
+          top = triggerRect.top + window.scrollY;
+        } else {
+          top = triggerRect.bottom + window.scrollY - contentRect.height;
+        }
+      } else if (side === 'left') {
         left =
-          triggerRect.left +
-          window.scrollX +
-          triggerRect.width / 2 -
-          contentRect.width / 2;
-      } else if (align === 'start') {
-        left = triggerRect.left + window.scrollX;
-      } else {
-        left = triggerRect.right + window.scrollX - contentRect.width;
+          triggerRect.left + window.scrollX - contentRect.width - sideOffset;
+        if (align === 'center') {
+          top =
+            triggerRect.top +
+            window.scrollY +
+            triggerRect.height / 2 -
+            contentRect.height / 2;
+        } else if (align === 'start') {
+          top = triggerRect.top + window.scrollY;
+        } else {
+          top = triggerRect.bottom + window.scrollY - contentRect.height;
+        }
       }
 
       if (left < 8) {
@@ -196,14 +222,16 @@ const PopoverContent = ({
       if (left + contentRect.width > viewportWidth - 8) {
         left = viewportWidth - contentRect.width - 8;
       }
+      if (top < 8) {
+        top = 8;
+      }
       if (top + contentRect.height > viewportHeight - 8) {
-        top =
-          triggerRect.top + window.scrollY - contentRect.height - sideOffset;
+        top = viewportHeight - contentRect.height - 8;
       }
 
       setPosition({ top, left });
     }
-  }, [isOpen, triggerRef, contentRef, sideOffset, align]);
+  }, [isOpen, triggerRef, contentRef, sideOffset, align, side]);
 
   if (!isMounted || !isOpen) {
     return null;

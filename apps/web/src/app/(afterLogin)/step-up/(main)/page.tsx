@@ -1,17 +1,19 @@
+import Link from 'next/link';
+
 import StepUpBanner from '@/components/(afterLogin)/step-up/components/banner';
+
 import {
   Button,
   EduButton,
   InlineSvg,
   ToggleButton,
 } from '@repo/ui/components';
-import Link from 'next/link';
 
 export default function Page() {
   return (
     <section className='flex flex-col gap-y-5'>
       <StepUpBanner />
-      <Link href='/step-up/section'>
+      <Link href='/step-up/step'>
         <Button className='w-full'>
           <div className='flex-center gap-x-1'>
             <span>02 변수 만들어보기</span>

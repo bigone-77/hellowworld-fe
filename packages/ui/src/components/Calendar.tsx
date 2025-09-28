@@ -195,7 +195,7 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
     <div className='w-[350px]'>
       <div className='mb-4 flex items-center justify-between'>
         <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-          <Popover.Trigger asChild>
+          <Popover.Trigger>
             <CalendarTitle
               headerTitle={headerTitle}
               isPopupOpen={isPopoverOpen}
