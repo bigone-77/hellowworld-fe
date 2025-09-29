@@ -11,6 +11,8 @@ import React, {
 } from 'react';
 import { createPortal } from 'react-dom';
 
+import { cn } from '../lib/utils';
+
 interface PopoverContextProps {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
@@ -251,7 +253,22 @@ const PopoverContent = ({
   );
 };
 
+const PopoverMenuContainer = ({ children }: { children: React.ReactNode }) => (
+  <div className='flex-center-col rounded-L shadow-modal-s w-full gap-y-2 border border-white/60 bg-white p-2'>
+    {children}
+  </div>
+);
+
+const PopoverMenuItem = ({ children }: { children: React.ReactNode }) => {
+  const commonClasses =
+    'rounded-L hover:bg-text-box text-text-body-l1 w-[180] p-4 text-left';
+
+  return <div className={cn(commonClasses, 'cursor-pointer')}>{children}</div>;
+};
+
 Popover.Trigger = PopoverTrigger;
 Popover.Content = PopoverContent;
+Popover.MenuContainer = PopoverMenuContainer;
+Popover.MenuItem = PopoverMenuItem;
 
 export default Popover;

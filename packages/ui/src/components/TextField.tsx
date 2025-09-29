@@ -18,6 +18,7 @@ export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   isTimer?: boolean;
   timerDuration?: number;
   onTimeUp?: () => void;
+  iconLeft?: React.ReactNode;
 }
 
 const TextField = ({
@@ -35,6 +36,7 @@ const TextField = ({
   isTimer,
   timerDuration,
   onTimeUp,
+  iconLeft,
   ...props
 }: TextFieldProps) => {
   const isControlled = value !== undefined;
@@ -84,6 +86,11 @@ const TextField = ({
         </label>
       )}
       <div className='relative'>
+        {iconLeft && (
+          <div className='absolute left-5 top-1/2 -translate-y-1/2'>
+            {iconLeft}
+          </div>
+        )}
         <input
           ref={ref}
           id={uniqueId}
@@ -95,6 +102,7 @@ const TextField = ({
           disabled={props.disabled}
           className={clsx(
             'rounded-M border-text-box-var text-body-l1 text-text2 w-full border py-4 pl-5 transition-all',
+            { 'pl-[50]': !!iconLeft, 'pl-5': !iconLeft },
             {
               'pr-20': isPasswordInput && showClearIcon,
               'pr-12': !isPasswordInput && showClearIcon,
@@ -163,18 +171,23 @@ const TextField = ({
           </button>
         </div>
       </div>
-      <div className='h-5 pl-5 pt-2'>
-        {error ? (
-          <HelperMessage variant='error'>{error}</HelperMessage>
-        ) : typeof success == 'string' ? (
-          <HelperMessage variant='success'>{success}</HelperMessage>
-        ) : (
-          <div aria-hidden='true' />
+      <>
+        {(error ||
+          typeof success === 'string' ||
+          (isTimer && !error && !success)) && (
+          <div className='pl-5 pt-2'>
+            {error ? (
+              <HelperMessage variant='error'>{error}</HelperMessage>
+            ) : typeof success === 'string' ? (
+              <HelperMessage variant='success'>{success}</HelperMessage>
+            ) : isTimer && !error && !success ? (
+              <HelperMessage>
+                도착한 인증번호 6자리를 입력해주세요
+              </HelperMessage>
+            ) : null}
+          </div>
         )}
-        {isTimer && !error && !success && (
-          <HelperMessage>도착한 인증번호 6자리를 입력해주세요</HelperMessage>
-        )}
-      </div>
+      </>
     </div>
   );
 };

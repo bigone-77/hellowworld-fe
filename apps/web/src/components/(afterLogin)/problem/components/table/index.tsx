@@ -6,12 +6,11 @@ import {
   getCoreRowModel,
   getSortedRowModel,
   SortingState,
-  flexRender, // flexRender를 import 합니다.
+  flexRender,
 } from '@tanstack/react-table';
 
 import { dummyData, Problem } from '@/types/problem';
 import { columns } from './columns';
-import { cn } from '@repo/ui/lib/utils';
 
 export default function ProblemTable() {
   const [data] = useState<Problem[]>(() => [...dummyData]);
@@ -29,50 +28,36 @@ export default function ProblemTable() {
   });
 
   return (
-    <div className='rounded-lg bg-white p-4 shadow'>
-      <table className='w-full border-separate border-spacing-y-2'>
-        <thead className='text-left text-gray-500'>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id} className='p-2 font-normal'>
-                  {/* 헤더 렌더링 */}
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext(),
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row, index) => (
-            <tr
-              key={row.id}
-              className={cn(
-                'rounded-lg shadow-sm transition-shadow hover:shadow-md',
-                {
-                  'bg-yellow-50 text-gray-800': index === 0, // 첫 번째 행 하이라이트
-                  'bg-white text-gray-800': index !== 0,
-                  'bg-gray-50 text-gray-400':
-                    row.original.status === '레벨부족',
-                },
-              )}
+    <div className='w-full'>
+      <div className='bg-surface2 rounded-S flex gap-x-3'>
+        {table.getHeaderGroups().map((headerGroup) =>
+          headerGroup.headers.map((header) => (
+            <div
+              key={header.id}
+              className='text-body-l1 px-3 py-[14]'
+              style={{ width: header.getSize() }}
             >
-              {row.getVisibleCells().map((cell) => (
-                <td
-                  key={cell.id}
-                  className='p-4 align-middle first:rounded-l-lg last:rounded-r-lg'
-                >
-                  {/* 셀 렌더링 */}
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              {flexRender(header.column.columnDef.header, header.getContext())}
+            </div>
+          )),
+        )}
+      </div>
+
+      <div className='my-2 flex flex-col gap-y-3'>
+        {table.getRowModel().rows.map((row) => (
+          <div key={row.id} className='flex gap-x-3'>
+            {row.getVisibleCells().map((cell) => (
+              <div
+                key={cell.id}
+                className='p-0 align-middle'
+                style={{ width: cell.column.getSize() }}
+              >
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
