@@ -21,7 +21,6 @@ export function Widget({ widget, children, isOverlay, isEditMode }: Props) {
       disabled: !isEditMode,
     });
 
-  // Use useDndContext to get the aria-describedby ID
   const dndContext = useDndContext();
   const ariaDescribedBy = dndContext?.active
     ? dndContext.active.data.current?.ariaDescribedBy
@@ -44,7 +43,7 @@ export function Widget({ widget, children, isOverlay, isEditMode }: Props) {
     gridRowStart: widget.row,
     gridColumnEnd: `span ${widget.width}`,
     gridRowEnd: `span ${widget.height}`,
-    minHeight: `${WIDGET_HEIGHT_MAP[widget.height as keyof typeof WIDGET_HEIGHT_MAP]}px`,
+    height: `${WIDGET_HEIGHT_MAP[widget.height as keyof typeof WIDGET_HEIGHT_MAP]}px`,
     transform: dragTransform || slideTransform,
     opacity: isDragging && !isOverlay ? 0.5 : 1,
   };
@@ -54,7 +53,6 @@ export function Widget({ widget, children, isOverlay, isEditMode }: Props) {
     style.height = `${widget.pixelHeight}px`;
   }
 
-  // Conditionally add the aria-describedby attribute only for the overlay
   const draggableAttributes = isOverlay
     ? { ...attributes, 'aria-describedby': ariaDescribedBy }
     : attributes;

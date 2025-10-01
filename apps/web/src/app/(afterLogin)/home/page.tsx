@@ -13,6 +13,7 @@ export default function Page() {
         {(widgets) =>
           widgets.map((widget) => {
             const widgetIdString = widget.id as keyof typeof WIDGET_CONFIG;
+
             const ComponentToRender = WIDGET_CONFIG[widgetIdString]?.Component;
 
             if (!ComponentToRender) {
