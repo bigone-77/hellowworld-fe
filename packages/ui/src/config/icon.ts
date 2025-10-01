@@ -4,7 +4,7 @@
   2️⃣ 만약 style이 직접 적용이 안된다면 에디터에 해당 svg를 열어 편집가능하게 바꿔주세요.
   3️⃣ 필요한 아이콘들이 없는 경우 추가하고 아래 업데이트 날짜를 기재해주세요.
 
-  ✨ 2025.08.08 [최신 업데이트]
+  ✨ 2025.09.29 [최신 업데이트]
 */
 
 export const ICON_MAP = {
@@ -14,8 +14,12 @@ export const ICON_MAP = {
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371406/svg/down-arrow.svg',
   prevArrow:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/prev-arrow.svg',
+  doublePrevArrow:
+    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1757349585/svg/double-prev-arrow.svg',
   nextArrow:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg',
+  doubleNextArrow:
+    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1757349585/svg/double-next-arrow.svg',
   check:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371466/svg/check.svg',
   award:
@@ -27,7 +31,7 @@ export const ICON_MAP = {
   logout:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753790409/svg/logout.svg',
   search:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1754589668/svg/search.svg',
+    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1757347608/svg/search.svg',
   cancel:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1754590078/svg/cancel.svg',
   error:
@@ -37,6 +41,12 @@ export const ICON_MAP = {
   pwOff:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1754590210/svg/pw-off.svg',
   pwOn: 'https://res.cloudinary.com/dl31hx4rn/image/upload/v1754590210/svg/pw-on.svg',
+  upAndDown:
+    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759146358/svg/up-and-down.svg',
+  filter:
+    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759161463/svg/filter.svg',
+  setting:
+    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759164151/svg/setting.svg',
 } as const;
 
 export type IconAlias = keyof typeof ICON_MAP;

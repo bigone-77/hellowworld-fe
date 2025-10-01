@@ -1,21 +1,41 @@
 import { http, HttpResponse } from 'msw';
 
-import { SendCodePayload, VerifyCodePayload } from '@/schemas';
+import {
+  HandleMemberJoinPayload,
+  SendCodePayload,
+  VerifyCodePayload,
+} from '@/schemas';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const handlers = [
-  // http.post(`${baseUrl}/api/users`, async ({ request }) => {
-  //   console.log('회원가입');
-  //   // return HttpResponse.text(JSON.stringify('user_exists'), {
-  //   //   status: 403,
-  //   // });
-  //   return HttpResponse.text(JSON.stringify('ok'), {
-  //     headers: {
-  //       'Set-Cookie': 'connect.sid=msw-cookie;HttpOnly;Path=/',
-  //     },
-  //   });
-  // }),
+  http.post(`${baseUrl}/api/auth/login`, async ({ request }) => {
+    const { email, password } = (await request.json()) as {
+      email: string;
+      password: string;
+    };
+
+    if (email && password) {
+      const accessToken = 'mock-jwt-access-token-from-msw-12345';
+      const refreshToken = 'mock-jwt-refresh-token-from-msw-67890';
+
+      const responseBody = {
+        code: 200,
+        message: '로그인이 성공적으로 완료되었습니다.',
+        data: {
+          accessToken,
+          refreshToken,
+        },
+      };
+
+      return HttpResponse.json(responseBody, {
+        status: 200,
+        headers: {
+          'Set-Cookie': `refreshToken=${refreshToken}; HttpOnly; Path=/; Max-Age=604800; SameSite=Strict`,
+        },
+      });
+    }
+  }),
 
   http.post(`${baseUrl}/api/auth/send-code`, async ({ request }) => {
     const { email } = (await request.json()) as SendCodePayload;
@@ -32,15 +52,27 @@ export const handlers = [
     });
   }),
 
-  http.post(
-    `${baseUrl}/api/auth/verify-code/:CONTACT_CODE`,
-    async ({ request }) => {
-      const { tempCode } = (await request.json()) as VerifyCodePayload;
+  http.post(`${baseUrl}/api/auth/verify-code`, async ({ request }) => {
+    const { tempCode } = (await request.json()) as VerifyCodePayload;
 
-      if (tempCode) {
+    if (tempCode) {
+      return HttpResponse.json({
+        code: 200,
+        message: '유효한 인증번호입니다.',
+      });
+    }
+  }),
+
+  http.post(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/member-join`,
+    async ({ request }) => {
+      const { email, password } =
+        (await request.json()) as HandleMemberJoinPayload;
+
+      if (email && password) {
         return HttpResponse.json({
           code: 200,
-          message: '유효한 인증번호입니다.',
+          message: '회원가입에 성공했습니다.',
         });
       }
     },

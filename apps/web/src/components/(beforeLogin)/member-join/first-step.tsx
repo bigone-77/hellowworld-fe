@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { useCheckbox, useMemberJoinQueries } from '@/hooks';
+import { useCheckbox, useAuthQueries } from '@/hooks';
 
 import { SendCodePayload, sendCodePayloadSchema } from '@/schemas';
 
@@ -53,7 +53,7 @@ export default function FirstStep({
   setTempCode,
   goNextStep,
 }: Props) {
-  const { mutate: sendCodeMutate } = useMemberJoinQueries();
+  const { mutate: sendCodeMutate } = useAuthQueries().memberJoinStepOneMutate;
 
   const {
     register,

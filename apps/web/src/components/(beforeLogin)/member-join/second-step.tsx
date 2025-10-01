@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { verifyCodeFormSchema, VerifyCodePayload } from '@/schemas';
 
 import { Button, Snackbar, TextField } from '@repo/ui/components';
-import { useVerifySendCode } from '@/hooks';
+import { useAuthQueries } from '@/hooks';
 
 interface Props {
   joinId: string;
@@ -18,7 +18,7 @@ interface Props {
 export default function SecondStep({ joinId, tempCode, goNextStep }: Props) {
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
-  const { mutate: verifyMutate } = useVerifySendCode();
+  const { mutate: verifyMutate } = useAuthQueries().memberJoinStepTwoMutate;
 
   const {
     register,
@@ -49,7 +49,7 @@ export default function SecondStep({ joinId, tempCode, goNextStep }: Props) {
   };
 
   return (
-    <section className='relative'>
+    <section>
       <div className='mb-10 flex flex-col gap-y-1'>
         <TextField
           label='아이디'

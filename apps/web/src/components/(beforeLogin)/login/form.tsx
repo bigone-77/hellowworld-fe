@@ -1,13 +1,33 @@
 'use client';
 
 import { Button, Checkbox, TextField } from '@repo/ui/components';
+import { loginFn } from '@/lib/(beforeLogin)/[server]';
+import { useFormStatus } from 'react-dom';
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <Button type='submit' className='w-full' disabled={pending}>
+      {pending ? '로그인 중...' : '로그인'}
+    </Button>
+  );
+}
 
 export default function LoginForm() {
   return (
-    <form>
+    <form action={loginFn}>
       <div className='flex-center-col gap-y-5 pb-[31]'>
-        <TextField label='아이디' placeholder='Helloworld@Hello.com' />
         <TextField
+          id='id'
+          name='id'
+          label='아이디'
+          placeholder='Helloworld@Hello.com'
+          required
+        />
+        <TextField
+          id='password'
+          name='password'
           label='비밀번호'
           placeholder='비밀번호를 입력해주세요'
           type='password'
@@ -20,7 +40,7 @@ export default function LoginForm() {
         </div>
       </div>
 
-      <Button className='w-full'>로그인</Button>
+      <SubmitButton />
     </form>
   );
 }

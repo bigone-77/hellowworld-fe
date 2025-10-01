@@ -1,8 +1,10 @@
-import { COOKIE } from '@/config/mock';
+import { getCookie } from 'cookies-next';
 import { redirect } from 'next/navigation';
 
 export default function Page() {
-  if (COOKIE) {
+  const loginUser = getCookie('accessToken');
+
+  if (loginUser) {
     redirect('/home');
   }
   redirect('/login');

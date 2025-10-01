@@ -1,7 +1,7 @@
 'use client';
 
 import { Widget } from '@/components/Widget';
-import { WIDGET_CONFIG } from '@/components/Widgets.config';
+import { WIDGET_CONFIG } from '@/config/widget';
 import { useWidgetGrid } from '@/hooks/useWidgetGrid';
 import { Widget as WidgetType } from '@/types/Widget';
 import { DndContext, DragOverlay, rectIntersection } from '@dnd-kit/core';
@@ -25,7 +25,7 @@ export default function WidgetProvider({ isEditMode, children }: Props) {
   } = useWidgetGrid();
 
   const ActiveComponent = activeWidget
-    ? WIDGET_CONFIG[activeWidget.id]?.Component
+    ? WIDGET_CONFIG[activeWidget.id as keyof typeof WIDGET_CONFIG]?.Component
     : null;
 
   return (
@@ -38,12 +38,11 @@ export default function WidgetProvider({ isEditMode, children }: Props) {
     >
       <div
         ref={gridRef}
-        className='grid w-full grid-cols-3 grid-rows-9 gap-4 rounded-lg p-4 shadow-lg'
+        className='grid w-full grid-cols-3 grid-rows-9 gap-4'
         style={{ gridTemplateRows: 'repeat(3, minmax(0, 1fr))' }}
       >
         {React.Children.map(children(widgets), (child) => {
           if (React.isValidElement(child)) {
-            // 자식 컴포넌트(Widget)에 isEditMode prop을 복제하여 전달
             return React.cloneElement(child, { isEditMode } as {
               isEditMode: boolean;
             });

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect, HTMLAttributes } from 'react';
 import { ICON_MAP, IconAlias } from '../config/icon';
 
@@ -6,12 +8,12 @@ interface BaseProps extends HTMLAttributes<HTMLSpanElement> {
   height?: number;
 }
 
-interface AliasProps {
+export interface AliasProps {
   alias: IconAlias;
   srcurl?: never;
 }
 
-interface ImgUrlProps {
+export interface ImgUrlProps {
   alias?: never;
   srcurl: string;
 }

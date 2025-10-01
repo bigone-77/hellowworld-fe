@@ -1,5 +1,6 @@
-import { GRID_COLS, GRID_ROWS } from '../config/grid';
-import { Widget } from '../types/Widget';
+import { GRID_COLS, GRID_ROWS } from '@/config/widget';
+
+import { Widget } from '@/types/Widget';
 
 const doWidgetsOverlap = (w1: Widget, w2: Widget) => {
   return !(

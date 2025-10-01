@@ -1,19 +1,21 @@
+import { ICON_MAP, IconAlias } from '../config/icon';
 import Button, { ButtonProps } from './Button';
-import InlineSvg from './InlineSvg';
+import InlineSvg, { AliasProps, ImgUrlProps } from './InlineSvg';
 
-interface ToggleButtonProps extends Omit<ButtonProps, 'children'> {
-  imgUrl: string;
+interface ToggleButtonBaseProps extends Omit<ButtonProps, 'children'> {
   isOn?: boolean;
 }
 
-const ToggleButton = ({
-  imgUrl,
-  isOn = false,
-  ...props
-}: ToggleButtonProps) => {
+export type ToggleButtonProps = ToggleButtonBaseProps &
+  (AliasProps | ImgUrlProps);
+
+const ToggleButton = ({ isOn = false, ...props }: ToggleButtonProps) => {
+  const srcurl =
+    'alias' in props && props.alias ? ICON_MAP[props.alias] : props.srcurl;
+
   return (
     <Button {...props}>
-      <InlineSvg className={`${!isOn && 'opacity-30'}`} srcurl={imgUrl} />
+      <InlineSvg className={`${!isOn && 'opacity-30'}`} srcurl={srcurl} />
     </Button>
   );
 };

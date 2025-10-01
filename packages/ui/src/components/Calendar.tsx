@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import {
   format,
@@ -190,10 +192,10 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
   const days = eachDayOfInterval({ start: calendarStart, end: calendarEnd });
 
   return (
-    <div className='w-[350px]'>
+    <div className='w-full'>
       <div className='mb-4 flex items-center justify-between'>
         <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-          <Popover.Trigger asChild>
+          <Popover.Trigger>
             <CalendarTitle
               headerTitle={headerTitle}
               isPopupOpen={isPopoverOpen}
