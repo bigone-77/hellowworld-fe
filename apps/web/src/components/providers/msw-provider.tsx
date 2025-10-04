@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, use } from 'react';
+import { use } from 'react';
 import { handlers } from '@/mocks/handlers';
 
 const mockingEnabledPromise =
@@ -33,13 +33,7 @@ export function MSWProvider({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // If MSW is enabled, we need to wait for the worker to start,
-  // so we wrap the children in a Suspense boundary until it's ready.
-  return (
-    <Suspense fallback={null}>
-      <MSWProviderWrapper>{children}</MSWProviderWrapper>
-    </Suspense>
-  );
+  return <MSWProviderWrapper>{children}</MSWProviderWrapper>;
 }
 
 function MSWProviderWrapper({

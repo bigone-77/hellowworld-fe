@@ -2,11 +2,8 @@ import { WidgetId } from '@/config/widget';
 
 export interface Widget {
   id: WidgetId;
-  col: number;
-  row: number;
   width: number;
   height: number;
-  // 시각적 이동을 위한 픽셀 값 (optional)
   translateX?: number;
   translateY?: number;
 }

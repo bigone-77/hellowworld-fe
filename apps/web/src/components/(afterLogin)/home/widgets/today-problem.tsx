@@ -1,8 +1,8 @@
 import WidgetWrapper from '@/components/(afterLogin)/home/widgets/layout/Wrapper';
 
-export default function Achievement() {
+export default function TodayProblem() {
   return (
-    <WidgetWrapper title='나의 업적' isMoreBtnVisible href='#'>
+    <WidgetWrapper title='오늘의 문제' isMoreBtnVisible href='#'>
       <div></div>
     </WidgetWrapper>
   );

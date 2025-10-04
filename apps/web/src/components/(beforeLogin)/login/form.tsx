@@ -1,8 +1,10 @@
 'use client';
 
-import { Button, Checkbox, TextField } from '@repo/ui/components';
-import { loginFn } from '@/lib/(beforeLogin)/[server]';
 import { useFormStatus } from 'react-dom';
+
+import { loginFn } from '@/lib/(beforeLogin)/[server]';
+
+import { Button, Checkbox, TextField } from '@repo/ui/components';
 
 function SubmitButton() {
   const { pending } = useFormStatus();

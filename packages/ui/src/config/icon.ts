@@ -47,6 +47,11 @@ export const ICON_MAP = {
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759161463/svg/filter.svg',
   setting:
     'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759164151/svg/setting.svg',
+  eye: 'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759601752/svg/eye.svg',
+  thumbsup:
+    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759601832/svg/thumbsup.svg',
+  comment:
+    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759602218/svg/comment.svg',
 } as const;
 
 export type IconAlias = keyof typeof ICON_MAP;

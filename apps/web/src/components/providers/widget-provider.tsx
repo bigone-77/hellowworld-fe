@@ -1,12 +1,14 @@
 'use client';
 
+import React from 'react';
+
+import { DndContext, DragOverlay, rectIntersection } from '@dnd-kit/core';
+import { restrictToWindowEdges } from '@dnd-kit/modifiers';
+
 import { Widget } from '@/components/Widget';
 import { WIDGET_CONFIG } from '@/config/widget';
 import { useWidgetGrid } from '@/hooks/useWidgetGrid';
 import { Widget as WidgetType } from '@/types/Widget';
-import { DndContext, DragOverlay, rectIntersection } from '@dnd-kit/core';
-import { restrictToWindowEdges } from '@dnd-kit/modifiers';
-import React from 'react';
 
 interface Props {
   isEditMode: boolean;
@@ -14,15 +16,8 @@ interface Props {
 }
 
 export default function WidgetProvider({ isEditMode, children }: Props) {
-  const {
-    widgets,
-    activeWidget,
-    gridRef,
-    snapToGridModifier,
-    handleDragStart,
-    handleDragOver,
-    handleDragEnd,
-  } = useWidgetGrid();
+  const { widgets, activeWidget, gridRef, handleDragStart, handleDragEnd } =
+    useWidgetGrid();
 
   const ActiveComponent = activeWidget
     ? WIDGET_CONFIG[activeWidget.id as keyof typeof WIDGET_CONFIG]?.Component
@@ -32,14 +27,11 @@ export default function WidgetProvider({ isEditMode, children }: Props) {
     <DndContext
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      onDragOver={handleDragOver}
-      modifiers={[snapToGridModifier]}
       collisionDetection={rectIntersection}
     >
       <div
         ref={gridRef}
-        className='grid w-full grid-cols-3 grid-rows-9 gap-4'
-        style={{ gridTemplateRows: 'repeat(3, minmax(0, 1fr))' }}
+        className='grid w-full grid-flow-row-dense grid-cols-3 gap-8'
       >
         {React.Children.map(children(widgets), (child) => {
           if (React.isValidElement(child)) {

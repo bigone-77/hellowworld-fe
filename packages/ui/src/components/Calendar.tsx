@@ -22,6 +22,7 @@ import { cn } from '../lib/utils';
 import InlineSvg from './InlineSvg';
 import Button from './Button';
 import Popover from './Popover';
+import PrevNextBtn from './PrevNextBtn';
 
 interface CalendarTitleProps {
   headerTitle: string;
@@ -73,11 +74,7 @@ const CalendarNavigator = ({
       size='s'
       className='!rounded-FULL'
     >
-      <InlineSvg
-        srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/prev-arrow.svg'
-        width={24}
-        height={24}
-      />
+      <InlineSvg alias='prevArrow' width={24} height={24} />
     </Button>
     <Button
       onClick={goToNextMonth}
@@ -85,11 +82,7 @@ const CalendarNavigator = ({
       size='s'
       className='!rounded-FULL'
     >
-      <InlineSvg
-        srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg'
-        width={24}
-        height={24}
-      />
+      <InlineSvg alias='nextArrow' width={24} height={24} />
     </Button>
   </div>
 );
@@ -115,36 +108,27 @@ const CalendarModal = ({
 }: ModalProps) => {
   const months = Array.from({ length: 12 }, (_, i) => i);
 
+  const changeYearHandler = (flag: 'prev' | 'next') => {
+    return flag === 'prev'
+      ? onYearChange(pickerYear - 1)
+      : onYearChange(pickerYear + 1);
+  };
+
   return (
     <div className='rounded-L shadow-modal-s w-full border border-white/60 bg-white p-4'>
       <div className='mb-4 flex items-center justify-between'>
         <span className='text-body-l2 font-bold'>{pickerYear}년</span>
-        <div className='flex items-center justify-center gap-x-2'>
-          <Button
-            onClick={() => onYearChange(pickerYear - 1)}
-            variant='primary_icon'
-            size='s'
-            className='!rounded-FULL size-5'
-          >
-            <InlineSvg
-              srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/prev-arrow.svg'
-              width={12}
-              height={12}
-            />
-          </Button>
-          <Button
-            onClick={() => onYearChange(pickerYear + 1)}
-            variant='primary_icon'
-            size='s'
-            className='!rounded-FULL size-5'
-          >
-            <InlineSvg
-              srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg'
-              width={12}
-              height={12}
-            />
-          </Button>
-        </div>
+        <PrevNextBtn
+          onPrevClick={() => changeYearHandler('prev')}
+          onNextClick={() => changeYearHandler('next')}
+          prevButtonProps={{
+            className: '!rounded-FULL size-5',
+          }}
+          nextButtonProps={{
+            className: '!rounded-FULL size-5',
+          }}
+          iconSize={12}
+        />
       </div>
       <div className='grid grid-cols-3 gap-2'>
         {months.map((monthIndex) => (
@@ -215,10 +199,7 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
             />
           </Popover.Content>
         </Popover>
-        <CalendarNavigator
-          goToPrevMonth={goToPrevMonth}
-          goToNextMonth={goToNextMonth}
-        />
+        <PrevNextBtn onPrevClick={goToPrevMonth} onNextClick={goToNextMonth} />
       </div>
 
       <CalendarWeekdays />
