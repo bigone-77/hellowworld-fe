@@ -1,4 +1,4 @@
-import WidgetWrapper from '@/components/(afterLogin)/home/widgets/layout/Wrapper';
+import WidgetWrapper from '@/components/(afterLogin)/home/components/widgets/layout/Wrapper';
 import { PrevNextBtn } from '@repo/ui/components';
 
 export default function MyBadges() {

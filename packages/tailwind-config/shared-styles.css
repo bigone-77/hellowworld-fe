@@ -209,7 +209,7 @@
     @apply border-border outline-ring/50;
   } */
   body {
-    @apply font-pretendard;
+    @apply font-pretendard text-text2;
   }
 }
 
