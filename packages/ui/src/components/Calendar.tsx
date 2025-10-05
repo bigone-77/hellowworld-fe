@@ -56,7 +56,7 @@ const CalendarTitle = ({
   >
     <span className='text-body-l2'>{headerTitle}</span>
     <InlineSvg
-      srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371406/svg/down-arrow.svg'
+      srcurl='${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/v1753371406/svg/down-arrow.svg'
       width={13.5}
       height={6.75}
     />
@@ -121,10 +121,10 @@ const CalendarModal = ({
         <PrevNextBtn
           onPrevClick={() => changeYearHandler('prev')}
           onNextClick={() => changeYearHandler('next')}
-          prevButtonProps={{
+          prevBtnProps={{
             className: '!rounded-FULL size-5',
           }}
-          nextButtonProps={{
+          nextBtnProps={{
             className: '!rounded-FULL size-5',
           }}
           iconSize={12}
@@ -239,7 +239,7 @@ const Calendar = ({ highlightedDates = [] }: { highlightedDates?: Date[] }) => {
               </span>
               {isToday(day) && (
                 <InlineSvg
-                  srcurl='https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371466/svg/check.svg'
+                  srcurl='${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/v1753371466/svg/check.svg'
                   width={16}
                   height={16}
                 />

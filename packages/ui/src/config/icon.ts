@@ -7,51 +7,42 @@
   ✨ 2025.09.29 [최신 업데이트]
 */
 
+// Define a base URL to avoid repetition
+const CLOUDINARY_BASE_URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
+
+/**
+ * Creates a full URL for an icon.
+ * @param path The specific part of the path for the icon.
+ * @returns The full URL string.
+ */
+const getIconUrl = (path: string): string => `${CLOUDINARY_BASE_URL}/${path}`;
+
 export const ICON_MAP = {
-  play: 'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753115575/svg/play.svg',
-  star: 'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753271887/svg/star.svg',
-  downArrow:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371406/svg/down-arrow.svg',
-  prevArrow:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/prev-arrow.svg',
-  doublePrevArrow:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1757349585/svg/double-prev-arrow.svg',
-  nextArrow:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371493/svg/next-arrow.svg',
-  doubleNextArrow:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1757349585/svg/double-next-arrow.svg',
-  check:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753371466/svg/check.svg',
-  award:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/award.svg',
-  board:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/board.svg',
-  solve:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/solve.svg',
-  logout:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753790409/svg/logout.svg',
-  search:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1757347608/svg/search.svg',
-  cancel:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1754590078/svg/cancel.svg',
-  error:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1754590131/svg/error.svg',
-  success:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1754590164/svg/success.svg',
-  pwOff:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1754590210/svg/pw-off.svg',
-  pwOn: 'https://res.cloudinary.com/dl31hx4rn/image/upload/v1754590210/svg/pw-on.svg',
-  upAndDown:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759146358/svg/up-and-down.svg',
-  filter:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759161463/svg/filter.svg',
-  setting:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759164151/svg/setting.svg',
-  eye: 'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759601752/svg/eye.svg',
-  thumbsup:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759601832/svg/thumbsup.svg',
-  comment:
-    'https://res.cloudinary.com/dl31hx4rn/image/upload/v1759602218/svg/comment.svg',
+  play: getIconUrl('v1753115575/svg/play.svg'),
+  star: getIconUrl('v1753271887/svg/star.svg'),
+  close: getIconUrl('v1759668710/svg/close.svg'),
+  downArrow: getIconUrl('v1753371406/svg/down-arrow.svg'),
+  prevArrow: getIconUrl('v1753371493/svg/prev-arrow.svg'),
+  doublePrevArrow: getIconUrl('v1757349585/svg/double-prev-arrow.svg'),
+  nextArrow: getIconUrl('v1753371493/svg/next-arrow.svg'),
+  doubleNextArrow: getIconUrl('v1757349585/svg/double-next-arrow.svg'),
+  check: getIconUrl('v1753371466/svg/check.svg'),
+  award: getIconUrl('v1753788512/svg/award.svg'),
+  board: getIconUrl('v1753788512/svg/board.svg'),
+  solve: getIconUrl('v1753788512/svg/solve.svg'),
+  logout: getIconUrl('v1753790409/svg/logout.svg'),
+  search: getIconUrl('v1757347608/svg/search.svg'),
+  cancel: getIconUrl('v1754590078/svg/cancel.svg'),
+  error: getIconUrl('v1754590131/svg/error.svg'),
+  success: getIconUrl('v1754590164/svg/success.svg'),
+  pwOff: getIconUrl('v1754590210/svg/pw-off.svg'),
+  pwOn: getIconUrl('v1754590210/svg/pw-on.svg'),
+  upAndDown: getIconUrl('v1759146358/svg/up-and-down.svg'),
+  filter: getIconUrl('v1759161463/svg/filter.svg'),
+  setting: getIconUrl('v1759164151/svg/setting.svg'),
+  eye: getIconUrl('v1759601752/svg/eye.svg'),
+  thumbsup: getIconUrl('v1759601832/svg/thumbsup.svg'),
+  comment: getIconUrl('v1759602218/svg/comment.svg'),
 } as const;
 
 export type IconAlias = keyof typeof ICON_MAP;
