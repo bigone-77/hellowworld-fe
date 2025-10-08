@@ -3,63 +3,75 @@
 import PrevNextBtn from '../../PrevNextBtn';
 
 export interface Props {
-  itemArr: [];
-  solvedLessons: boolean[];
-  currentLesson: number;
-
-  onLessonClick: (stepNumber: number) => void;
+  problems: any[]; // 임시로 any 처리
+  currentStep: number;
+  onStepClick: (stepNumber: number) => void;
   onPrevClick: () => void;
   onNextClick: () => void;
 }
 
 export default function TestProgressBar({
-  itemArr,
+  problems,
+  currentStep,
   onStepClick,
   onPrevClick,
   onNextClick,
 }: Props) {
-  const steps = Array.from({ length: itemArr?.length }, (_, i) => {
-    const stepNumber = i + 1;
-    let state: 'current' | 'solved' | 'unseen' = 'unseen';
+  // 상태에 따른 Tailwind 클래스를 반환하는 헬퍼 함수
+  const getStepClasses = (
+    status: 'solved' | 'unsolved' | 'passed',
+    isCurrent: boolean,
+  ) => {
+    if (isCurrent) {
+      // 현재 스텝이면서 이미 푼 문제일 경우 (이미지 상의 분홍색)
+      if (status === 'solved') {
+        return 'bg-pink-300 border-2 border-pink-500 shadow-lg';
+      }
+      // 현재 스텝이지만 아직 풀지 않은 문제
+      return 'bg-blue-400 border-2 border-blue-600 shadow-lg';
+    }
+    // 현재 스텝이 아닐 경우
+    switch (status) {
+      case 'solved':
+        return 'bg-yellow-400';
+      case 'passed':
+        return 'bg-yellow-200'; // 옅은 노란색
+      case 'unsolved':
+      default:
+        return 'bg-gray-200';
+    }
+  };
 
-    // props로 받은 currentStep을 사용합니다.
-    if (stepNumber === currentStep) state = 'current';
-    else if (solvedSteps[i]) state = 'solved';
+  const totalSteps = problems.length;
 
-    const stateClasses = {
-      current: 'bg-blue-500 scale-110 shadow-lg',
-      solved: 'bg-yellow-400',
-      unseen: 'bg-gray-200',
-    };
-
-    return (
-      <button
-        key={stepNumber}
-        onClick={() => onStepClick(stepNumber)}
-        className={`h-4 w-8 rounded-full transition-all duration-200 ${stateClasses[state]}`}
-      />
-    );
-  });
+  const currentProblemStatus = problems[currentStep - 1]?.status;
 
   return (
-    <div className='flex h-16 w-full items-center justify-between rounded-lg bg-purple-200/50 px-4 shadow-inner'>
-      <PrevNextBtn
-        iconSize={20}
-        onPrevClick={onPrevClick}
-        prevBtnProps={{
-          disabled: currentStep <= 1,
-        }}
-        onNextClick={onNextClick}
-        nextBtnProps={{
-          disabled: !solvedSteps[currentStep - 1] && currentStep < totalCnt,
-        }}
-      >
-        <div className='flex items-center gap-2'>{steps}</div>
-        <div className='flex items-center gap-2'>
-          <span className='font-bold'>250 pt</span>
-          <button className='text-2xl text-gray-500'>&times;</button>
-        </div>
-      </PrevNextBtn>
-    </div>
+    <PrevNextBtn
+      iconSize={20}
+      prevBtnProps={{
+        disabled: currentStep <= 1,
+      }}
+      onPrevClick={onPrevClick}
+      nextBtnProps={{
+        disabled: currentProblemStatus === 'unseen' && currentStep < totalSteps,
+      }}
+      onNextClick={onNextClick}
+    >
+      <div className='flex items-center gap-x-1 px-6'>
+        {problems.map((problem, i) => {
+          const stepNumber = i + 1;
+          const isCurrent = stepNumber === currentStep;
+          return (
+            <div key={problem.id} className='h-full'>
+              <button
+                onClick={() => onStepClick(stepNumber)}
+                className={`rounded-S h-10 w-[130.4] transition-all duration-200 ${getStepClasses(problem.status, isCurrent)}`}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </PrevNextBtn>
   );
 }

@@ -1,6 +1,6 @@
-import ProblemBanner from '@/components/(afterLogin)/problem/components/banner';
-import ProblemSearchAndFilter from '@/components/(afterLogin)/problem/components/search-and-filter';
-import ProblemTable from '@/components/(afterLogin)/problem/components/table';
+import ProblemBanner from '@/components/(afterLogin)/(onHomeLayout)/problem/components/banner';
+import ProblemSearchAndFilter from '@/components/(afterLogin)/(onHomeLayout)/problem/components/search-and-filter';
+import ProblemTable from '@/components/(afterLogin)/(onHomeLayout)/problem/components/table';
 
 export default function Page() {
   return (

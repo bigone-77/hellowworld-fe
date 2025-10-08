@@ -1,4 +1,4 @@
-import WidgetWrapper from '@/components/(afterLogin)/home/components/widgets/layout/Wrapper';
+import WidgetWrapper from '@/components/(afterLogin)/(onHomeLayout)/home/components/widgets/layout/Wrapper';
 import { Calendar as CalendarUI } from '@repo/ui/components';
 
 export default function Calendar() {

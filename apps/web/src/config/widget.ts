@@ -10,7 +10,7 @@ import {
   MyPosts,
   ProblemStatus,
   RecommendedProblems,
-} from '@/components/(afterLogin)/home/components/widgets';
+} from '@/components/(afterLogin)/(onHomeLayout)/home/components/widgets';
 
 export const GRID_COLS = 3;
 export const GAP = 16;

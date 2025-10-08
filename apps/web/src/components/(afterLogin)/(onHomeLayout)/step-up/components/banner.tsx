@@ -1,4 +1,4 @@
-import StepLabel from '@/components/(afterLogin)/step-up/components/step-label';
+import StepLabel from '@/components/(afterLogin)/(onHomeLayout)/step-up/components/step-label';
 
 import { StatItem, Mascot, Progressbar } from '@repo/ui/components';
 

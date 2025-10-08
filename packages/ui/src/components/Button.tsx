@@ -52,7 +52,7 @@ const Button = ({
     },
     secondary: {
       base: `
-          text-secondary-box-on bg-secondary-box border-secondary-line shadow-[0_6px_0_0_var(--color-secondary-line)] btn-press-effect
+          text-secondary-box-on bg-secondary-box border-secondary-box-line shadow-[0_6px_0_0_var(--color-secondary-line)] btn-press-effect
           hover:bg-secondary-box-var1 
           active:bg-secondary-box-var2 active:text-secondary-box-on active:border-secondary-line active:shadow-[0_2px_0_0_var(--color-secondary-line)]
           disabled:bg-text-box disabled:text-text2/30 disabled:border-text-line disabled:shadow-[0_2px_0_0_var(--color-text-line)] disabled:cursor-default

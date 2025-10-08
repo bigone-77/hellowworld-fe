@@ -38,7 +38,7 @@ const PrevNextBtn = ({
         <InlineSvg alias='prevArrow' width={iconSize} height={iconSize} />
       </Button>
 
-      {children}
+      {children && <div className='h-full w-full flex-grow'>{children}</div>}
 
       <Button
         variant='primary_icon'

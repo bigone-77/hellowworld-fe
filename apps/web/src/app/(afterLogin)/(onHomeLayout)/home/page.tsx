@@ -1,4 +1,4 @@
-import HomeDashboard from '@/components/(afterLogin)/home/components/widget-dashboard';
+import HomeDashboard from '@/components/(afterLogin)/(onHomeLayout)/home/components/widget-dashboard';
 
 export default function Page() {
   return (

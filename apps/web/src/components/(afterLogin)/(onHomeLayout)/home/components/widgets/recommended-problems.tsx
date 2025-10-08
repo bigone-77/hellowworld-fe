@@ -1,4 +1,4 @@
-import WidgetWrapper from '@/components/(afterLogin)/home/components/widgets/layout/Wrapper';
+import WidgetWrapper from '@/components/(afterLogin)/(onHomeLayout)/home/components/widgets/layout/Wrapper';
 import { Button, InlineSvg, Label } from '@repo/ui/components';
 import { IconAlias } from '@repo/ui/config/icon';
 import { formatDate } from '@repo/utils';

@@ -4,7 +4,7 @@
   2️⃣ 만약 style이 직접 적용이 안된다면 에디터에 해당 svg를 열어 편집가능하게 바꿔주세요.
   3️⃣ 필요한 아이콘들이 없는 경우 추가하고 아래 업데이트 날짜를 기재해주세요.
 
-  ✨ 2025.09.29 [최신 업데이트]
+  ✨ 2025.10.09 [최신 업데이트]
 */
 
 // Define a base URL to avoid repetition
@@ -43,6 +43,7 @@ export const ICON_MAP = {
   eye: getIconUrl('v1759601752/svg/eye.svg'),
   thumbsup: getIconUrl('v1759601832/svg/thumbsup.svg'),
   comment: getIconUrl('v1759602218/svg/comment.svg'),
+  hint: getIconUrl('v1759949744/svg/hint.svg'),
 } as const;
 
 export type IconAlias = keyof typeof ICON_MAP;

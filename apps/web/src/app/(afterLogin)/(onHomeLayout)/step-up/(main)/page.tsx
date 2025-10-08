@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import StepUpBanner from '@/components/(afterLogin)/step-up/components/banner';
+import StepUpBanner from '@/components/(afterLogin)/(onHomeLayout)/step-up/components/banner';
 
 import {
   Button,
