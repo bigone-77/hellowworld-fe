@@ -60,9 +60,7 @@ export default function HomeLayout() {
         </MenuBtnWrapper>
         <div className='flex flex-col gap-y-[6]'>
           <Image
-            src={
-              'https://res.cloudinary.com/dl31hx4rn/image/upload/v1752665741/badge/friends.svg'
-            }
+            src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/v1752665741/badge/friends.svg`}
             alt='home-badge'
             width={44}
             height={44}
@@ -82,9 +80,7 @@ export default function HomeLayout() {
       <div className='flex flex-col items-center gap-y-6'>
         <MenuBtnWrapper>
           <Image
-            src={
-              'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/award.svg'
-            }
+            src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/v1753788512/svg/award.svg`}
             alt='award'
             width={24}
             height={24}
@@ -99,9 +95,7 @@ export default function HomeLayout() {
           <Popover.Trigger>
             <MenuBtnWrapper isPopupOpen={popoverOpen.solve}>
               <Image
-                src={
-                  'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/solve.svg'
-                }
+                src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/v1753788512/svg/solve.svg`}
                 alt='solve'
                 width={24}
                 height={24}
@@ -133,9 +127,7 @@ export default function HomeLayout() {
 
         <MenuBtnWrapper>
           <Image
-            src={
-              'https://res.cloudinary.com/dl31hx4rn/image/upload/v1753788512/svg/board.svg'
-            }
+            src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/v1753788512/svg/board.svg`}
             alt='solve'
             width={24}
             height={24}

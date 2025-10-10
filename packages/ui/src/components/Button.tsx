@@ -13,6 +13,7 @@ type ButtonVariant =
   | 'outline_s'
   | 'outline_m'
   | 'text'
+  | 'danger'
   | 'date_picker';
 
 type ButtonSize = 'xl' | 'l' | 'm' | 's' | 'xs';
@@ -52,7 +53,7 @@ const Button = ({
     },
     secondary: {
       base: `
-          text-secondary-box-on bg-secondary-box border-secondary-line shadow-[0_6px_0_0_var(--color-secondary-line)] btn-press-effect
+          text-secondary-box-on bg-secondary-box border-secondary-box-line shadow-[0_6px_0_0_var(--color-secondary-line)] btn-press-effect
           hover:bg-secondary-box-var1 
           active:bg-secondary-box-var2 active:text-secondary-box-on active:border-secondary-line active:shadow-[0_2px_0_0_var(--color-secondary-line)]
           disabled:bg-text-box disabled:text-text2/30 disabled:border-text-line disabled:shadow-[0_2px_0_0_var(--color-text-line)] disabled:cursor-default
@@ -104,6 +105,13 @@ const Button = ({
         hover:bg-text-box 
         active:bg-text-box-var
         disabled:bg-text-box disabled:text-text1 disabled:cursor-default
+      `,
+    },
+    danger: {
+      base: `
+        border-error-on text-body-l2 text-red-50 px-3 py-[18] rounded-[100] 
+        hover:bg-error-box
+        active:bg-red-20
       `,
     },
     date_picker: {

@@ -49,32 +49,8 @@
     }
   }
 
-  @keyframes modal-slide-in {
-    from {
-      transform: translateY(20px) scale(0.98);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
-  }
-
-  @keyframes modal-slide-out {
-    from {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
-    to {
-      transform: translateY(20px) scale(0.98);
-      opacity: 0;
-    }
-  }
-
   --animate-in: fade-in 200ms ease-out;
   --animate-out: fade-out 150ms ease-in;
-  --animate-modal-in: modal-slide-in 200ms ease-out forwards;
-  --animate-modal-out: modal-slide-out 150ms ease-in forwards;
 
   --color-black: #000000;
   --color-white: #ffffff;
