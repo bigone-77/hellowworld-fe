@@ -2,33 +2,35 @@
 
 import { Button, InlineSvg, Label } from '@repo/ui/components';
 
+import { Problem } from '@/types/pre-test';
+
 interface Props {
+  currentStep: number;
+  title: Problem['title'];
+  difficulty: Problem['difficulty'];
+  point: Problem['point'];
   children: React.ReactNode;
 }
 
-export default function TestContentWrapper({ children }: Props) {
+export default function TestContentWrapper({
+  currentStep,
+  title,
+  difficulty,
+  point,
+  children,
+}: Props) {
   return (
     <div className='rounded-L bg-secondary-box-var2 mb-[43] flex w-full flex-col px-5'>
       <div className='flex-center gap-x-3 py-5'>
-        <Label variant='positive'>보통</Label>
-        <span className='text-body-l2 text-surface1'>1. 개발상식</span>
+        <Label variant='positive'>{difficulty}</Label>
+        <span className='text-surface1'>
+          {currentStep}. {title}
+        </span>
+        <span className='text-text-box-var text-body-l2'>+{point}pt</span>
       </div>
 
       <div className='min-h-0 flex-1'>{children}</div>
-
-      <div className='flex-between my-5 h-[58] flex-shrink-0'>
-        <Button variant='secondary' className='px-6'>
-          <InlineSvg alias='play' />
-          넘어가기
-        </Button>
-        <div className='flex-center gap-x-6'>
-          <Button variant='secondary' className='px-6'>
-            <InlineSvg alias='hint' />
-            힌트
-          </Button>
-          <Button variant='primary'>다음으로</Button>
-        </div>
-      </div>
+      <div className='h-[102]' aria-hidden />
     </div>
   );
 }

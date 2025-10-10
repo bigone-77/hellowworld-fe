@@ -1,26 +1,35 @@
 'use client';
 
-import { useState } from 'react';
-import { parseAsInteger, useQueryState } from 'nuqs';
-import { cn } from '@repo/ui/lib/utils';
-import { TestHeaderHeight } from '@/config/layout';
+import { Options } from 'nuqs';
 
 import TestHeaderMileStone from './components/mile-stone';
-import TestHeaderPointAndClose from './components/point-and-close';
 import TestHeaderProgressBar from './components/progressbar';
 
-import { dummyProblems, Problem } from '@/types/pre-test';
-import { PrevNextBtn } from '@repo/ui/components';
+import { Button, InlineSvg, Modal, PrevNextBtn } from '@repo/ui/components';
+import { cn } from '@repo/ui/lib/utils';
 
-export default function TestHeader() {
-  const [currentStep, setCurrentStep] = useQueryState(
-    'lesson',
-    parseAsInteger.withDefault(1),
-  );
-  const [problems, setProblems] = useState<Problem[]>(dummyProblems); // 실제로는 props나 다른 상태로 관리될 수 있음
+import { TestHeaderHeight } from '@/config/layout';
 
-  const TOTAL_STEPS = problems.length;
-  const currentProblemStatus = problems[currentStep - 1]?.status;
+import { Problem as ProblemType } from '@/types/pre-test';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+interface Props {
+  problems: ProblemType[];
+  currentStep: number; // 현재 몇 index 단계인지 알려주는 변수
+  setCurrentStep: (
+    value: number | ((old: number) => number | null) | null,
+    options?: Options,
+  ) => Promise<URLSearchParams>;
+}
+
+export default function TestHeader({
+  problems,
+  currentStep,
+  setCurrentStep,
+}: Props) {
+  const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <header
@@ -35,19 +44,9 @@ export default function TestHeader() {
         <PrevNextBtn
           className='w-full'
           iconSize={20}
-          onPrevClick={() =>
-            setCurrentStep(currentStep > 1 ? currentStep - 1 : 1)
-          }
-          onNextClick={() =>
-            setCurrentStep(
-              currentStep < TOTAL_STEPS ? currentStep + 1 : TOTAL_STEPS,
-            )
-          }
+          onPrevClick={() => {}}
+          onNextClick={() => {}}
           prevBtnProps={{ disabled: currentStep <= 1 }}
-          nextBtnProps={{
-            disabled:
-              currentProblemStatus === 'passed' && currentStep < TOTAL_STEPS,
-          }}
         >
           <TestHeaderProgressBar
             problems={problems}
@@ -58,9 +57,53 @@ export default function TestHeader() {
       </div>
 
       {/* 오른쪽 그룹 */}
-      <div>
-        <TestHeaderPointAndClose />
+      <div className='flex items-center gap-x-[9.5]'>
+        <div className='text-title-s text-secondary-box-on flex items-center gap-x-[6]'>
+          <p className='bg-secondary-box rounded-S inline-flex items-center justify-center px-5 py-[7.5]'>
+            250
+          </p>
+          <span>pt</span>
+        </div>
+        <Button
+          variant='outline_m'
+          className='rounded-S size-11'
+          onClick={() => setShowModal(true)}
+        >
+          <InlineSvg alias='close' />
+        </Button>
       </div>
+
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+        <Modal.Content>
+          <Modal.Header>
+            <Modal.Title>
+              <div className='flex-center-col'>
+                <div className='flex-center size-[200]'>
+                  <InlineSvg alias='error' width={80} height={80} />
+                </div>
+                <span>사전 테스트 나가기</span>
+              </div>
+            </Modal.Title>
+            <Modal.Description>
+              지금 나가면 진행중인 내용은 저장되지 않아요
+            </Modal.Description>
+          </Modal.Header>
+          <Modal.Footer>
+            <div className='flex-center-col gap-y-3'>
+              <Button
+                variant='danger'
+                className='px-12'
+                onClick={() => router.replace('/home')}
+              >
+                나가기
+              </Button>
+              <Button variant='text' onClick={() => setShowModal(false)}>
+                취소
+              </Button>
+            </div>
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
     </header>
   );
 }

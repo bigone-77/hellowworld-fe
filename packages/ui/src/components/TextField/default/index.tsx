@@ -2,26 +2,26 @@
 
 import { InputHTMLAttributes, useId, useState, ChangeEvent, Ref } from 'react';
 import clsx from 'clsx';
-import InlineSvg from './InlineSvg';
-import HelperMessage from './HelperMessage';
 
 import { useTimer } from '@repo/utils';
 
-export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+import InlineSvg from '../../InlineSvg';
+import HelperMessage from '../../HelperMessage';
+
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onClear?: () => void;
   label?: string;
   className?: string;
   ref?: Ref<HTMLInputElement>;
   error?: string | null;
   success?: boolean | string;
-
   isTimer?: boolean;
   timerDuration?: number;
   onTimeUp?: () => void;
   iconLeft?: React.ReactNode;
 }
 
-const TextField = ({
+export default function DefaultTextField({
   className,
   onClear,
   label,
@@ -32,13 +32,12 @@ const TextField = ({
   ref,
   error,
   success,
-
   isTimer,
   timerDuration,
   onTimeUp,
   iconLeft,
   ...props
-}: TextFieldProps) => {
+}: Props) {
   const isControlled = value !== undefined;
   const [internalValue, setInternalValue] = useState(defaultValue ?? '');
   const displayValue = isControlled ? value : internalValue;
@@ -190,6 +189,4 @@ const TextField = ({
       </>
     </div>
   );
-};
-
-export default TextField;
+}

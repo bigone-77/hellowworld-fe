@@ -5,16 +5,11 @@
   3️⃣ 필요한 아이콘들이 없는 경우 추가하고 아래 업데이트 날짜를 기재해주세요.
 
   ✨ 2025.10.09 [최신 업데이트]
+  ✨ 2025.10.11 [마스코트 정적 svg 추가]
 */
 
-// Define a base URL to avoid repetition
 const CLOUDINARY_BASE_URL = process.env.NEXT_PUBLIC_CLOUDINARY_URL;
 
-/**
- * Creates a full URL for an icon.
- * @param path The specific part of the path for the icon.
- * @returns The full URL string.
- */
 const getIconUrl = (path: string): string => `${CLOUDINARY_BASE_URL}/${path}`;
 
 export const ICON_MAP = {
@@ -44,6 +39,27 @@ export const ICON_MAP = {
   thumbsup: getIconUrl('v1759601832/svg/thumbsup.svg'),
   comment: getIconUrl('v1759602218/svg/comment.svg'),
   hint: getIconUrl('v1759949744/svg/hint.svg'),
+  wrongAnswer: getIconUrl('v1760123925/svg/wrong-answer.svg'),
+  correctAnswer: getIconUrl('v1760123950/svg/correct-answer.svg'),
 } as const;
 
-export type IconAlias = keyof typeof ICON_MAP;
+const MASCOT_ICONS_MAP = {
+  wave: getIconUrl('v1759248272/mascot/wave.svg'),
+  typing: getIconUrl('v1759248272/mascot/typing.svg'),
+  study: getIconUrl('v1759248287/mascot/study.svg'),
+  magic: getIconUrl('v1759248282/mascot/magic.svg'),
+  run: getIconUrl('v1759248283/mascot/run.svg'),
+  win: getIconUrl('v1759248284/mascot/win.svg'),
+  sigh: getIconUrl('v1759248286/mascot/sigh.svg'),
+  sleep: getIconUrl('v1759248284/mascot/sleep.svg'),
+  panic: getIconUrl('v1759248310/mascot/panic.svg'),
+} as const;
+
+export type MascotIconAlias = keyof typeof MASCOT_ICONS_MAP;
+
+export const ALL_ICONS_MAP = {
+  ...ICON_MAP,
+  ...MASCOT_ICONS_MAP,
+} as const;
+
+export type IconAlias = keyof typeof ALL_ICONS_MAP;

@@ -1,6 +1,5 @@
 'use client';
 
-import { TestHeaderHeight } from '@/config/layout';
 import { Problem } from '@/types/pre-test';
 import { cn } from '@repo/ui/lib/utils';
 

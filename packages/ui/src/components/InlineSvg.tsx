@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, HTMLAttributes } from 'react';
-import { ICON_MAP, IconAlias } from '../config/icon';
+import { ALL_ICONS_MAP, IconAlias } from '../config/icon';
 
 interface BaseProps extends HTMLAttributes<HTMLSpanElement> {
   width?: number;
@@ -29,7 +29,7 @@ const InlineSvg = ({
   const [svg, setSvg] = useState<string | null>(null);
 
   const srcurl =
-    'alias' in props && props.alias ? ICON_MAP[props.alias] : props.srcurl;
+    'alias' in props && props.alias ? ALL_ICONS_MAP[props.alias] : props.srcurl;
 
   useEffect(() => {
     if (srcurl) {

@@ -13,6 +13,7 @@ type ButtonVariant =
   | 'outline_s'
   | 'outline_m'
   | 'text'
+  | 'danger'
   | 'date_picker';
 
 type ButtonSize = 'xl' | 'l' | 'm' | 's' | 'xs';
@@ -104,6 +105,13 @@ const Button = ({
         hover:bg-text-box 
         active:bg-text-box-var
         disabled:bg-text-box disabled:text-text1 disabled:cursor-default
+      `,
+    },
+    danger: {
+      base: `
+        border-error-on text-body-l2 text-red-50 px-3 py-[18] rounded-[100] 
+        hover:bg-error-box
+        active:bg-red-20
       `,
     },
     date_picker: {

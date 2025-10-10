@@ -32,7 +32,7 @@ export default function Login() {
             className='border-text-box-var w-full border-[0.5] py-[11] text-black'
           >
             <Image
-              src='${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/v1755539308/svg/google.svg'
+              src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/v1755539308/svg/google.svg`}
               alt='구글 로그인'
               width={20}
               height={20}
