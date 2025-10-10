@@ -1,9 +1,0 @@
-export { default as Achievement } from './achievement';
-export { default as BookmarkedProblem } from './bookmarked-problem';
-export { default as Calendar } from './calendar';
-export { default as TodayProblem } from './today-problem';
-export { default as MyBadges } from './my-badges';
-export { default as MyPosts } from './my-posts';
-export { default as MonthlyTop } from './monthly-top';
-export { default as ProblemStatus } from './problem-status';
-export { default as RecommendedProblems } from './recommended-problems';

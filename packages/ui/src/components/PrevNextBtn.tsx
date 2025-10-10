@@ -10,19 +10,21 @@ type ExtraButtonProps = Omit<
 interface PrevNextBtnProps {
   onPrevClick: () => void;
   onNextClick: () => void;
-  prevButtonProps?: ExtraButtonProps;
-  nextButtonProps?: ExtraButtonProps;
+  prevBtnProps?: ExtraButtonProps;
+  nextBtnProps?: ExtraButtonProps;
   iconSize?: number;
   className?: string;
+  children?: React.ReactNode;
 }
 
 const PrevNextBtn = ({
   onPrevClick,
   onNextClick,
-  prevButtonProps,
-  nextButtonProps,
+  prevBtnProps,
+  nextBtnProps,
   iconSize = 24,
   className,
+  children,
 }: PrevNextBtnProps) => {
   return (
     <div className={cn('flex items-center justify-center gap-2', className)}>
@@ -30,18 +32,20 @@ const PrevNextBtn = ({
         variant='primary_icon'
         size='s'
         onClick={onPrevClick}
-        {...prevButtonProps}
-        className={cn('!rounded-FULL', prevButtonProps?.className)}
+        {...prevBtnProps}
+        className={cn('!rounded-FULL', prevBtnProps?.className)}
       >
         <InlineSvg alias='prevArrow' width={iconSize} height={iconSize} />
       </Button>
+
+      {children && <div className='h-full w-full flex-grow'>{children}</div>}
 
       <Button
         variant='primary_icon'
         size='s'
         onClick={onNextClick}
-        {...nextButtonProps}
-        className={cn('!rounded-FULL', nextButtonProps?.className)}
+        {...nextBtnProps}
+        className={cn('!rounded-FULL', nextBtnProps?.className)}
       >
         <InlineSvg alias='nextArrow' width={iconSize} height={iconSize} />
       </Button>
