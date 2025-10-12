@@ -1,29 +1,56 @@
+import { Label } from '@repo/ui/components';
+
+import { cn } from '@repo/ui/lib/utils';
+
 interface Props {
-  step: number;
+  stepNo: number;
   title: string;
-  currentIdx: number;
+  status: 'prev' | 'current' | 'next';
+  currentCnt: number;
   totalCnt: number;
-  stepTextColor?: string;
-  titleSize: 'l' | 's';
+  titleSize?: 'l' | 's';
 }
 
 export default function StepLabel({
-  step,
+  stepNo,
   title,
-  currentIdx,
+  status,
+  currentCnt,
   totalCnt,
-  stepTextColor = 'text-primary-line',
   titleSize = 's',
 }: Props) {
   return (
-    <p className='flex items-center gap-x-2'>
-      <span className={`text-label-l2 ${stepTextColor}`}>STEP{step}</span>
+    <div
+      className={cn(
+        'flex-between gap-x-2',
+        titleSize === 'l' && 'justify-start',
+      )}
+    >
+      <div className='flex-center gap-x-2'>
+        <Label
+          className={cn(
+            '',
+            status === 'current'
+              ? 'bg-primary-box text-text2'
+              : status === 'prev'
+                ? 'bg-text2 text-surface1'
+                : 'bg-text-line text-surface1',
+          )}
+        >
+          STEP {stepNo}
+        </Label>
+        <span
+          className={`text-text2 ${titleSize === 's' ? 'text-body-l2' : 'text-title-l'}`}
+        >
+          {title}
+        </span>
+      </div>
 
       <span
         className={`text-text2 ${titleSize === 's' ? 'text-body-l2' : 'text-title-l'}`}
       >
-        {title} ({currentIdx}/{totalCnt})
+        ({currentCnt}/{totalCnt})
       </span>
-    </p>
+    </div>
   );
 }

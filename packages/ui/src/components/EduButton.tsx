@@ -26,11 +26,11 @@ const EduButton = ({
 
   return (
     <div className={finalClassName.trim()} {...props}>
-      <div className='text-body-l2 flex items-center gap-x-4'>
+      <div className='text-body-l2 text-primary-on flex items-center gap-x-4'>
         <span>{step}</span>
         <span>{title}</span>
       </div>
-      <span>{progress}%</span>
+      <span className='text-body-l2 text-primary-on'>{progress}%</span>
     </div>
   );
 };

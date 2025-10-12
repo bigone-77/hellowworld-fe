@@ -2,6 +2,7 @@ import {
   Button,
   EduButton,
   InlineSvg,
+  Label,
   Progressbar,
   ToggleButton,
 } from '@repo/ui/components';
@@ -10,13 +11,13 @@ export default function ProblemStatusStatus() {
   return (
     <div className='mt-3 flex flex-col gap-y-3'>
       <p className='flex items-center gap-x-2'>
-        <span className='text-label-l2 text-primary-box-var3'>STEP2</span>
+        <Label className='bg-primary-box text-text2'>STEP2</Label>
         <span className='text-title-l text-text2'>
           왕초보 Python 입문 (3/20)
         </span>
       </p>
       <Progressbar progress={32} />
-      <div className='bg-text-box rounded-L flex max-h-[224] flex-col gap-y-3 overflow-y-auto p-5'>
+      <div className='bg-surface-var1 rounded-L flex max-h-[224] flex-col gap-y-3 overflow-y-auto p-5'>
         {lessonData.map((d) => (
           <div
             key={d.id}
@@ -34,7 +35,7 @@ export default function ProblemStatusStatus() {
               </Button>
               <ToggleButton
                 variant='primary_icon'
-                className='aspect-square'
+                className='text-body-l2 text-primary-on aspect-square'
                 alias='star'
                 isOn={false}
               />

@@ -1,4 +1,4 @@
-import { ICON_MAP, IconAlias } from '../config/icon';
+import { ALL_ICONS_MAP, ICON_MAP, IconAlias } from '../config/icon';
 import Button, { ButtonProps } from './Button';
 import InlineSvg, { AliasProps, ImgUrlProps } from './InlineSvg';
 
@@ -11,7 +11,7 @@ export type ToggleButtonProps = ToggleButtonBaseProps &
 
 const ToggleButton = ({ isOn = false, ...props }: ToggleButtonProps) => {
   const srcurl =
-    'alias' in props && props.alias ? ICON_MAP[props.alias] : props.srcurl;
+    'alias' in props && props.alias ? ALL_ICONS_MAP[props.alias] : props.srcurl;
 
   return (
     <Button {...props}>
