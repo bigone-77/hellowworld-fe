@@ -1,18 +1,19 @@
 'use client';
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Options } from 'nuqs';
 
-import TestHeaderMileStone from './components/mile-stone';
-import TestHeaderProgressBar from './components/progressbar';
+import TestHeaderMileStone from './mile-stone';
+import TestHeaderProgressBar from './progressbar';
 
 import { Button, InlineSvg, Modal, PrevNextBtn } from '@repo/ui/components';
+
 import { cn } from '@repo/ui/lib/utils';
 
 import { TestHeaderHeight } from '@/config/layout';
 
 import { Problem as ProblemType } from '@/types/pre-test';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
 interface Props {
   problems: ProblemType[];

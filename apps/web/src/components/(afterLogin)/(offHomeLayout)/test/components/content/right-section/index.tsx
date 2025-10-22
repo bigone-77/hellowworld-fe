@@ -13,7 +13,7 @@ interface Props {
   flag: 'Y' | 'N' | '';
 }
 
-export default function TestContentMainRightSection({
+export default function TestContentRightSection({
   format,
   options,
   flag,

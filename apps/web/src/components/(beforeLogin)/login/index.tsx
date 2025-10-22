@@ -25,7 +25,7 @@ export default function Login() {
         </p>
 
         <Link
-          href={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/login/oauth2/code/google`}
+          href={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/oauth2/authorization/google`}
         >
           <Button
             variant='outline_s'

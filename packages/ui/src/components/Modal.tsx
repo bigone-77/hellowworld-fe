@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import { motion, AnimatePresence, HTMLMotionProps } from 'framer-motion';
+import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion';
 
 import { cn } from '../lib/utils';
 import InlineSvg from './InlineSvg';
