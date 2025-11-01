@@ -6,6 +6,8 @@ import { dummyProblems } from '@/types/pre-test';
 
 import PreTest from './pre-test';
 import StepTest from './step-test';
+import { useState } from 'react';
+import { SplashScreen } from '@/components/(afterLogin)/(offHomeLayout)/test/components/splash-screen';
 
 interface TestProps {
   variant: 'pre-test' | 'step-test';
@@ -21,17 +23,39 @@ export default function Test({ variant }: TestProps) {
 
   const currentProblem = problemData[currentStep - 1]; // currentStep번째 문제 데이터
 
-  switch (variant) {
-    case 'pre-test':
-      return (
-        <PreTest
-          problemData={problemData}
-          currentProblem={currentProblem!}
-          currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
-        />
-      );
-    case 'step-test':
-      return <StepTest />;
+  const [showSplashScreen, setShowSplashScreen] = useState(true);
+
+  const handleGameStart = () => {
+    setShowSplashScreen(false);
+  };
+
+  {
+    showSplashScreen && <SplashScreen onTestStart={handleGameStart} />;
   }
+
+  const renderTest = () => {
+    switch (variant) {
+      case 'pre-test':
+        return (
+          <PreTest
+            problemData={problemData}
+            currentProblem={currentProblem!}
+            currentStep={currentStep}
+            setCurrentStep={setCurrentStep}
+          />
+        );
+      case 'step-test':
+        return <StepTest />;
+      default:
+        return null; // 예외 처리
+    }
+  };
+
+  return (
+    <>
+      {showSplashScreen && <SplashScreen onTestStart={handleGameStart} />}
+
+      {!showSplashScreen && renderTest()}
+    </>
+  );
 }

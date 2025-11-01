@@ -70,6 +70,7 @@ export default function TestContent({ currentStep, currentProblem }: Props) {
           </section>
         </main>
       </div>
+
       <div className='h-[58] -translate-y-8'>
         <TestContentBottomSection
           flag={answerStatus}

@@ -18,7 +18,7 @@ import { Problem as ProblemType } from '@/types/pre-test';
 interface Props {
   problems: ProblemType[];
   currentStep: number; // 현재 몇 index 단계인지 알려주는 변수
-  setCurrentStep: (
+  setCurrentStep?: (
     value: number | ((old: number) => number | null) | null,
     options?: Options,
   ) => Promise<URLSearchParams>;
@@ -52,7 +52,7 @@ export default function TestHeader({
           <TestHeaderProgressBar
             problems={problems}
             currentStep={currentStep}
-            onStepClick={(step) => setCurrentStep(step)}
+            onStepClick={(step) => setCurrentStep?.(step)}
           />
         </PrevNextBtn>
       </div>

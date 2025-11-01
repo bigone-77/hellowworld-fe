@@ -66,8 +66,8 @@ export default function ProblemStatusOnboarding() {
           <Carousel setApi={setApi}>
             <CarouselDot className='-translate-y-3' />
             <CarouselContent>
-              <CarouselItem>
-                <Modal.Header>
+              <CarouselItem className='flex flex-col'>
+                <Modal.Header className='flex-1'>
                   <Modal.Title>
                     <div className='flex-center-col'>
                       <div className='size-[200]'>

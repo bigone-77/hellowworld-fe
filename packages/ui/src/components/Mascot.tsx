@@ -3,7 +3,7 @@
 import Lottie from 'lottie-react';
 
 // 추후 실질적인 mascot json파일 들어올 예정
-import tempLottie from '../assets/spinner.json';
+import tempLottie from '../assets/mascot/test.json';
 // import waveLottie from '@/public/lottie/mascot-wave.json';
 // import typingLottie from '@/public/lottie/mascot-typing.json';
 // import studyLottie from '@/public/lottie/mascot-study.json';

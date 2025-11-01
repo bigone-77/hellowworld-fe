@@ -1,46 +1,63 @@
 'use client';
 
-import { use } from 'react';
+import { useEffect, useState } from 'react';
 import { handlers } from '@/mocks/handlers';
 
-const mockingEnabledPromise =
-  typeof window !== 'undefined'
-    ? import('@/mocks/browser').then(async ({ default: worker }) => {
-        if (process.env.NODE_ENV === 'production') {
+let mswWorker: any = null;
+
+async function initializeMsw() {
+  if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+    if (mswWorker) {
+      return mswWorker;
+    }
+
+    const { default: worker } = await import('@/mocks/browser');
+
+    await worker.start({
+      onUnhandledRequest(request, print) {
+        if (request.url.includes('_next')) {
           return;
         }
-        await worker.start({
-          onUnhandledRequest(request, print) {
-            if (request.url.includes('_next')) {
-              return;
-            }
-            if (request.url.includes('res.cloudinary.com')) {
-              return;
-            }
-            print.warning();
-          },
-        });
-        worker.use(...handlers);
-        (module as any).hot?.dispose(() => {
-          worker.stop();
-        });
-        console.log(worker.listHandlers());
-      })
-    : Promise.resolve();
+        if (request.url.includes('res.cloudinary.com')) {
+          return;
+        }
+        print.warning();
+      },
+    });
+
+    worker.use(...handlers);
+
+    console.log(worker.listHandlers());
+
+    mswWorker = worker;
+    return worker;
+  }
+  return null;
+}
 
 export function MSWProvider({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <MSWProviderWrapper>{children}</MSWProviderWrapper>;
-}
+  const [mocksReady, setMocksReady] = useState(false);
 
-function MSWProviderWrapper({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  use(mockingEnabledPromise);
-  return children;
+  useEffect(() => {
+    initializeMsw().then(() => {
+      setMocksReady(true);
+    });
+
+    return () => {
+      if (mswWorker && process.env.NODE_ENV !== 'production') {
+        mswWorker.stop();
+        mswWorker = null;
+      }
+    };
+  }, []);
+
+  if (!mocksReady) {
+    return null;
+  }
+
+  return <>{children}</>;
 }

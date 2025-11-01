@@ -9,6 +9,7 @@ import LoginForm from '@/components/(beforeLogin)/login/form';
 import { Button } from '@repo/ui/components';
 
 export default function Login() {
+  const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}&scope=profile%20email&state=WKBrjHsVN6U5WD7ikn1kl94sj9CK5qmSSoiBdR7nk_c%3D&redirect_uri=${process.env.NEXT_PUBLIC_BASE_URL}`;
   return (
     <FormWrapper title={`게임처럼 쉽게, \n 코딩을 배워보세요.`}>
       <div className='w-full px-6 pt-[55]'>
@@ -25,7 +26,8 @@ export default function Login() {
         </p>
 
         <Link
-          href={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/oauth2/authorization/google`}
+          // href={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/oauth2/authorization/google`}
+          href={GOOGLE_LOGIN_URL}
         >
           <Button
             variant='outline_s'
