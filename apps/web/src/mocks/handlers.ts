@@ -6,7 +6,7 @@ import {
   VerifyCodePayload,
 } from '@/schemas';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_FE_BASE_URL;
 
 export const handlers = [
   http.post(`${baseUrl}/api/auth/login`, async ({ request }) => {
@@ -64,7 +64,7 @@ export const handlers = [
   }),
 
   http.post(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/member-join`,
+    `${process.env.NEXT_PUBLIC_FE_BASE_URL}/api/auth/member-join`,
     async ({ request }) => {
       const { email, password } =
         (await request.json()) as HandleMemberJoinPayload;

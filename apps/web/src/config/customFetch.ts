@@ -40,7 +40,7 @@ export const customFetch = async <T>(
   };
 
   const response = await fetch(
-    process.env.NEXT_PUBLIC_BASE_URL + url,
+    process.env.NEXT_PUBLIC_BE_BASE_URL + url,
     mergedOptions,
   );
 
