@@ -17,3 +17,19 @@ export { default as Spinner } from './Spinner';
 export { default as Mascot } from './Mascot';
 export { default as StatItem } from './StatItem';
 export { default as PrevNextBtn } from './PrevNextBtn';
+export {
+  type CarouselApi,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  CarouselDot,
+} from './Carousel';
+
+export {
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+} from './Dropdown';

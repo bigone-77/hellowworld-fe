@@ -25,6 +25,8 @@ export const ICON_MAP = {
   award: getIconUrl('v1753788512/svg/award.svg'),
   board: getIconUrl('v1753788512/svg/board.svg'),
   solve: getIconUrl('v1753788512/svg/solve.svg'),
+  aim: getIconUrl('v1762018972/svg/aim.svg'),
+  book: getIconUrl('v1762018972/svg/book.svg'),
   logout: getIconUrl('v1753790409/svg/logout.svg'),
   search: getIconUrl('v1757347608/svg/search.svg'),
   cancel: getIconUrl('v1754590078/svg/cancel.svg'),

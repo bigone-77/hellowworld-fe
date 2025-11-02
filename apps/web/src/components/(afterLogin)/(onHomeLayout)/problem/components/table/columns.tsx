@@ -40,14 +40,6 @@ const CustomCell = ({
   );
 };
 
-const OverlayContentWrapper = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div className='flex-center-col rounded-L shadow-modal-s w-full gap-y-2 border border-white/60 bg-white p-2'>
-      {children}
-    </div>
-  );
-};
-
 export const columns: ColumnDef<Problem>[] = [
   {
     accessorKey: 'status',
@@ -68,18 +60,13 @@ export const columns: ColumnDef<Problem>[] = [
             </div>
           </Popover.Trigger>
           <Popover.Content align='start' side='bottom'>
-            <OverlayContentWrapper>
+            <Popover.MenuContainer>
               {['미진행', '스스로풀음', '도움받음', '레벨부족'].map(
                 (status, index) => (
-                  <p
-                    key={index}
-                    className='rounded-L hover:bg-text-box text-text-body-l1 w-[180] cursor-pointer p-4'
-                  >
-                    {status}
-                  </p>
+                  <Popover.MenuItem key={index}>{status}</Popover.MenuItem>
                 ),
               )}
-            </OverlayContentWrapper>
+            </Popover.MenuContainer>
           </Popover.Content>
         </Popover>
       );
@@ -128,16 +115,11 @@ export const columns: ColumnDef<Problem>[] = [
             </div>
           </Popover.Trigger>
           <Popover.Content align='start' side='bottom'>
-            <OverlayContentWrapper>
+            <Popover.MenuContainer>
               {['Python3', 'Java', 'Javascript'].map((lang, index) => (
-                <p
-                  key={index}
-                  className='rounded-L hover:bg-text-box text-text-body-l1 w-[180] cursor-pointer p-4'
-                >
-                  {lang}
-                </p>
+                <Popover.MenuItem key={index}>{lang}</Popover.MenuItem>
               ))}
-            </OverlayContentWrapper>
+            </Popover.MenuContainer>
           </Popover.Content>
         </Popover>
       );

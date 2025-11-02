@@ -31,7 +31,6 @@ const Checkbox = ({
           },
         )}
       >
-        {/* checked 상태일 때만 체크 아이콘을 보여줍니다. */}
         {checked && (
           <InlineSvg
             alias='check'
@@ -42,7 +41,6 @@ const Checkbox = ({
         )}
       </div>
 
-      {/* 라벨 텍스트 */}
       <span className='text-body-s2 text-text1 select-none'>{children}</span>
     </label>
   );
