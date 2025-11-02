@@ -7,10 +7,7 @@ interface Props {
   flag: 'Y' | 'N' | 'H' | 'V' | '';
 }
 
-export default function TestContentMainLeftSection({
-  description,
-  flag,
-}: Props) {
+export default function TestContentLeftSection({ description, flag }: Props) {
   switch (flag) {
     case 'Y':
       return (

@@ -1,6 +1,6 @@
-import StepUpLayout, {
-  dummyStepData,
-} from '@repo/ui/layouts/(afterLogin)/step-up/layout';
+import StepUpLayout from '@/components/(afterLogin)/(onHomeLayout)/step-up/components/layout';
+
+import { dummyStepData } from '@/types/step-up';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
