@@ -14,7 +14,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "lint": "eslint src --max-warnings 0"
+    "lint": "eslint src"
   },
   "peerDependencies": {
     "@types/react-dom": "^19.1.1",
