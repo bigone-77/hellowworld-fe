@@ -8,6 +8,7 @@ import { Problem, ProblemStatus } from '@/types/problem';
 import { Button, InlineSvg, Popover, ToggleButton } from '@repo/ui/components';
 
 import { cn } from '@repo/ui/lib/utils';
+import { useRouter } from 'next/navigation';
 
 const STATUS_CLASS_MAP: Record<ProblemStatus, string> = {
   스스로풀음: 'bg-primary-box text-primary-on border-primary-line',
@@ -198,6 +199,8 @@ export const columns: ColumnDef<Problem>[] = [
     id: 'actions',
     size: 100,
     cell: ({ row }) => {
+      const router = useRouter();
+
       const problem = row.original;
       const isDisabled = problem.status === '레벨부족';
 
@@ -207,6 +210,7 @@ export const columns: ColumnDef<Problem>[] = [
             variant='primary_icon'
             className='disabled:bg-text-box disabled:border-text-line disabled:text-text-line size-11'
             disabled={isDisabled}
+            onClick={() => router.push('/problem-test')}
           >
             <InlineSvg alias='play' />
           </Button>
