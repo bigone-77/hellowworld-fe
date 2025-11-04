@@ -9,8 +9,6 @@ import LoginForm from '@/components/(beforeLogin)/login/form';
 import { Button } from '@repo/ui/components';
 
 export default function Login() {
-  console.log('test');
-
   const GOOGLE_LOGIN_URL =
     `https://accounts.google.com/o/oauth2/v2/auth?` +
     `response_type=code&` +
