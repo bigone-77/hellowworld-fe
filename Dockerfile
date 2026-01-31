@@ -1,15 +1,15 @@
-# 1단계: 베이스 이미지 설정
-FROM node:18-alpine AS base
+# 1. 빌드 환경 설정 (Node.js 22 사용)
+FROM node:22-alpine AS base
 RUN npm install -g pnpm turbo
 WORKDIR /app
 
-# 2단계: 모노레포 구조 최적화 (prune)
+# 2. 프로젝트 구조 최적화 (prune)
 FROM base AS pruner
 COPY . .
-# frontend-server 앱과 관련된 의존성만 추출합니다.
+# frontend-server와 관련된 패키지만 추출
 RUN turbo prune frontend-server --docker
 
-# 3단계: 실제 빌드
+# 3. 실제 빌드 단계
 FROM base AS builder
 WORKDIR /app
 COPY --from=pruner /app/out/json/ .
@@ -17,16 +17,20 @@ COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 RUN pnpm install
 
 COPY --from=pruner /app/out/full/ .
-# GitHub Actions에서 생성한 .env를 빌드 과정에 포함
+# GitHub Actions에서 생성된 .env 파일 복사
 COPY apps/web/.env ./apps/web/.env
 RUN turbo run build --filter=frontend-server
 
-# 4단계: Nginx 실행
-FROM nginx:stable-alpine AS runner
-# Next.js export 결과물 경로 (apps/web/out)를 복사
-COPY --from=builder /app/apps/web/out /usr/share/nginx/html
-# 위에서 만든 nginx.conf 적용
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# 4. 실행 단계 (Node.js 서버 직접 실행)
+FROM node:22-alpine AS runner
+WORKDIR /app
+RUN npm install -g pnpm turbo
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# 빌드 결과물 전체 복사
+COPY --from=builder /app .
+
+# 컨테이너 포트 3000번 개방
+EXPOSE 3000
+
+# Next.js 서버 실행 (SSR 지원)
+CMD ["pnpm", "turbo", "run", "start", "--filter=frontend-server"]

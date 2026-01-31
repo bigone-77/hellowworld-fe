@@ -1,4 +1,4 @@
-name: Frontend CI/CD Pipeline
+name: Frontend CI/CD Pipeline (Node 22)
 
 on:
   push:
@@ -11,6 +11,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # 빌드 타임 환경 변수 생성
       - name: Create .env file
         run: |
           echo "NEXT_PUBLIC_BE_BASE_URL=${{ secrets.NEXT_PUBLIC_BE_BASE_URL }}" >> apps/web/.env
@@ -20,12 +21,14 @@ jobs:
           echo "NEXT_PUBLIC_GOOGLE_CLIENT_SECRET=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET }}" >> apps/web/.env
           echo "NEXT_PUBLIC_GOOGLE_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_URI }}" >> apps/web/.env
 
+      # Docker Hub 로그인 (계정: byeoninjeong)
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # 이미지 빌드 및 푸시 (이미지명: frontend-server)
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
@@ -33,6 +36,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/frontend-server:latest
 
+      # EC2 서버 배포 명령
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -40,10 +44,9 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # 팀원이 지정한 서버 내 경로로 이동
+            # 팀원분이 설정한 서버 내 경로
             cd /home/ec2-user/dev/helloworld-platform 
-            # 최신 이미지를 받아오고 frontend 서비스만 재시작
+            # 도커 컴포즈로 프론트엔드 업데이트
             docker compose -f docker-compose.dev.yml pull frontend
             docker compose -f docker-compose.dev.yml up -d frontend
-            # 사용하지 않는 오래된 이미지 정리
             docker image prune -f
