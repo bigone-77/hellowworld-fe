@@ -44,9 +44,7 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # 팀원분이 설정한 서버 내 경로
             cd /home/ec2-user/dev/helloworld-platform 
-            # 도커 컴포즈로 프론트엔드 업데이트
             docker compose -f docker-compose.dev.yml pull frontend
             docker compose -f docker-compose.dev.yml up -d frontend
             docker image prune -f
