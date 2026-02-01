@@ -1,4 +1,4 @@
-name: Frontend CI/CD Pipeline (Node 22)
+name: Frontend CI/CD Pipeline (Node 22 + Firewall Bot)
 
 on:
   push:
@@ -11,7 +11,33 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 1. .env 파일 생성 (환경 변수 주입)
+      # 1. 방화벽 제어용 AWS 권한 설정
+      - name: Configure AWS Credentials for Firewall
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_CICD_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_CICD_SECRET_KEY }}
+          aws-region: ap-northeast-2
+
+      # 2. 현재 GitHub 러너의 IP 가져오기
+      - name: Get Runner IP
+        id: ip
+        run: echo "ip=$(curl -s https://checkip.amazonaws.com)" >> $GITHUB_OUTPUT
+
+      # 3. 보안 그룹 SSH(22번 포트) 문 임시 개방
+      - name: Whitelist Runner IP
+        run: |
+          for sg_id in "${{ secrets.AWS_SG_ID_API }}" "${{ secrets.AWS_SG_ID_WS }}"
+          do
+            echo "Opening port 22 for SG $sg_id"
+            aws ec2 authorize-security-group-ingress \
+              --group-id $sg_id \
+              --protocol tcp \
+              --port 22 \
+              --cidr ${{ steps.ip.outputs.ip }}/32 || true
+          done
+
+      # 4. 빌드 타임 환경 변수(.env) 생성
       - name: Create .env file
         run: |
           echo "NEXT_PUBLIC_BE_BASE_URL=${{ secrets.NEXT_PUBLIC_BE_BASE_URL }}" >> apps/web/.env
@@ -21,14 +47,14 @@ jobs:
           echo "NEXT_PUBLIC_GOOGLE_CLIENT_SECRET=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET }}" >> apps/web/.env
           echo "NEXT_PUBLIC_GOOGLE_REDIRECT_URI=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_URI }}" >> apps/web/.env
 
-      # 2. Docker Hub 로그인 (DOCKER_TOKEN 사용)
+      # 5. Docker Hub 로그인 (DOCKER_TOKEN 사용)
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      # 3. 이미지 빌드 및 푸시
+      # 6. 이미지 빌드 및 푸시
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
@@ -36,6 +62,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/frontend-server:latest
 
+      # 7. EC2 서버 SSH 접속 및 배포 실행
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -47,3 +74,17 @@ jobs:
             docker compose -f docker-compose.dev.yml pull frontend
             docker compose -f docker-compose.dev.yml up -d frontend
             docker image prune -f
+
+      # 8. 보안 그룹 문 닫기 (실패해도 무조건 실행!)
+      - name: Revoke Runner IP
+        if: always()
+        run: |
+          for sg_id in "${{ secrets.AWS_SG_ID_API }}" "${{ secrets.AWS_SG_ID_WS }}"
+          do
+            echo "Closing port 22 for SG $sg_id"
+            aws ec2 revoke-security-group-ingress \
+              --group-id $sg_id \
+              --protocol tcp \
+              --port 22 \
+              --cidr ${{ steps.ip.outputs.ip }}/32 || true
+          done
